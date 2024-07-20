@@ -1,0 +1,13 @@
+plot,treatment,cwsi_avg,swsi_avg,final_value,recommendation
+5012,2,0.89938198,0.184454032,0.470425211,Do not irrigate
+5001,3,0.838434134,,,Irrigate
+5018,3,0.677865981,,,Irrigate
+5020,3,0.814228012,,,Irrigate
+5007,4,,0.273684673,,Do not irrigate
+5027,4,,0.520423075,,Irrigate
+2001,2,0.511755829,0.470735631,0.48714371,Do not irrigate
+2011,2,0.329451494,0.500369202,0.432002119,Do not irrigate
+2003,3,1.426636002,,,Irrigate
+2018,3,0.512072912,,,Irrigate
+2009,4,,0.337511703,,Do not irrigate
+2012,4,,0.185992758,,Do not irrigate
