@@ -155,10 +155,22 @@ class FuzzyIrrigationController:
         if series.index.tz is not None:
             series.index = series.index.tz_localize(None)
         
+        # Get data for the last n_days
         recent_data = series.loc[start_date:end_date]
-        valid_data = recent_data[(recent_data >= 0) & (recent_data <= 1.5)]
         
-        return valid_data.iloc[-1] if not valid_data.empty else None
+        # Group by date and get the maximum CWSI for each day
+        daily_max = recent_data.groupby(recent_data.index.date).max()
+        
+        # Filter valid CWSI values (between 0 and 1.5)
+        valid_data = daily_max[(daily_max >= 0) & (daily_max <= 1.5)]
+        
+        if len(valid_data) > 0:
+            # Sort values in descending order and take the average of up to 3 highest values
+            top_3_avg = valid_data.sort_values(ascending=False).head(3).mean()
+            # Cap the average at 1  
+            return min(top_3_avg, 1)
+        else:
+            return None
 
     def get_recent_values(self, series, n_days=3):
         end_date = pd.Timestamp.now().floor('D')
@@ -189,7 +201,19 @@ class FuzzyIrrigationController:
         logger.info(f"Values used for irrigation decision for plot {plot}:")
         logger.info(f"ET Average: {et_avg:.2f} (from {et_start} to {et_end})")
         logger.info(f"Most recent SWSI: {swsi_value:.2f}" if swsi_value is not None else "No valid SWSI value found")
-        logger.info(f"Most recent valid CWSI: {cwsi_value:.2f}" if cwsi_value is not None else "No valid CWSI value found in the last 3 days")
+        
+        if cwsi_value is not None:
+            logger.info(f"CWSI Value (avg of up to 3 highest daily max values): {cwsi_value:.2f}")
+            # Log the daily max CWSI values for the last 3 days
+            daily_max = cwsi_data.groupby(cwsi_data.index.date).max()
+            for date in daily_max.index:
+                value = daily_max[date]
+                if 0 <= value <= 1.5:
+                    logger.info(f"  CWSI max for {date}: {value:.2f}")
+                else:
+                    logger.info(f"  CWSI max for {date}: {value:.2f} (invalid, outside 0-1.5 range)")
+        else:
+            logger.info("No valid CWSI values found in the last 3 days")
 
         # Set inputs for fuzzy system
         self.irrigation_sim.input['et'] = et_avg
@@ -205,8 +229,8 @@ class FuzzyIrrigationController:
 
         # Plot fuzzy output
         self.plot_fuzzy_output(et_avg, swsi_value if swsi_value is not None else 0.5, 
-                               min(cwsi_value, 1) if cwsi_value is not None else 0.5, 
-                               irrigation_amount, plot)
+                            min(cwsi_value, 1) if cwsi_value is not None else 0.5, 
+                            irrigation_amount, plot)
 
         return irrigation_amount, et_avg, swsi_value, cwsi_value
 

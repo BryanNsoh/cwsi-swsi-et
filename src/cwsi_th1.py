@@ -1,3 +1,5 @@
+# src/cwsi_th1.py
+
 import os
 import pandas as pd
 import numpy as np
@@ -8,7 +10,10 @@ from datetime import time, timedelta
 STEFAN_BOLTZMANN = 5.67e-8
 CP = 1005
 K = 0.41
-CROP_HEIGHT = 2.7
+CROP_HEIGHTS = {
+    'CORN': 2.7,  # Adjust this value as needed
+    'SOYBEAN': 1.0  # Adjust this value as needed
+}
 SURFACE_ALBEDO = 0.23
 
 # Setup logging
@@ -88,6 +93,10 @@ def process_csv_file(file_path):
     # Read the CSV file
     df = pd.read_csv(file_path, parse_dates=['TIMESTAMP'])
     
+    # Determine crop type from filename
+    crop_type = 'CORN' if 'CORN' in file_path.upper() else 'SOYBEAN'
+    crop_height = CROP_HEIGHTS[crop_type]
+    
     # Find the IRT column
     irt_column = next((col for col in df.columns if 'irt' in col.lower()), None)
     if not irt_column:
@@ -106,7 +115,7 @@ def process_csv_file(file_path):
         df = df.drop(columns=['cwsi'])
     
     # Calculate CWSI only for the filtered rows
-    df.loc[mask, 'cwsi'] = df.loc[mask].apply(lambda row: calculate_cwsi_th1(row, CROP_HEIGHT, SURFACE_ALBEDO), axis=1)
+    df.loc[mask, 'cwsi'] = df.loc[mask].apply(lambda row: calculate_cwsi_th1(row, crop_height, SURFACE_ALBEDO), axis=1)
     
     # Remove temporary columns
     df = df.drop(columns=['time', 'canopy_temp'])
