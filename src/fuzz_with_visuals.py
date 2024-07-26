@@ -1,3 +1,5 @@
+# src/fuzz_with_visuals.py
+
 import os
 import pandas as pd
 import numpy as np
@@ -141,6 +143,23 @@ class FuzzyIrrigationController:
         plt.savefig(os.path.join(self.image_dir, f'fuzzy_output_plot_{plot}.png'))
         plt.close()
 
+    def get_recent_swsi(self, series):
+        # Get the most recent non-NaN SWSI value
+        return series.dropna().iloc[-1] if not series.dropna().empty else None
+
+    def get_recent_cwsi(self, series, n_days=3):
+        end_date = pd.Timestamp.now().floor('D')
+        start_date = end_date - pd.Timedelta(days=n_days)
+        
+        # Ensure the series index is timezone-naive
+        if series.index.tz is not None:
+            series.index = series.index.tz_localize(None)
+        
+        recent_data = series.loc[start_date:end_date]
+        valid_data = recent_data[(recent_data >= 0) & (recent_data <= 1.5)]
+        
+        return valid_data.iloc[-1] if not valid_data.empty else None
+
     def get_recent_values(self, series, n_days=3):
         end_date = pd.Timestamp.now().floor('D')
         start_date = end_date - pd.Timedelta(days=n_days)
@@ -162,28 +181,20 @@ class FuzzyIrrigationController:
         self.plot_recent_data(et_data, swsi_data, cwsi_data, plot)
 
         et_avg = et_data.mean()
-        swsi_avg = swsi_data.mean()
 
-        # For CWSI, try to find valid values in the past 5 days
-        valid_cwsi_data = cwsi_data[cwsi_data.notna()]
-        if valid_cwsi_data.empty:
-            # If no valid CWSI values found in the past 5 days, set a default value for CWSI
-            default_cwsi = 0.5  # Set a reasonable default value
-            logger.warning(f"No valid CWSI values found in the past 5 days for plot {plot}, using default value: {default_cwsi}")
-            cwsi_max = default_cwsi
-        else:
-            cwsi_max = min(valid_cwsi_data.max(), 1)  # Cap CWSI at 1
+        swsi_value = self.get_recent_swsi(df['swsi'])
+        cwsi_value = self.get_recent_cwsi(df['cwsi'])
 
         # Log the values used for decision making
         logger.info(f"Values used for irrigation decision for plot {plot}:")
         logger.info(f"ET Average: {et_avg:.2f} (from {et_start} to {et_end})")
-        logger.info(f"SWSI Average: {swsi_avg:.2f} (from {swsi_start} to {swsi_end})")
-        logger.info(f"CWSI Maximum: {cwsi_max:.2f} (from {cwsi_start} to {cwsi_end})")
+        logger.info(f"Most recent SWSI: {swsi_value:.2f}" if swsi_value is not None else "No valid SWSI value found")
+        logger.info(f"Most recent valid CWSI: {cwsi_value:.2f}" if cwsi_value is not None else "No valid CWSI value found in the last 3 days")
 
         # Set inputs for fuzzy system
         self.irrigation_sim.input['et'] = et_avg
-        self.irrigation_sim.input['swsi'] = swsi_avg
-        self.irrigation_sim.input['cwsi'] = cwsi_max
+        self.irrigation_sim.input['swsi'] = swsi_value if swsi_value is not None else 0.5  # Default value if no valid SWSI
+        self.irrigation_sim.input['cwsi'] = min(cwsi_value, 1) if cwsi_value is not None else 0.5  # Default value if no valid CWSI, cap at 1
 
         # Compute output
         self.irrigation_sim.compute()
@@ -193,9 +204,11 @@ class FuzzyIrrigationController:
         logger.info(f"Recommended Irrigation Amount for plot {plot}: {irrigation_amount:.2f} inches")
 
         # Plot fuzzy output
-        self.plot_fuzzy_output(et_avg, swsi_avg, cwsi_max, irrigation_amount, plot)
+        self.plot_fuzzy_output(et_avg, swsi_value if swsi_value is not None else 0.5, 
+                               min(cwsi_value, 1) if cwsi_value is not None else 0.5, 
+                               irrigation_amount, plot)
 
-        return irrigation_amount, et_avg, swsi_avg, cwsi_max
+        return irrigation_amount, et_avg, swsi_value, cwsi_value
 
 def process_csv_file(file_path, controller):
     logger.info(f"Processing file for irrigation recommendation: {file_path}")
@@ -206,15 +219,15 @@ def process_csv_file(file_path, controller):
     plot_number = file_path.split('_')[-2]  # Assuming the plot number is the second-to-last part of the filename
     crop_type = 'corn' if 'CORN' in file_path else 'soybean'
 
-    irrigation_amount, et_avg, swsi_avg, cwsi_max = controller.compute_irrigation(df, plot_number)
+    irrigation_amount, et_avg, swsi_value, cwsi_value = controller.compute_irrigation(df, plot_number)
     
     return {
         'plot': plot_number,
         'crop': crop_type,
         'irrigation': irrigation_amount,
         'et_avg': et_avg,
-        'swsi_avg': swsi_avg,
-        'cwsi_max': cwsi_max
+        'swsi': swsi_value,
+        'cwsi': cwsi_value
     }
 
 def main(input_folder, output_file):
