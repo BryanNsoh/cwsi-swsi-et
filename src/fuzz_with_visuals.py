@@ -1,5 +1,3 @@
-# src/fuzz.py
-
 import os
 import pandas as pd
 import numpy as np
@@ -9,6 +7,7 @@ from skfuzzy import control as ctrl
 import skfuzzy as fuzz
 from datetime import datetime, timedelta
 import logging
+from matplotlib import gridspec
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -16,6 +15,8 @@ logger = logging.getLogger(__name__)
 class FuzzyIrrigationController:
     def __init__(self):
         self.setup_fuzzy_system()
+        self.image_dir = os.path.join(os.getcwd(), 'images')
+        os.makedirs(self.image_dir, exist_ok=True)
 
     def setup_fuzzy_system(self):
         # Define input ranges
@@ -87,50 +88,58 @@ class FuzzyIrrigationController:
         self.irrigation_ctrl = ctrl.ControlSystem(rules)
         self.irrigation_sim = ctrl.ControlSystemSimulation(self.irrigation_ctrl)
 
-    def get_recent_swsi(self, series):
-        # Get the most recent non-NaN SWSI value
-        return series.dropna().iloc[-1] if not series.dropna().empty else None
-
-    def get_recent_cwsi(self, series, n_days=3):
-        end_date = pd.Timestamp.now().floor('D')
-        start_date = end_date - pd.Timedelta(days=n_days)
+    def plot_membership_functions(self):
+        fig, (ax0, ax1, ax2, ax3) = plt.subplots(nrows=4, figsize=(10, 20))
         
-        # Ensure the series index is timezone-naive
-        if series.index.tz is not None:
-            series.index = series.index.tz_localize(None)
+        self.et.view(ax=ax0)
+        ax0.set_title('Evapotranspiration')
+        self.swsi.view(ax=ax1)
+        ax1.set_title('Surface Water Supply Index')
+        self.cwsi.view(ax=ax2)
+        ax2.set_title('Crop Water Stress Index')
+        self.irrigation.view(ax=ax3)
+        ax3.set_title('Irrigation')
         
-        recent_data = series.loc[start_date:end_date]
-        valid_data = recent_data[(recent_data >= 0) & (recent_data <= 1.5)]
+        plt.tight_layout()
+        plt.savefig(os.path.join(self.image_dir, 'membership_functions.png'))
+        plt.close()
+
+    def plot_recent_data(self, et_data, swsi_data, cwsi_data, plot):
+        fig, (ax1, ax2, ax3) = plt.subplots(nrows=3, figsize=(10, 15))
         
-        return valid_data.iloc[-1] if not valid_data.empty else None
+        et_data.plot(ax=ax1)
+        ax1.set_title('Recent Evapotranspiration')
+        ax1.set_ylabel('ET')
+        
+        swsi_data.plot(ax=ax2)
+        ax2.set_title('Recent Surface Water Supply Index')
+        ax2.set_ylabel('SWSI')
+        
+        cwsi_data.plot(ax=ax3)
+        ax3.set_title('Recent Crop Water Stress Index')
+        ax3.set_ylabel('CWSI')
+        
+        plt.tight_layout()
+        plt.savefig(os.path.join(self.image_dir, f'recent_data_plot_{plot}.png'))
+        plt.close()
 
-    def compute_irrigation(self, df, plot):
-        # Compute inputs for fuzzy system
-        et_data, et_start, et_end = self.get_recent_values(df['et'], 6)
-        et_avg = et_data.mean()
-
-        swsi_value = self.get_recent_swsi(df['swsi'])
-        cwsi_value = self.get_recent_cwsi(df['cwsi'])
-
-        # Log the values used for decision making
-        logger.info(f"Values used for irrigation decision for plot {plot}:")
-        logger.info(f"ET Average: {et_avg:.2f} (from {et_start} to {et_end})")
-        logger.info(f"Most recent SWSI: {swsi_value:.2f}" if swsi_value is not None else "No valid SWSI value found")
-        logger.info(f"Most recent valid CWSI: {cwsi_value:.2f}" if cwsi_value is not None else "No valid CWSI value found in the last 3 days")
-
-        # Set inputs for fuzzy system
-        self.irrigation_sim.input['et'] = et_avg
-        self.irrigation_sim.input['swsi'] = swsi_value if swsi_value is not None else 0.5  # Default value if no valid SWSI
-        self.irrigation_sim.input['cwsi'] = min(cwsi_value, 1) if cwsi_value is not None else 0.5  # Default value if no valid CWSI, cap at 1
-
-        # Compute output
-        self.irrigation_sim.compute()
-
-        irrigation_amount = self.irrigation_sim.output['irrigation']
-
-        logger.info(f"Recommended Irrigation Amount for plot {plot}: {irrigation_amount:.2f} inches")
-
-        return irrigation_amount, et_avg, swsi_value, cwsi_value
+    def plot_fuzzy_output(self, et_avg, swsi_avg, cwsi_max, irrigation_amount, plot):
+        fig, ax = plt.subplots(figsize=(8, 6))
+        
+        self.irrigation.view(sim=self.irrigation_sim, ax=ax)
+        ax.plot([irrigation_amount, irrigation_amount], [0, 1], 'r--', linewidth=1.5, label='Output')
+        
+        ax.set_title(f'Fuzzy Irrigation Output (Plot {plot})')
+        ax.set_ylabel('Membership')
+        ax.set_xlabel('Irrigation Amount')
+        ax.legend()
+        
+        plt.text(0.05, 0.95, f'Inputs:\nET: {et_avg:.2f}\nSWSI: {swsi_avg:.2f}\nCWSI: {cwsi_max:.2f}', 
+                 transform=ax.transAxes, verticalalignment='top', bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
+        
+        plt.tight_layout()
+        plt.savefig(os.path.join(self.image_dir, f'fuzzy_output_plot_{plot}.png'))
+        plt.close()
 
     def get_recent_values(self, series, n_days=3):
         end_date = pd.Timestamp.now().floor('D')
@@ -143,6 +152,51 @@ class FuzzyIrrigationController:
         recent_data = series.loc[start_date:end_date]
         return recent_data, start_date, end_date
 
+    def compute_irrigation(self, df, plot, n_days=6):
+        # Compute inputs for fuzzy system
+        et_data, et_start, et_end = self.get_recent_values(df['et'], n_days)
+        swsi_data, swsi_start, swsi_end = self.get_recent_values(df['swsi'], n_days)
+        cwsi_data, cwsi_start, cwsi_end = self.get_recent_values(df['cwsi'], n_days)
+
+        # Plot recent data
+        self.plot_recent_data(et_data, swsi_data, cwsi_data, plot)
+
+        et_avg = et_data.mean()
+        swsi_avg = swsi_data.mean()
+
+        # For CWSI, try to find valid values in the past 5 days
+        valid_cwsi_data = cwsi_data[cwsi_data.notna()]
+        if valid_cwsi_data.empty:
+            # If no valid CWSI values found in the past 5 days, set a default value for CWSI
+            default_cwsi = 0.5  # Set a reasonable default value
+            logger.warning(f"No valid CWSI values found in the past 5 days for plot {plot}, using default value: {default_cwsi}")
+            cwsi_max = default_cwsi
+        else:
+            cwsi_max = min(valid_cwsi_data.max(), 1)  # Cap CWSI at 1
+
+        # Log the values used for decision making
+        logger.info(f"Values used for irrigation decision for plot {plot}:")
+        logger.info(f"ET Average: {et_avg:.2f} (from {et_start} to {et_end})")
+        logger.info(f"SWSI Average: {swsi_avg:.2f} (from {swsi_start} to {swsi_end})")
+        logger.info(f"CWSI Maximum: {cwsi_max:.2f} (from {cwsi_start} to {cwsi_end})")
+
+        # Set inputs for fuzzy system
+        self.irrigation_sim.input['et'] = et_avg
+        self.irrigation_sim.input['swsi'] = swsi_avg
+        self.irrigation_sim.input['cwsi'] = cwsi_max
+
+        # Compute output
+        self.irrigation_sim.compute()
+
+        irrigation_amount = self.irrigation_sim.output['irrigation']
+
+        logger.info(f"Recommended Irrigation Amount for plot {plot}: {irrigation_amount:.2f} inches")
+
+        # Plot fuzzy output
+        self.plot_fuzzy_output(et_avg, swsi_avg, cwsi_max, irrigation_amount, plot)
+
+        return irrigation_amount, et_avg, swsi_avg, cwsi_max
+
 def process_csv_file(file_path, controller):
     logger.info(f"Processing file for irrigation recommendation: {file_path}")
     
@@ -152,19 +206,23 @@ def process_csv_file(file_path, controller):
     plot_number = file_path.split('_')[-2]  # Assuming the plot number is the second-to-last part of the filename
     crop_type = 'corn' if 'CORN' in file_path else 'soybean'
 
-    irrigation_amount, et_avg, swsi_value, cwsi_value = controller.compute_irrigation(df, plot_number)
+    irrigation_amount, et_avg, swsi_avg, cwsi_max = controller.compute_irrigation(df, plot_number)
     
     return {
         'plot': plot_number,
         'crop': crop_type,
         'irrigation': irrigation_amount,
         'et_avg': et_avg,
-        'swsi': swsi_value,
-        'cwsi': cwsi_value
+        'swsi_avg': swsi_avg,
+        'cwsi_max': cwsi_max
     }
 
 def main(input_folder, output_file):
     controller = FuzzyIrrigationController()
+    
+    # Plot membership functions
+    controller.plot_membership_functions()
+    
     recommendations = []
 
     for root, _, files in os.walk(input_folder):
@@ -178,6 +236,11 @@ def main(input_folder, output_file):
     recommendations_df = pd.DataFrame(recommendations)
     recommendations_df.to_csv(output_file, index=False)
     logger.info(f"Recommendations saved to {output_file}")
+
+    # Visualize the fuzzy control system and rule base
+    controller.irrigation_ctrl.view()
+    plt.savefig(os.path.join(controller.image_dir, 'fuzzy_control_system.png'))
+    plt.close()
 
 if __name__ == "__main__":
     input_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\data"

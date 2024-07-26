@@ -1,7 +1,0 @@
-plot,crop,irrigation,et_avg,swsi_avg,cwsi_max,
-5006,corn,0.707295249,5.366522092,0.587998322,0.818445044,
-5010,corn,0.611783826,3.65749364,0.371585381,1,
-5023,corn,0.479335582,4.714734042,0.007682351,1,
-2006,soybean,0.53047777,4.612925362,0.410784296,0.5,(used 0.5 because no valid value in last 4 days)
-2015,soybean,0.422222222,1.263930243,0,0.5,(used 0.5 because no valid value in last 4 days)
-2023,soybean,0.422222222,1.263930243,0,0.5,(used 0.5 because no valid value in last 4 days)

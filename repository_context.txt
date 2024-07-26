@@ -1,11 +1,6 @@
 <repository_structure>
 <directory name="cwsi-swsi-et">
     <file>
-        <name>recommendations.csv</name>
-        <path>recommendations.csv</path>
-        <content>Full content not provided</content>
-    </file>
-    <file>
         <name>repo_context_extractor.py</name>
         <path>repo_context_extractor.py</path>
         <content>
@@ -1078,120 +1073,215 @@ pyyaml
         </content>
     </file>
 </directory>
-    <directory name="data">
+    <directory name="analysis-2024-07-26">
+    </directory>
+        <directory name="data">
+        </directory>
+            <directory name="data-2024-07-26">
+    <file>
+        <name>LINEAR_CORN_trt1_plot_5023_20240726.csv</name>
+        <path>analysis-2024-07-26\data\data-2024-07-26\LINEAR_CORN_trt1_plot_5023_20240726.csv</path>
+        <content>Full content not provided</content>
+    </file>
+            </directory>
+    <directory name="data-07-19-2024">
     <file>
         <name>LINEAR_CORN_trt1_plot_5006_20240719.csv</name>
-        <path>data\LINEAR_CORN_trt1_plot_5006_20240719.csv</path>
+        <path>data-07-19-2024\LINEAR_CORN_trt1_plot_5006_20240719.csv</path>
         <content>Full content not provided</content>
     </file>
     <file>
         <name>LINEAR_CORN_trt1_plot_5010_20240719.csv</name>
-        <path>data\LINEAR_CORN_trt1_plot_5010_20240719.csv</path>
+        <path>data-07-19-2024\LINEAR_CORN_trt1_plot_5010_20240719.csv</path>
         <content>Full content not provided</content>
     </file>
     <file>
         <name>LINEAR_CORN_trt1_plot_5023_20240719.csv</name>
-        <path>data\LINEAR_CORN_trt1_plot_5023_20240719.csv</path>
+        <path>data-07-19-2024\LINEAR_CORN_trt1_plot_5023_20240719.csv</path>
         <content>Full content not provided</content>
     </file>
     <file>
         <name>LINEAR_CORN_trt2_plot_5003_20240719.csv</name>
-        <path>data\LINEAR_CORN_trt2_plot_5003_20240719.csv</path>
+        <path>data-07-19-2024\LINEAR_CORN_trt2_plot_5003_20240719.csv</path>
         <content>Full content not provided</content>
     </file>
     <file>
         <name>LINEAR_CORN_trt2_plot_5012_20240719.csv</name>
-        <path>data\LINEAR_CORN_trt2_plot_5012_20240719.csv</path>
+        <path>data-07-19-2024\LINEAR_CORN_trt2_plot_5012_20240719.csv</path>
         <content>Full content not provided</content>
     </file>
     <file>
         <name>LINEAR_CORN_trt2_plot_5026_20240719.csv</name>
-        <path>data\LINEAR_CORN_trt2_plot_5026_20240719.csv</path>
+        <path>data-07-19-2024\LINEAR_CORN_trt2_plot_5026_20240719.csv</path>
         <content>Full content not provided</content>
     </file>
     <file>
         <name>LINEAR_CORN_trt3_plot_5001_20240719.csv</name>
-        <path>data\LINEAR_CORN_trt3_plot_5001_20240719.csv</path>
+        <path>data-07-19-2024\LINEAR_CORN_trt3_plot_5001_20240719.csv</path>
         <content>Full content not provided</content>
     </file>
     <file>
         <name>LINEAR_CORN_trt3_plot_5018_20240719.csv</name>
-        <path>data\LINEAR_CORN_trt3_plot_5018_20240719.csv</path>
+        <path>data-07-19-2024\LINEAR_CORN_trt3_plot_5018_20240719.csv</path>
         <content>Full content not provided</content>
     </file>
     <file>
         <name>LINEAR_CORN_trt3_plot_5020_20240719.csv</name>
-        <path>data\LINEAR_CORN_trt3_plot_5020_20240719.csv</path>
+        <path>data-07-19-2024\LINEAR_CORN_trt3_plot_5020_20240719.csv</path>
         <content>Full content not provided</content>
     </file>
     <file>
         <name>LINEAR_CORN_trt4_plot_5007_20240719.csv</name>
-        <path>data\LINEAR_CORN_trt4_plot_5007_20240719.csv</path>
+        <path>data-07-19-2024\LINEAR_CORN_trt4_plot_5007_20240719.csv</path>
         <content>Full content not provided</content>
     </file>
     <file>
         <name>LINEAR_CORN_trt4_plot_5009_20240719.csv</name>
-        <path>data\LINEAR_CORN_trt4_plot_5009_20240719.csv</path>
+        <path>data-07-19-2024\LINEAR_CORN_trt4_plot_5009_20240719.csv</path>
         <content>Full content not provided</content>
     </file>
     <file>
         <name>LINEAR_CORN_trt4_plot_5027_20240719.csv</name>
-        <path>data\LINEAR_CORN_trt4_plot_5027_20240719.csv</path>
+        <path>data-07-19-2024\LINEAR_CORN_trt4_plot_5027_20240719.csv</path>
         <content>Full content not provided</content>
     </file>
     <file>
         <name>LINEAR_SOYBEAN_trt1_plot_2006_20240719.csv</name>
-        <path>data\LINEAR_SOYBEAN_trt1_plot_2006_20240719.csv</path>
+        <path>data-07-19-2024\LINEAR_SOYBEAN_trt1_plot_2006_20240719.csv</path>
         <content>Full content not provided</content>
     </file>
     <file>
         <name>LINEAR_SOYBEAN_trt1_plot_2015_20240719.csv</name>
-        <path>data\LINEAR_SOYBEAN_trt1_plot_2015_20240719.csv</path>
+        <path>data-07-19-2024\LINEAR_SOYBEAN_trt1_plot_2015_20240719.csv</path>
         <content>Full content not provided</content>
     </file>
     <file>
         <name>LINEAR_SOYBEAN_trt1_plot_2023_20240719.csv</name>
-        <path>data\LINEAR_SOYBEAN_trt1_plot_2023_20240719.csv</path>
+        <path>data-07-19-2024\LINEAR_SOYBEAN_trt1_plot_2023_20240719.csv</path>
         <content>Full content not provided</content>
     </file>
     <file>
         <name>LINEAR_SOYBEAN_trt2_plot_2001_20240719.csv</name>
-        <path>data\LINEAR_SOYBEAN_trt2_plot_2001_20240719.csv</path>
+        <path>data-07-19-2024\LINEAR_SOYBEAN_trt2_plot_2001_20240719.csv</path>
         <content>Full content not provided</content>
     </file>
     <file>
         <name>LINEAR_SOYBEAN_trt2_plot_2011_20240719.csv</name>
-        <path>data\LINEAR_SOYBEAN_trt2_plot_2011_20240719.csv</path>
+        <path>data-07-19-2024\LINEAR_SOYBEAN_trt2_plot_2011_20240719.csv</path>
         <content>Full content not provided</content>
     </file>
     <file>
         <name>LINEAR_SOYBEAN_trt2_plot_2026_20240719.csv</name>
-        <path>data\LINEAR_SOYBEAN_trt2_plot_2026_20240719.csv</path>
+        <path>data-07-19-2024\LINEAR_SOYBEAN_trt2_plot_2026_20240719.csv</path>
         <content>Full content not provided</content>
     </file>
     <file>
         <name>LINEAR_SOYBEAN_trt3_plot_2003_20240719.csv</name>
-        <path>data\LINEAR_SOYBEAN_trt3_plot_2003_20240719.csv</path>
+        <path>data-07-19-2024\LINEAR_SOYBEAN_trt3_plot_2003_20240719.csv</path>
         <content>Full content not provided</content>
     </file>
     <file>
         <name>LINEAR_SOYBEAN_trt3_plot_2018_20240719.csv</name>
-        <path>data\LINEAR_SOYBEAN_trt3_plot_2018_20240719.csv</path>
+        <path>data-07-19-2024\LINEAR_SOYBEAN_trt3_plot_2018_20240719.csv</path>
         <content>Full content not provided</content>
     </file>
     <file>
         <name>LINEAR_SOYBEAN_trt3_plot_2020_20240719.csv</name>
-        <path>data\LINEAR_SOYBEAN_trt3_plot_2020_20240719.csv</path>
+        <path>data-07-19-2024\LINEAR_SOYBEAN_trt3_plot_2020_20240719.csv</path>
         <content>Full content not provided</content>
     </file>
     <file>
         <name>LINEAR_SOYBEAN_trt4_plot_2009_20240719.csv</name>
-        <path>data\LINEAR_SOYBEAN_trt4_plot_2009_20240719.csv</path>
+        <path>data-07-19-2024\LINEAR_SOYBEAN_trt4_plot_2009_20240719.csv</path>
         <content>Full content not provided</content>
     </file>
     <file>
         <name>LINEAR_SOYBEAN_trt4_plot_2012_20240719.csv</name>
-        <path>data\LINEAR_SOYBEAN_trt4_plot_2012_20240719.csv</path>
+        <path>data-07-19-2024\LINEAR_SOYBEAN_trt4_plot_2012_20240719.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    </directory>
+    <directory name="images">
+    <file>
+        <name>fuzzy_control_system.png</name>
+        <path>images\fuzzy_control_system.png</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>fuzzy_output_plot_2006.png</name>
+        <path>images\fuzzy_output_plot_2006.png</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>fuzzy_output_plot_2015.png</name>
+        <path>images\fuzzy_output_plot_2015.png</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>fuzzy_output_plot_2023.png</name>
+        <path>images\fuzzy_output_plot_2023.png</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>fuzzy_output_plot_5006.png</name>
+        <path>images\fuzzy_output_plot_5006.png</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>fuzzy_output_plot_5010.png</name>
+        <path>images\fuzzy_output_plot_5010.png</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>fuzzy_output_plot_5023.png</name>
+        <path>images\fuzzy_output_plot_5023.png</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>membership_functions.png</name>
+        <path>images\membership_functions.png</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>recent_data_plot_2006.png</name>
+        <path>images\recent_data_plot_2006.png</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>recent_data_plot_2015.png</name>
+        <path>images\recent_data_plot_2015.png</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>recent_data_plot_2023.png</name>
+        <path>images\recent_data_plot_2023.png</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>recent_data_plot_5006.png</name>
+        <path>images\recent_data_plot_5006.png</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>recent_data_plot_5010.png</name>
+        <path>images\recent_data_plot_5010.png</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>recent_data_plot_5023.png</name>
+        <path>images\recent_data_plot_5023.png</path>
+        <content>Full content not provided</content>
+    </file>
+    </directory>
+    <directory name="recommendations-07-19-2024">
+    <file>
+        <name>fuzzy-trt-1.csv</name>
+        <path>recommendations-07-19-2024\fuzzy-trt-1.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>other_recommendations.csv</name>
+        <path>recommendations-07-19-2024\other_recommendations.csv</path>
         <content>Full content not provided</content>
     </file>
     </directory>
@@ -1204,13 +1294,13 @@ import os
 import pandas as pd
 import numpy as np
 import logging
-from datetime import time
+from datetime import time, timedelta
 
 # Configuration
 STEFAN_BOLTZMANN = 5.67e-8
 CP = 1005
 K = 0.41
-CROP_HEIGHT = 1.6
+CROP_HEIGHT = 2.7
 SURFACE_ALBEDO = 0.23
 
 # Setup logging
@@ -1282,7 +1372,7 @@ def calculate_cwsi_th1(row, crop_height, surface_albedo=0.23):
         return None
     
     cwsi = numerator / denominator
-    return cwsi if 0 <= cwsi <= 1.5 else None
+    return cwsi if 0 <= cwsi <= 2 else None
 
 def process_csv_file(file_path):
     logger.info(f"Processing file: {file_path}")
@@ -1313,6 +1403,13 @@ def process_csv_file(file_path):
     # Remove temporary columns
     df = df.drop(columns=['time', 'canopy_temp'])
     
+    # Log the range of computed CWSI values
+    cwsi_values = df['cwsi'].dropna()
+    if not cwsi_values.empty:
+        logger.info(f"CWSI value ranges for {file_path}: Min={cwsi_values.min()}, Max={cwsi_values.max()}, Mean={cwsi_values.mean()}")
+    else:
+        logger.info(f"No CWSI values computed for {file_path}")
+    
     # Save the updated DataFrame back to the same CSV file
     df.to_csv(file_path, index=False)
     logger.info(f"Updated CWSI values in file: {file_path}")
@@ -1329,6 +1426,7 @@ def main(input_folder):
 if __name__ == "__main__":
     input_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\data"
     main(input_folder)
+
         </content>
     </file>
     <file>
@@ -1340,8 +1438,7 @@ import re
 import pandas as pd
 import numpy as np
 import yaml
-from datetime import datetime
-from pytz import timezone
+from datetime import datetime, timedelta
 
 def load_sensor_mapping(file_path):
     with open(file_path, 'r') as file:
@@ -1366,9 +1463,6 @@ def parse_dat_file(file_name):
     data["TIMESTAMP"] = pd.to_datetime(data["TIMESTAMP"], errors="coerce")
     data = data[~data["TIMESTAMP"].isna()]
     
-    data = data.set_index("TIMESTAMP")
-    data.index = data.index.tz_localize("America/Chicago")
-    
     # Correct column names if necessary
     if 'TDR5006B11724' in data.columns:
         data['TDR5006B11824'] = data['TDR5006B11724']
@@ -1379,9 +1473,9 @@ def parse_dat_file(file_name):
         data.drop('TDR5026A23824', axis=1, inplace=True)
     
     # Resample to hourly data
-    data_hourly = data.resample('1H').mean()
+    data_hourly = data.set_index("TIMESTAMP").resample('h').mean().reset_index()
     
-    return data_hourly.sort_index()  # Sort by timestamp
+    return data_hourly.sort_values("TIMESTAMP")  # Sort by timestamp
 
 def get_dat_files(folder_path, crop_type):
     if crop_type == 'corn':
@@ -1403,24 +1497,29 @@ def parse_weather_csv(filename):
         header=1,
         skiprows=[2, 3],
         parse_dates=["TIMESTAMP"],
-        date_format="%Y-%m-%d %H:%M:%S"
+        date_format="%Y-%m-%d %H:%M:%S",
+        low_memory=False
     )
     
     df = df.rename(columns=lambda x: x.strip())
     df["TIMESTAMP"] = pd.to_datetime(df["TIMESTAMP"], errors="coerce")
     df = df.dropna(subset=["TIMESTAMP"])
-    df["TIMESTAMP"] = df["TIMESTAMP"].apply(lambda x: x.replace(tzinfo=timezone('America/Chicago')).astimezone(timezone('UTC')))
-    df = df.set_index("TIMESTAMP")
     df = df.apply(pd.to_numeric, errors="coerce")
 
     # Select only the required weather columns
-    weather_columns = ['Ta_2m_Avg', 'RH_2m_Avg', 'WndAveSpd_3m', 'WndAveDir_3m', 'PresAvg_1pnt5m', 'Solar_2m_Avg', 'Rain_1m_Tot', 'TaMax_2m', 'TaMin_2m', 'RHMax_2m', 'RHMin_2m']
+    weather_columns = ['TIMESTAMP', 'Ta_2m_Avg', 'RH_2m_Avg', 'WndAveSpd_3m', 'WndAveDir_3m', 'PresAvg_1pnt5m', 'Solar_2m_Avg', 'Rain_1m_Tot', 'TaMax_2m', 'TaMin_2m', 'RHMax_2m', 'RHMin_2m']
     df = df[weather_columns]
 
+    # Ensure TIMESTAMP is recognized as datetime
+    df['TIMESTAMP'] = pd.to_datetime(df['TIMESTAMP'])
+
+    # Shift timestamps back by 5 hours
+    df['TIMESTAMP'] = df['TIMESTAMP'] - timedelta(hours=5)
+
     # Resample to hourly data
-    df_hourly = df.resample('1H').mean()
+    df_hourly = df.set_index("TIMESTAMP").resample('h').mean().reset_index()
     
-    return df_hourly.sort_index()  # Sort by timestamp
+    return df_hourly.sort_values("TIMESTAMP")  # Sort by timestamp
 
 def process_folder(folder_path, sensor_mapping, crop_type, output_folder, weather_data):
     dat_files = get_dat_files(folder_path, crop_type)
@@ -1444,13 +1543,22 @@ def process_and_save_data(df, sensor_mapping, crop_type, output_folder, weather_
 
     for (treatment, plot_number, field), sensors in sensor_groups.items():
         columns_to_save = ['TIMESTAMP'] + [s for s in sensors if s in df.columns]
-        df_to_save = df.reset_index()[columns_to_save].dropna(subset=columns_to_save[1:], how='all')
+        df_to_save = df[columns_to_save].dropna(subset=columns_to_save[1:], how='all')
         
         if not df_to_save.empty:
-            # Merge with weather data
-            df_to_save = df_to_save.set_index('TIMESTAMP').sort_index()
-            merged_df = pd.merge(df_to_save, weather_data, left_index=True, right_index=True, how='outer')
-            merged_df = merged_df.reset_index()
+            # Get the date range where at least one sensor has data
+            start_date = df_to_save['TIMESTAMP'].min()
+            end_date = df_to_save['TIMESTAMP'].max()
+
+            # Filter weather data to match the sensor data range
+            weather_data_filtered = weather_data[
+                (weather_data['TIMESTAMP'] >= start_date) &
+                (weather_data['TIMESTAMP'] <= end_date)
+            ]
+
+            # Merge with filtered weather data
+            merged_df = pd.merge(df_to_save, weather_data_filtered, on='TIMESTAMP', how='outer')
+            merged_df = merged_df.sort_values("TIMESTAMP")
 
             file_name = f"{field}_trt{treatment}_plot_{plot_number}_{datetime.now().strftime('%Y%m%d')}.csv"
             output_path = os.path.join(output_folder, file_name)
@@ -1459,10 +1567,16 @@ def process_and_save_data(df, sensor_mapping, crop_type, output_folder, weather_
         else:
             print(f"No data to save for {field} plot {plot_number}")
 
+def create_dated_folder(base_path):
+    current_date = datetime.now().strftime("%Y-%m-%d")
+    dated_folder = os.path.join(base_path, f"data-{current_date}")
+    os.makedirs(dated_folder, exist_ok=True)
+    return dated_folder
+
 def main(corn_folders, soybean_folders, sensor_mapping_path, output_folder, weather_csv_path):
     sensor_mapping = load_sensor_mapping(sensor_mapping_path)
     
-    os.makedirs(output_folder, exist_ok=True)
+    dated_output_folder = create_dated_folder(output_folder)
     
     # Load and process weather data
     weather_data = parse_weather_csv(weather_csv_path)
@@ -1470,12 +1584,12 @@ def main(corn_folders, soybean_folders, sensor_mapping_path, output_folder, weat
     print("Processing corn data")
     for folder in corn_folders:
         print(f"Processing corn folder: {folder}")
-        process_folder(folder, sensor_mapping, crop_type='corn', output_folder=output_folder, weather_data=weather_data)
+        process_folder(folder, sensor_mapping, crop_type='corn', output_folder=dated_output_folder, weather_data=weather_data)
     
     print("Processing soybean data")
     for folder in soybean_folders:
         print(f"Processing soybean folder: {folder}")
-        process_folder(folder, sensor_mapping, crop_type='soybean', output_folder=output_folder, weather_data=weather_data)
+        process_folder(folder, sensor_mapping, crop_type='soybean', output_folder=dated_output_folder, weather_data=weather_data)
 
 if __name__ == "__main__":
     corn_folders = [
@@ -1597,6 +1711,8 @@ if __name__ == "__main__":
         <name>fuzz.py</name>
         <path>src\fuzz.py</path>
         <content>
+# src/fuzz.py
+
 import os
 import pandas as pd
 import numpy as np
@@ -1627,12 +1743,12 @@ class FuzzyIrrigationController:
         self.cwsi = ctrl.Antecedent(x_cwsi, 'cwsi')
         self.irrigation = ctrl.Consequent(x_irrigation, 'irrigation')
     
-        # Define membership functions
-        self.et['very_low'] = fuzz.trimf(x_et, [0, 0, 5])
-        self.et['low'] = fuzz.trimf(x_et, [0, 5, 10])
-        self.et['medium'] = fuzz.trimf(x_et, [5, 10, 15])
-        self.et['high'] = fuzz.trimf(x_et, [10, 15, 20])
-        self.et['very_high'] = fuzz.trimf(x_et, [15, 20, 20])
+        # Define membership functions for ET
+        self.et['very_low'] = fuzz.trimf(x_et, [0, 0, 2])
+        self.et['low'] = fuzz.trimf(x_et, [1, 2.5, 4])
+        self.et['medium'] = fuzz.trimf(x_et, [3, 4.5, 6])
+        self.et['high'] = fuzz.trimf(x_et, [5, 6.5, 8])
+        self.et['very_high'] = fuzz.trimf(x_et, [7, 10, 10])
     
         self.swsi['very_wet'] = fuzz.trimf(x_swsi, [0, 0, 0.25])
         self.swsi['wet'] = fuzz.trimf(x_swsi, [0, 0.25, 0.5])
@@ -1684,6 +1800,51 @@ class FuzzyIrrigationController:
         self.irrigation_ctrl = ctrl.ControlSystem(rules)
         self.irrigation_sim = ctrl.ControlSystemSimulation(self.irrigation_ctrl)
 
+    def get_recent_swsi(self, series):
+        # Get the most recent non-NaN SWSI value
+        return series.dropna().iloc[-1] if not series.dropna().empty else None
+
+    def get_recent_cwsi(self, series, n_days=3):
+        end_date = pd.Timestamp.now().floor('D')
+        start_date = end_date - pd.Timedelta(days=n_days)
+        
+        # Ensure the series index is timezone-naive
+        if series.index.tz is not None:
+            series.index = series.index.tz_localize(None)
+        
+        recent_data = series.loc[start_date:end_date]
+        valid_data = recent_data[(recent_data >= 0) & (recent_data <= 1.5)]
+        
+        return valid_data.iloc[-1] if not valid_data.empty else None
+
+    def compute_irrigation(self, df, plot):
+        # Compute inputs for fuzzy system
+        et_data, et_start, et_end = self.get_recent_values(df['et'], 6)
+        et_avg = et_data.mean()
+
+        swsi_value = self.get_recent_swsi(df['swsi'])
+        cwsi_value = self.get_recent_cwsi(df['cwsi'])
+
+        # Log the values used for decision making
+        logger.info(f"Values used for irrigation decision for plot {plot}:")
+        logger.info(f"ET Average: {et_avg:.2f} (from {et_start} to {et_end})")
+        logger.info(f"Most recent SWSI: {swsi_value:.2f}" if swsi_value is not None else "No valid SWSI value found")
+        logger.info(f"Most recent valid CWSI: {cwsi_value:.2f}" if cwsi_value is not None else "No valid CWSI value found in the last 3 days")
+
+        # Set inputs for fuzzy system
+        self.irrigation_sim.input['et'] = et_avg
+        self.irrigation_sim.input['swsi'] = swsi_value if swsi_value is not None else 0.5  # Default value if no valid SWSI
+        self.irrigation_sim.input['cwsi'] = min(cwsi_value, 1) if cwsi_value is not None else 0.5  # Default value if no valid CWSI, cap at 1
+
+        # Compute output
+        self.irrigation_sim.compute()
+
+        irrigation_amount = self.irrigation_sim.output['irrigation']
+
+        logger.info(f"Recommended Irrigation Amount for plot {plot}: {irrigation_amount:.2f} inches")
+
+        return irrigation_amount, et_avg, swsi_value, cwsi_value
+
     def get_recent_values(self, series, n_days=3):
         end_date = pd.Timestamp.now().floor('D')
         start_date = end_date - pd.Timedelta(days=n_days)
@@ -1695,54 +1856,24 @@ class FuzzyIrrigationController:
         recent_data = series.loc[start_date:end_date]
         return recent_data, start_date, end_date
 
-    def compute_irrigation(self, df, n_days=3):
-        # Compute inputs for fuzzy system
-        et_data, et_start, et_end = self.get_recent_values(df['et'], n_days)
-        swsi_data, swsi_start, swsi_end = self.get_recent_values(df['swsi'], n_days)
-        cwsi_data, cwsi_start, cwsi_end = self.get_recent_values(df['cwsi'], n_days)
-
-        et_avg = et_data.mean()
-        swsi_avg = swsi_data.mean()
-        cwsi_max = min(cwsi_data.max(), 1)  # Cap CWSI at 1
-
-        # Log the values used for decision making
-        logger.info(f"\nValues used for irrigation decision:")
-        logger.info(f"ET Average: {et_avg:.2f} (from {et_start} to {et_end})")
-        logger.info(f"SWSI Average: {swsi_avg:.2f} (from {swsi_start} to {swsi_end})")
-        logger.info(f"CWSI Maximum: {cwsi_max:.2f} (from {cwsi_start} to {cwsi_end})")
-
-        # Set inputs for fuzzy system
-        self.irrigation_sim.input['et'] = et_avg
-        self.irrigation_sim.input['swsi'] = swsi_avg
-        self.irrigation_sim.input['cwsi'] = cwsi_max
-
-        # Compute output
-        self.irrigation_sim.compute()
-
-        irrigation_amount = self.irrigation_sim.output['irrigation']
-
-        logger.info(f"\nRecommended Irrigation Amount: {irrigation_amount:.2f} inches")
-
-        return irrigation_amount, et_avg, swsi_avg, cwsi_max
-
 def process_csv_file(file_path, controller):
     logger.info(f"Processing file for irrigation recommendation: {file_path}")
     
     df = pd.read_csv(file_path, parse_dates=['TIMESTAMP'])
     df.set_index('TIMESTAMP', inplace=True)
     
-    irrigation_amount, et_avg, swsi_avg, cwsi_max = controller.compute_irrigation(df)
-    
     plot_number = file_path.split('_')[-2]  # Assuming the plot number is the second-to-last part of the filename
     crop_type = 'corn' if 'CORN' in file_path else 'soybean'
+
+    irrigation_amount, et_avg, swsi_value, cwsi_value = controller.compute_irrigation(df, plot_number)
     
     return {
         'plot': plot_number,
         'crop': crop_type,
         'irrigation': irrigation_amount,
         'et_avg': et_avg,
-        'swsi_avg': swsi_avg,
-        'cwsi_max': cwsi_max
+        'swsi': swsi_value,
+        'cwsi': cwsi_value
     }
 
 def main(input_folder, output_file):
@@ -1763,8 +1894,501 @@ def main(input_folder, output_file):
 
 if __name__ == "__main__":
     input_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\data"
-    output_file = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\recommendations.csv"
+    output_file = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\recommendations\fuzzy-trt-1.csv"
     main(input_folder, output_file)
+        </content>
+    </file>
+    <file>
+        <name>fuzz_with_visuals.py</name>
+        <path>src\fuzz_with_visuals.py</path>
+        <content>
+import os
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from skfuzzy import control as ctrl
+import skfuzzy as fuzz
+from datetime import datetime, timedelta
+import logging
+from matplotlib import gridspec
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+class FuzzyIrrigationController:
+    def __init__(self):
+        self.setup_fuzzy_system()
+        self.image_dir = os.path.join(os.getcwd(), 'images')
+        os.makedirs(self.image_dir, exist_ok=True)
+
+    def setup_fuzzy_system(self):
+        # Define input ranges
+        x_et = np.arange(0, 20, 0.1)
+        x_swsi = np.arange(0, 1, 0.01)
+        x_cwsi = np.arange(0, 1, 0.01)
+        x_irrigation = np.arange(0, 1, 0.01)
+    
+        # Create fuzzy variables
+        self.et = ctrl.Antecedent(x_et, 'et')
+        self.swsi = ctrl.Antecedent(x_swsi, 'swsi')
+        self.cwsi = ctrl.Antecedent(x_cwsi, 'cwsi')
+        self.irrigation = ctrl.Consequent(x_irrigation, 'irrigation')
+    
+        # Define membership functions for ET
+        self.et['very_low'] = fuzz.trimf(x_et, [0, 0, 2])
+        self.et['low'] = fuzz.trimf(x_et, [1, 2.5, 4])
+        self.et['medium'] = fuzz.trimf(x_et, [3, 4.5, 6])
+        self.et['high'] = fuzz.trimf(x_et, [5, 6.5, 8])
+        self.et['very_high'] = fuzz.trimf(x_et, [7, 10, 10])
+    
+        self.swsi['very_wet'] = fuzz.trimf(x_swsi, [0, 0, 0.25])
+        self.swsi['wet'] = fuzz.trimf(x_swsi, [0, 0.25, 0.5])
+        self.swsi['normal'] = fuzz.trimf(x_swsi, [0.25, 0.5, 0.75])
+        self.swsi['dry'] = fuzz.trimf(x_swsi, [0.5, 0.75, 1])
+        self.swsi['very_dry'] = fuzz.trimf(x_swsi, [0.75, 1, 1])
+    
+        self.cwsi['no_stress'] = fuzz.trimf(x_cwsi, [0, 0, 0.25])
+        self.cwsi['low_stress'] = fuzz.trimf(x_cwsi, [0, 0.25, 0.5])
+        self.cwsi['moderate_stress'] = fuzz.trimf(x_cwsi, [0.25, 0.5, 0.75])
+        self.cwsi['high_stress'] = fuzz.trimf(x_cwsi, [0.5, 0.75, 1])
+        self.cwsi['severe_stress'] = fuzz.trimf(x_cwsi, [0.75, 1, 1])
+    
+        self.irrigation['none'] = fuzz.trimf(x_irrigation, [0, 0, 0.2])
+        self.irrigation['very_low'] = fuzz.trimf(x_irrigation, [0, 0.2, 0.4])
+        self.irrigation['low'] = fuzz.trimf(x_irrigation, [0.2, 0.4, 0.6])
+        self.irrigation['medium'] = fuzz.trimf(x_irrigation, [0.4, 0.6, 0.8])
+        self.irrigation['high'] = fuzz.trimf(x_irrigation, [0.6, 0.8, 1])
+        self.irrigation['very_high'] = fuzz.trimf(x_irrigation, [0.8, 1, 1])
+    
+        # Define fuzzy rules
+        rules = [
+            ctrl.Rule(self.cwsi['severe_stress'], self.irrigation['very_high']),
+            ctrl.Rule(self.cwsi['high_stress'], self.irrigation['high']),
+            ctrl.Rule(self.cwsi['moderate_stress'], self.irrigation['medium']),
+            ctrl.Rule(self.cwsi['low_stress'], self.irrigation['low']),
+            ctrl.Rule(self.cwsi['no_stress'], self.irrigation['very_low']),
+            
+            ctrl.Rule(self.swsi['very_dry'], self.irrigation['very_high']),
+            ctrl.Rule(self.swsi['dry'], self.irrigation['high']),
+            ctrl.Rule(self.swsi['normal'], self.irrigation['medium']),
+            ctrl.Rule(self.swsi['wet'], self.irrigation['low']),
+            ctrl.Rule(self.swsi['very_wet'], self.irrigation['none']),
+            
+            ctrl.Rule(self.cwsi['severe_stress'] & self.swsi['very_dry'], self.irrigation['very_high']),
+            ctrl.Rule(self.cwsi['high_stress'] & self.swsi['dry'], self.irrigation['high']),
+            ctrl.Rule(self.cwsi['moderate_stress'] & self.swsi['normal'], self.irrigation['medium']),
+            ctrl.Rule(self.cwsi['low_stress'] & self.swsi['wet'], self.irrigation['low']),
+            ctrl.Rule(self.cwsi['no_stress'] & self.swsi['very_wet'], self.irrigation['none']),
+            
+            ctrl.Rule(self.et['very_high'] & self.cwsi['high_stress'], self.irrigation['high']),
+            ctrl.Rule(self.et['high'] & self.swsi['dry'], self.irrigation['medium']),
+            ctrl.Rule(self.et['medium'] & (self.cwsi['moderate_stress'] | self.swsi['normal']), self.irrigation['medium']),
+            ctrl.Rule(self.et['low'] & (self.cwsi['low_stress'] | self.swsi['wet']), self.irrigation['low']),
+            ctrl.Rule(self.et['very_low'] & (self.cwsi['no_stress'] | self.swsi['very_wet']), self.irrigation['none']),
+        ]
+    
+        # Create and simulate control system
+        self.irrigation_ctrl = ctrl.ControlSystem(rules)
+        self.irrigation_sim = ctrl.ControlSystemSimulation(self.irrigation_ctrl)
+
+    def plot_membership_functions(self):
+        fig, (ax0, ax1, ax2, ax3) = plt.subplots(nrows=4, figsize=(10, 20))
+        
+        self.et.view(ax=ax0)
+        ax0.set_title('Evapotranspiration')
+        self.swsi.view(ax=ax1)
+        ax1.set_title('Surface Water Supply Index')
+        self.cwsi.view(ax=ax2)
+        ax2.set_title('Crop Water Stress Index')
+        self.irrigation.view(ax=ax3)
+        ax3.set_title('Irrigation')
+        
+        plt.tight_layout()
+        plt.savefig(os.path.join(self.image_dir, 'membership_functions.png'))
+        plt.close()
+
+    def plot_recent_data(self, et_data, swsi_data, cwsi_data, plot):
+        fig, (ax1, ax2, ax3) = plt.subplots(nrows=3, figsize=(10, 15))
+        
+        et_data.plot(ax=ax1)
+        ax1.set_title('Recent Evapotranspiration')
+        ax1.set_ylabel('ET')
+        
+        swsi_data.plot(ax=ax2)
+        ax2.set_title('Recent Surface Water Supply Index')
+        ax2.set_ylabel('SWSI')
+        
+        cwsi_data.plot(ax=ax3)
+        ax3.set_title('Recent Crop Water Stress Index')
+        ax3.set_ylabel('CWSI')
+        
+        plt.tight_layout()
+        plt.savefig(os.path.join(self.image_dir, f'recent_data_plot_{plot}.png'))
+        plt.close()
+
+    def plot_fuzzy_output(self, et_avg, swsi_avg, cwsi_max, irrigation_amount, plot):
+        fig, ax = plt.subplots(figsize=(8, 6))
+        
+        self.irrigation.view(sim=self.irrigation_sim, ax=ax)
+        ax.plot([irrigation_amount, irrigation_amount], [0, 1], 'r--', linewidth=1.5, label='Output')
+        
+        ax.set_title(f'Fuzzy Irrigation Output (Plot {plot})')
+        ax.set_ylabel('Membership')
+        ax.set_xlabel('Irrigation Amount')
+        ax.legend()
+        
+        plt.text(0.05, 0.95, f'Inputs:\nET: {et_avg:.2f}\nSWSI: {swsi_avg:.2f}\nCWSI: {cwsi_max:.2f}', 
+                 transform=ax.transAxes, verticalalignment='top', bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
+        
+        plt.tight_layout()
+        plt.savefig(os.path.join(self.image_dir, f'fuzzy_output_plot_{plot}.png'))
+        plt.close()
+
+    def get_recent_values(self, series, n_days=3):
+        end_date = pd.Timestamp.now().floor('D')
+        start_date = end_date - pd.Timedelta(days=n_days)
+        
+        # Ensure the series index is timezone-naive
+        if series.index.tz is not None:
+            series.index = series.index.tz_localize(None)
+        
+        recent_data = series.loc[start_date:end_date]
+        return recent_data, start_date, end_date
+
+    def compute_irrigation(self, df, plot, n_days=6):
+        # Compute inputs for fuzzy system
+        et_data, et_start, et_end = self.get_recent_values(df['et'], n_days)
+        swsi_data, swsi_start, swsi_end = self.get_recent_values(df['swsi'], n_days)
+        cwsi_data, cwsi_start, cwsi_end = self.get_recent_values(df['cwsi'], n_days)
+
+        # Plot recent data
+        self.plot_recent_data(et_data, swsi_data, cwsi_data, plot)
+
+        et_avg = et_data.mean()
+        swsi_avg = swsi_data.mean()
+
+        # For CWSI, try to find valid values in the past 5 days
+        valid_cwsi_data = cwsi_data[cwsi_data.notna()]
+        if valid_cwsi_data.empty:
+            # If no valid CWSI values found in the past 5 days, set a default value for CWSI
+            default_cwsi = 0.5  # Set a reasonable default value
+            logger.warning(f"No valid CWSI values found in the past 5 days for plot {plot}, using default value: {default_cwsi}")
+            cwsi_max = default_cwsi
+        else:
+            cwsi_max = min(valid_cwsi_data.max(), 1)  # Cap CWSI at 1
+
+        # Log the values used for decision making
+        logger.info(f"Values used for irrigation decision for plot {plot}:")
+        logger.info(f"ET Average: {et_avg:.2f} (from {et_start} to {et_end})")
+        logger.info(f"SWSI Average: {swsi_avg:.2f} (from {swsi_start} to {swsi_end})")
+        logger.info(f"CWSI Maximum: {cwsi_max:.2f} (from {cwsi_start} to {cwsi_end})")
+
+        # Set inputs for fuzzy system
+        self.irrigation_sim.input['et'] = et_avg
+        self.irrigation_sim.input['swsi'] = swsi_avg
+        self.irrigation_sim.input['cwsi'] = cwsi_max
+
+        # Compute output
+        self.irrigation_sim.compute()
+
+        irrigation_amount = self.irrigation_sim.output['irrigation']
+
+        logger.info(f"Recommended Irrigation Amount for plot {plot}: {irrigation_amount:.2f} inches")
+
+        # Plot fuzzy output
+        self.plot_fuzzy_output(et_avg, swsi_avg, cwsi_max, irrigation_amount, plot)
+
+        return irrigation_amount, et_avg, swsi_avg, cwsi_max
+
+def process_csv_file(file_path, controller):
+    logger.info(f"Processing file for irrigation recommendation: {file_path}")
+    
+    df = pd.read_csv(file_path, parse_dates=['TIMESTAMP'])
+    df.set_index('TIMESTAMP', inplace=True)
+    
+    plot_number = file_path.split('_')[-2]  # Assuming the plot number is the second-to-last part of the filename
+    crop_type = 'corn' if 'CORN' in file_path else 'soybean'
+
+    irrigation_amount, et_avg, swsi_avg, cwsi_max = controller.compute_irrigation(df, plot_number)
+    
+    return {
+        'plot': plot_number,
+        'crop': crop_type,
+        'irrigation': irrigation_amount,
+        'et_avg': et_avg,
+        'swsi_avg': swsi_avg,
+        'cwsi_max': cwsi_max
+    }
+
+def main(input_folder, output_file):
+    controller = FuzzyIrrigationController()
+    
+    # Plot membership functions
+    controller.plot_membership_functions()
+    
+    recommendations = []
+
+    for root, _, files in os.walk(input_folder):
+        for file in files:
+            if file.endswith('.csv') and ('CORN' in file or 'SOYBEAN' in file) and 'trt1' in file:
+                file_path = os.path.join(root, file)
+                result = process_csv_file(file_path, controller)
+                recommendations.append(result)
+
+    # Create recommendations DataFrame and save to CSV
+    recommendations_df = pd.DataFrame(recommendations)
+    recommendations_df.to_csv(output_file, index=False)
+    logger.info(f"Recommendations saved to {output_file}")
+
+    # Visualize the fuzzy control system and rule base
+    controller.irrigation_ctrl.view()
+    plt.savefig(os.path.join(controller.image_dir, 'fuzzy_control_system.png'))
+    plt.close()
+
+if __name__ == "__main__":
+    input_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\data"
+    output_file = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\recommendations\fuzzy-trt-1.csv"
+    main(input_folder, output_file)
+        </content>
+    </file>
+    <file>
+        <name>other_scheduling.py</name>
+        <path>src\other_scheduling.py</path>
+        <content>
+import os
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from datetime import datetime, timedelta
+import logging
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+def get_recent_values(series, n_days=3):
+    end_date = pd.Timestamp.now().floor('D')
+    start_date = end_date - pd.Timedelta(days=n_days)
+    
+    # Ensure the series index is timezone-naive
+    if series.index.tz is not None:
+        series.index = series.index.tz_localize(None)
+    
+    recent_data = series.loc[start_date:end_date]
+    return recent_data[recent_data.notnull() & (recent_data != 0)], start_date, end_date
+
+def process_treatment_two(df, plot):
+    if 'cwsi' not in df.columns or 'swsi' not in df.columns:
+        logger.warning(f"Missing CWSI or SWSI data for treatment two, plot {plot}. Skipping.")
+        return None
+    
+    cwsi_data, _, _ = get_recent_values(df['cwsi'], 3)
+    swsi_data, _, _ = get_recent_values(df['swsi'], 3)
+    
+    if cwsi_data.empty or swsi_data.empty:
+        logger.warning(f"Missing non-zero CWSI or SWSI data for treatment two, plot {plot}. Skipping.")
+        return None
+
+    cwsi_avg = cwsi_data.mean()
+    swsi_avg = swsi_data.mean()
+    
+    final_value = cwsi_avg * 0.4 + swsi_avg * 0.6
+    recommendation = 'Irrigate' if final_value > 0.5 else 'Do not irrigate'
+    
+    logger.info(f"Processing treatment two for plot {plot}:")
+    logger.info(f"CWSI Avg: {cwsi_avg:.2f}")
+    logger.info(f"SWSI Avg: {swsi_avg:.2f}")
+    logger.info(f"Final Value: {final_value:.2f}")
+    logger.info(f"Recommendation: {recommendation}")
+    
+    return {
+        'plot': plot,
+        'treatment': 2,
+        'cwsi_avg': cwsi_avg,
+        'swsi_avg': swsi_avg,
+        'final_value': final_value,
+        'recommendation': recommendation
+    }
+
+def process_treatment_three(df, plot):
+    if 'cwsi' not in df.columns:
+        logger.warning(f"Missing CWSI data for treatment three, plot {plot}. Skipping.")
+        return None
+    
+    cwsi_data, _, _ = get_recent_values(df['cwsi'], 4)
+    
+    if cwsi_data.empty:
+        logger.warning(f"Missing non-zero CWSI data for treatment three, plot {plot}. Skipping.")
+        return None
+
+    cwsi_avg = cwsi_data.mean()
+    
+    recommendation = 'Irrigate' if cwsi_avg > 0.5 else 'Do not irrigate'
+    
+    logger.info(f"Processing treatment three for plot {plot}:")
+    logger.info(f"CWSI Avg: {cwsi_avg:.2f}")
+    logger.info(f"Recommendation: {recommendation}")
+    
+    return {
+        'plot': plot,
+        'treatment': 3,
+        'cwsi_avg': cwsi_avg,
+        'recommendation': recommendation
+    }
+
+def process_treatment_four(df, plot):
+    if 'swsi' not in df.columns:
+        logger.warning(f"Missing SWSI data for treatment four, plot {plot}. Skipping.")
+        return None
+    
+    swsi_data, _, _ = get_recent_values(df['swsi'], 3)
+    
+    if swsi_data.empty:
+        logger.warning(f"Missing non-zero SWSI data for treatment four, plot {plot}. Skipping.")
+        return None
+
+    swsi_avg = swsi_data.mean()
+    
+    recommendation = 'Irrigate' if swsi_avg > 0.5 else 'Do not irrigate'
+    
+    logger.info(f"Processing treatment four for plot {plot}:")
+    logger.info(f"SWSI Avg: {swsi_avg:.2f}")
+    logger.info(f"Recommendation: {recommendation}")
+    
+    return {
+        'plot': plot,
+        'treatment': 4,
+        'swsi_avg': swsi_avg,
+        'recommendation': recommendation
+    }
+
+def process_csv_file(file_path):
+    logger.info(f"Processing file for irrigation recommendation: {file_path}")
+    
+    df = pd.read_csv(file_path, parse_dates=['TIMESTAMP'])
+    df.set_index('TIMESTAMP', inplace=True)
+    
+    plot_number = file_path.split('_')[-2]  # Assuming the plot number is the second-to-last part of the filename
+    treatment = int(file_path.split('_')[2][3])  # Assuming the treatment number is in the format 'trtX'
+
+    if treatment == 2:
+        return process_treatment_two(df, plot_number)
+    elif treatment == 3:
+        return process_treatment_three(df, plot_number)
+    elif treatment == 4:
+        return process_treatment_four(df, plot_number)
+    else:
+        logger.warning(f"Unsupported treatment {treatment} for plot {plot_number}. Skipping.")
+        return None
+
+def main(input_folder, output_folder):
+    recommendations = []
+
+    for root, _, files in os.walk(input_folder):
+        for file in files:
+            if file.endswith('.csv'):
+                file_path = os.path.join(root, file)
+                result = process_csv_file(file_path)
+                if result:
+                    recommendations.append(result)
+
+    # Create recommendations DataFrame and save to CSV
+    os.makedirs(output_folder, exist_ok=True)
+    output_file = os.path.join(output_folder, 'recommendations.csv')
+    recommendations_df = pd.DataFrame(recommendations)
+    recommendations_df.to_csv(output_file, index=False)
+    logger.info(f"Recommendations saved to {output_file}")
+
+if __name__ == "__main__":
+    input_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\data"
+    output_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\recommendations"
+    main(input_folder, output_folder)
+
+        </content>
+    </file>
+    <file>
+        <name>run_analysis.py</name>
+        <path>src\run_analysis.py</path>
+        <content>
+# src/run_analysis.py
+
+import os
+from datetime import datetime
+import logging
+from dat_to_csv import main as dat_to_csv_main
+from cwsi_th1 import main as cwsi_main
+from swsi import main as swsi_main
+from et import main as et_main
+from fuzz_with_visuals import main as fuzz_main
+from other_scheduling import main as other_scheduling_main
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+def create_dated_folder(base_path):
+    current_date = datetime.now().strftime("%Y-%m-%d")
+    dated_folder = os.path.join(base_path, f"analysis-{current_date}")
+    os.makedirs(dated_folder, exist_ok=True)
+    return dated_folder
+
+def run_analysis():
+    # Define base paths
+    base_output_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et"
+    
+    # Create dated folders
+    dated_output_folder = create_dated_folder(base_output_folder)
+    dated_data_folder = os.path.join(dated_output_folder, "data")
+    dated_recommendations_folder = os.path.join(dated_output_folder, "recommendations")
+    
+    os.makedirs(dated_data_folder, exist_ok=True)
+    os.makedirs(dated_recommendations_folder, exist_ok=True)
+    
+    # Run dat_to_csv
+    corn_folders = [
+        r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\2024_data_corn_lnr\07-03-2024",
+        r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\2024_data_corn_lnr\07-08-2024-discontinuous",
+        r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\2024_data_corn_lnr\07-14-2024-discont-nodeC only",
+        r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\2024_data_corn_lnr\07-15-2024-discont-unsure",
+        r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\2024_data_corn_lnr\07-19-2024",
+        r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\2024_data_corn_lnr\07-26-2024"
+    ]
+    soybean_folders = [
+        r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\Soybean Lnr\07-15-24",
+        r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\Soybean Lnr\07-19-2024",
+        r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\Soybean Lnr\07-26-2024"
+    ]
+    sensor_mapping_path = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\sensor_mapping.yaml"
+    weather_csv_path = r"C:\Users\bnsoh2\Downloads\North_Platte_3SW_Beta_1min (9).csv"
+    
+    logger.info("Running dat_to_csv...")
+    dat_to_csv_main(corn_folders, soybean_folders, sensor_mapping_path, dated_data_folder, weather_csv_path)
+    
+    # Run CWSI calculation
+    logger.info("Calculating CWSI...")
+    cwsi_main(dated_data_folder)
+    
+    # Run SWSI calculation
+    logger.info("Calculating SWSI...")
+    swsi_main(dated_data_folder)
+    
+    # Run ET calculation
+    logger.info("Calculating ET...")
+    et_main(dated_data_folder)
+    
+    # Run fuzzy logic irrigation scheduling
+    logger.info("Running fuzzy logic irrigation scheduling...")
+    fuzz_output_file = os.path.join(dated_recommendations_folder, "fuzzy-trt-1.csv")
+    fuzz_main(dated_data_folder, fuzz_output_file)
+    
+    # Run other scheduling methods
+    logger.info("Running other scheduling methods...")
+    other_scheduling_main(dated_data_folder, dated_recommendations_folder)
+    
+    logger.info("Analysis complete. Results saved in: " + dated_output_folder)
+
+if __name__ == "__main__":
+    run_analysis()
         </content>
     </file>
     <file>

@@ -132,10 +132,16 @@ def process_and_save_data(df, sensor_mapping, crop_type, output_folder, weather_
         else:
             print(f"No data to save for {field} plot {plot_number}")
 
+def create_dated_folder(base_path):
+    current_date = datetime.now().strftime("%Y-%m-%d")
+    dated_folder = os.path.join(base_path, f"data-{current_date}")
+    os.makedirs(dated_folder, exist_ok=True)
+    return dated_folder
+
 def main(corn_folders, soybean_folders, sensor_mapping_path, output_folder, weather_csv_path):
     sensor_mapping = load_sensor_mapping(sensor_mapping_path)
     
-    os.makedirs(output_folder, exist_ok=True)
+    dated_output_folder = create_dated_folder(output_folder)
     
     # Load and process weather data
     weather_data = parse_weather_csv(weather_csv_path)
@@ -143,12 +149,12 @@ def main(corn_folders, soybean_folders, sensor_mapping_path, output_folder, weat
     print("Processing corn data")
     for folder in corn_folders:
         print(f"Processing corn folder: {folder}")
-        process_folder(folder, sensor_mapping, crop_type='corn', output_folder=output_folder, weather_data=weather_data)
+        process_folder(folder, sensor_mapping, crop_type='corn', output_folder=dated_output_folder, weather_data=weather_data)
     
     print("Processing soybean data")
     for folder in soybean_folders:
         print(f"Processing soybean folder: {folder}")
-        process_folder(folder, sensor_mapping, crop_type='soybean', output_folder=output_folder, weather_data=weather_data)
+        process_folder(folder, sensor_mapping, crop_type='soybean', output_folder=dated_output_folder, weather_data=weather_data)
 
 if __name__ == "__main__":
     corn_folders = [
