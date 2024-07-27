@@ -25,17 +25,17 @@ class FuzzyIrrigationController:
         x_irrigation = np.arange(0, 1, 0.01)
     
         # Create fuzzy variables
-        self.et = ctrl.Antecedent(x_et, 'et')
+        self.etc = ctrl.Antecedent(x_et, 'etc')
         self.swsi = ctrl.Antecedent(x_swsi, 'swsi')
         self.cwsi = ctrl.Antecedent(x_cwsi, 'cwsi')
         self.irrigation = ctrl.Consequent(x_irrigation, 'irrigation')
     
         # Define membership functions for ET
-        self.et['very_low'] = fuzz.trimf(x_et, [0, 0, 2])
-        self.et['low'] = fuzz.trimf(x_et, [1, 2.5, 4])
-        self.et['medium'] = fuzz.trimf(x_et, [3, 4.5, 6])
-        self.et['high'] = fuzz.trimf(x_et, [5, 6.5, 8])
-        self.et['very_high'] = fuzz.trimf(x_et, [7, 10, 10])
+        self.etc['very_low'] = fuzz.trimf(x_et, [0, 0, 2])
+        self.etc['low'] = fuzz.trimf(x_et, [1, 2.5, 4])
+        self.etc['medium'] = fuzz.trimf(x_et, [3, 4.5, 6])
+        self.etc['high'] = fuzz.trimf(x_et, [5, 6.5, 8])
+        self.etc['very_high'] = fuzz.trimf(x_et, [7, 10, 10])
     
         self.swsi['very_wet'] = fuzz.trimf(x_swsi, [0, 0, 0.25])
         self.swsi['wet'] = fuzz.trimf(x_swsi, [0, 0.25, 0.5])
@@ -76,11 +76,11 @@ class FuzzyIrrigationController:
             ctrl.Rule(self.cwsi['low_stress'] & self.swsi['wet'], self.irrigation['low']),
             ctrl.Rule(self.cwsi['no_stress'] & self.swsi['very_wet'], self.irrigation['none']),
             
-            ctrl.Rule(self.et['very_high'] & self.cwsi['high_stress'], self.irrigation['high']),
-            ctrl.Rule(self.et['high'] & self.swsi['dry'], self.irrigation['medium']),
-            ctrl.Rule(self.et['medium'] & (self.cwsi['moderate_stress'] | self.swsi['normal']), self.irrigation['medium']),
-            ctrl.Rule(self.et['low'] & (self.cwsi['low_stress'] | self.swsi['wet']), self.irrigation['low']),
-            ctrl.Rule(self.et['very_low'] & (self.cwsi['no_stress'] | self.swsi['very_wet']), self.irrigation['none']),
+            ctrl.Rule(self.etc['very_high'] & self.cwsi['high_stress'], self.irrigation['high']),
+            ctrl.Rule(self.etc['high'] & self.swsi['dry'], self.irrigation['medium']),
+            ctrl.Rule(self.etc['medium'] & (self.cwsi['moderate_stress'] | self.swsi['normal']), self.irrigation['medium']),
+            ctrl.Rule(self.etc['low'] & (self.cwsi['low_stress'] | self.swsi['wet']), self.irrigation['low']),
+            ctrl.Rule(self.etc['very_low'] & (self.cwsi['no_stress'] | self.swsi['very_wet']), self.irrigation['none']),
         ]
     
         # Create and simulate control system
@@ -106,7 +106,7 @@ class FuzzyIrrigationController:
 
     def compute_irrigation(self, df, plot):
         # Compute inputs for fuzzy system
-        et_data, et_start, et_end = self.get_recent_values(df['et'], 6)
+        et_data, et_start, et_end = self.get_recent_values(df['etc'], 6)
         et_avg = et_data.mean()
 
         swsi_value = self.get_recent_swsi(df['swsi'])
@@ -119,7 +119,7 @@ class FuzzyIrrigationController:
         logger.info(f"Most recent valid CWSI: {cwsi_value:.2f}" if cwsi_value is not None else "No valid CWSI value found in the last 3 days")
 
         # Set inputs for fuzzy system
-        self.irrigation_sim.input['et'] = et_avg
+        self.irrigation_sim.input['etc'] = et_avg
         self.irrigation_sim.input['swsi'] = swsi_value if swsi_value is not None else 0.5  # Default value if no valid SWSI
         self.irrigation_sim.input['cwsi'] = min(cwsi_value, 1) if cwsi_value is not None else 0.5  # Default value if no valid CWSI, cap at 1
 

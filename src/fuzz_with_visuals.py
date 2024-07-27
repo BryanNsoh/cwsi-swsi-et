@@ -15,7 +15,8 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 class FuzzyIrrigationController:
-    def __init__(self):
+    def __init__(self, days_back=3):
+        self.days_back = days_back
         self.setup_fuzzy_system()
         self.image_dir = os.path.join(os.getcwd(), 'images')
         os.makedirs(self.image_dir, exist_ok=True)
@@ -28,17 +29,17 @@ class FuzzyIrrigationController:
         x_irrigation = np.arange(0, 1, 0.01)
     
         # Create fuzzy variables
-        self.et = ctrl.Antecedent(x_et, 'et')
+        self.etc = ctrl.Antecedent(x_et, 'etc')
         self.swsi = ctrl.Antecedent(x_swsi, 'swsi')
         self.cwsi = ctrl.Antecedent(x_cwsi, 'cwsi')
         self.irrigation = ctrl.Consequent(x_irrigation, 'irrigation')
     
         # Define membership functions for ET
-        self.et['very_low'] = fuzz.trimf(x_et, [0, 0, 2])
-        self.et['low'] = fuzz.trimf(x_et, [1, 2.5, 4])
-        self.et['medium'] = fuzz.trimf(x_et, [3, 4.5, 6])
-        self.et['high'] = fuzz.trimf(x_et, [5, 6.5, 8])
-        self.et['very_high'] = fuzz.trimf(x_et, [7, 10, 10])
+        self.etc['very_low'] = fuzz.trimf(x_et, [0, 0, 2])
+        self.etc['low'] = fuzz.trimf(x_et, [1, 2.5, 4])
+        self.etc['medium'] = fuzz.trimf(x_et, [3, 4.5, 6])
+        self.etc['high'] = fuzz.trimf(x_et, [5, 6.5, 8])
+        self.etc['very_high'] = fuzz.trimf(x_et, [7, 10, 10])
     
         self.swsi['very_wet'] = fuzz.trimf(x_swsi, [0, 0, 0.25])
         self.swsi['wet'] = fuzz.trimf(x_swsi, [0, 0.25, 0.5])
@@ -79,11 +80,11 @@ class FuzzyIrrigationController:
             ctrl.Rule(self.cwsi['low_stress'] & self.swsi['wet'], self.irrigation['low']),
             ctrl.Rule(self.cwsi['no_stress'] & self.swsi['very_wet'], self.irrigation['none']),
             
-            ctrl.Rule(self.et['very_high'] & self.cwsi['high_stress'], self.irrigation['high']),
-            ctrl.Rule(self.et['high'] & self.swsi['dry'], self.irrigation['medium']),
-            ctrl.Rule(self.et['medium'] & (self.cwsi['moderate_stress'] | self.swsi['normal']), self.irrigation['medium']),
-            ctrl.Rule(self.et['low'] & (self.cwsi['low_stress'] | self.swsi['wet']), self.irrigation['low']),
-            ctrl.Rule(self.et['very_low'] & (self.cwsi['no_stress'] | self.swsi['very_wet']), self.irrigation['none']),
+            ctrl.Rule(self.etc['very_high'] & self.cwsi['high_stress'], self.irrigation['high']),
+            ctrl.Rule(self.etc['high'] & self.swsi['dry'], self.irrigation['medium']),
+            ctrl.Rule(self.etc['medium'] & (self.cwsi['moderate_stress'] | self.swsi['normal']), self.irrigation['medium']),
+            ctrl.Rule(self.etc['low'] & (self.cwsi['low_stress'] | self.swsi['wet']), self.irrigation['low']),
+            ctrl.Rule(self.etc['very_low'] & (self.cwsi['no_stress'] | self.swsi['very_wet']), self.irrigation['none']),
         ]
     
         # Create and simulate control system
@@ -93,7 +94,7 @@ class FuzzyIrrigationController:
     def plot_membership_functions(self):
         fig, (ax0, ax1, ax2, ax3) = plt.subplots(nrows=4, figsize=(10, 20))
         
-        self.et.view(ax=ax0)
+        self.etc.view(ax=ax0)
         ax0.set_title('Evapotranspiration')
         self.swsi.view(ax=ax1)
         ax1.set_title('Surface Water Supply Index')
@@ -143,19 +144,30 @@ class FuzzyIrrigationController:
         plt.savefig(os.path.join(self.image_dir, f'fuzzy_output_plot_{plot}.png'))
         plt.close()
 
-    def get_recent_swsi(self, series):
-        # Get the most recent non-NaN SWSI value
-        return series.dropna().iloc[-1] if not series.dropna().empty else None
-
-    def get_recent_cwsi(self, series, n_days=3):
+    def get_recent_values(self, series):
         end_date = pd.Timestamp.now().floor('D')
-        start_date = end_date - pd.Timedelta(days=n_days)
+        start_date = end_date - pd.Timedelta(days=self.days_back)
         
         # Ensure the series index is timezone-naive
         if series.index.tz is not None:
             series.index = series.index.tz_localize(None)
         
-        # Get data for the last n_days
+        recent_data = series.loc[start_date:end_date]
+        return recent_data, start_date, end_date
+
+    def get_recent_swsi(self, series):
+        # Get the most recent non-NaN SWSI value
+        return series.dropna().iloc[-1] if not series.dropna().empty else None
+
+    def get_recent_cwsi(self, series):
+        end_date = pd.Timestamp.now().floor('D')
+        start_date = end_date - pd.Timedelta(days=self.days_back)
+        
+        # Ensure the series index is timezone-naive
+        if series.index.tz is not None:
+            series.index = series.index.tz_localize(None)
+        
+        # Get data for the last self.days_back days
         recent_data = series.loc[start_date:end_date]
         
         # Group by date and get the maximum CWSI for each day
@@ -172,22 +184,11 @@ class FuzzyIrrigationController:
         else:
             return None
 
-    def get_recent_values(self, series, n_days=3):
-        end_date = pd.Timestamp.now().floor('D')
-        start_date = end_date - pd.Timedelta(days=n_days)
-        
-        # Ensure the series index is timezone-naive
-        if series.index.tz is not None:
-            series.index = series.index.tz_localize(None)
-        
-        recent_data = series.loc[start_date:end_date]
-        return recent_data, start_date, end_date
-
-    def compute_irrigation(self, df, plot, n_days=6):
+    def compute_irrigation(self, df, plot):
         # Compute inputs for fuzzy system
-        et_data, et_start, et_end = self.get_recent_values(df['et'], n_days)
-        swsi_data, swsi_start, swsi_end = self.get_recent_values(df['swsi'], n_days)
-        cwsi_data, cwsi_start, cwsi_end = self.get_recent_values(df['cwsi'], n_days)
+        et_data, et_start, et_end = self.get_recent_values(df['etc'])
+        swsi_data, swsi_start, swsi_end = self.get_recent_values(df['swsi'])
+        cwsi_data, cwsi_start, cwsi_end = self.get_recent_values(df['cwsi'])
 
         # Plot recent data
         self.plot_recent_data(et_data, swsi_data, cwsi_data, plot)
@@ -204,7 +205,7 @@ class FuzzyIrrigationController:
         
         if cwsi_value is not None:
             logger.info(f"CWSI Value (avg of up to 3 highest daily max values): {cwsi_value:.2f}")
-            # Log the daily max CWSI values for the last 3 days
+            # Log the daily max CWSI values for the last self.days_back days
             daily_max = cwsi_data.groupby(cwsi_data.index.date).max()
             for date in daily_max.index:
                 value = daily_max[date]
@@ -213,10 +214,10 @@ class FuzzyIrrigationController:
                 else:
                     logger.info(f"  CWSI max for {date}: {value:.2f} (invalid, outside 0-1.5 range)")
         else:
-            logger.info("No valid CWSI values found in the last 3 days")
+            logger.info(f"No valid CWSI values found in the last {self.days_back} days")
 
         # Set inputs for fuzzy system
-        self.irrigation_sim.input['et'] = et_avg
+        self.irrigation_sim.input['etc'] = et_avg
         self.irrigation_sim.input['swsi'] = swsi_value if swsi_value is not None else 0.5  # Default value if no valid SWSI
         self.irrigation_sim.input['cwsi'] = min(cwsi_value, 1) if cwsi_value is not None else 0.5  # Default value if no valid CWSI, cap at 1
 
@@ -254,8 +255,8 @@ def process_csv_file(file_path, controller):
         'cwsi': cwsi_value
     }
 
-def main(input_folder, output_file):
-    controller = FuzzyIrrigationController()
+def main(input_folder, output_file, days_back=4):
+    controller = FuzzyIrrigationController(days_back)
     
     # Plot membership functions
     controller.plot_membership_functions()
@@ -282,4 +283,4 @@ def main(input_folder, output_file):
 if __name__ == "__main__":
     input_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\data"
     output_file = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\recommendations\fuzzy-trt-1.csv"
-    main(input_folder, output_file)
+    main(input_folder, output_file, days_back=6)

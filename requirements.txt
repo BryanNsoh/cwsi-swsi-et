@@ -5,3 +5,5 @@ seaborn
 scikit-fuzzy
 pyet
 pyyaml
+python-dotenv
+requests
