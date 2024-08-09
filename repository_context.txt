@@ -1,6 +1,11 @@
 <repository_structure>
 <directory name="cwsi-swsi-et">
     <file>
+        <name>.env</name>
+        <path>.env</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
         <name>repo_context_extractor.py</name>
         <path>repo_context_extractor.py</path>
         <content>
@@ -82,6 +87,8 @@ seaborn
 scikit-fuzzy
 pyet
 pyyaml
+python-dotenv
+requests
         </content>
     </file>
     <file>
@@ -1073,134 +1080,413 @@ pyyaml
         </content>
     </file>
 </directory>
+    <directory name="analysis-2024-07-19">
+    </directory>
+        <directory name="data-07-19-2024">
+    <file>
+        <name>LINEAR_CORN_trt1_plot_5006_20240719.csv</name>
+        <path>analysis-2024-07-19\data-07-19-2024\LINEAR_CORN_trt1_plot_5006_20240719.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt1_plot_5010_20240719.csv</name>
+        <path>analysis-2024-07-19\data-07-19-2024\LINEAR_CORN_trt1_plot_5010_20240719.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt1_plot_5023_20240719.csv</name>
+        <path>analysis-2024-07-19\data-07-19-2024\LINEAR_CORN_trt1_plot_5023_20240719.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt2_plot_5003_20240719.csv</name>
+        <path>analysis-2024-07-19\data-07-19-2024\LINEAR_CORN_trt2_plot_5003_20240719.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt2_plot_5012_20240719.csv</name>
+        <path>analysis-2024-07-19\data-07-19-2024\LINEAR_CORN_trt2_plot_5012_20240719.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt2_plot_5026_20240719.csv</name>
+        <path>analysis-2024-07-19\data-07-19-2024\LINEAR_CORN_trt2_plot_5026_20240719.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt3_plot_5001_20240719.csv</name>
+        <path>analysis-2024-07-19\data-07-19-2024\LINEAR_CORN_trt3_plot_5001_20240719.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt3_plot_5018_20240719.csv</name>
+        <path>analysis-2024-07-19\data-07-19-2024\LINEAR_CORN_trt3_plot_5018_20240719.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt3_plot_5020_20240719.csv</name>
+        <path>analysis-2024-07-19\data-07-19-2024\LINEAR_CORN_trt3_plot_5020_20240719.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt4_plot_5007_20240719.csv</name>
+        <path>analysis-2024-07-19\data-07-19-2024\LINEAR_CORN_trt4_plot_5007_20240719.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt4_plot_5009_20240719.csv</name>
+        <path>analysis-2024-07-19\data-07-19-2024\LINEAR_CORN_trt4_plot_5009_20240719.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt4_plot_5027_20240719.csv</name>
+        <path>analysis-2024-07-19\data-07-19-2024\LINEAR_CORN_trt4_plot_5027_20240719.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt1_plot_2006_20240719.csv</name>
+        <path>analysis-2024-07-19\data-07-19-2024\LINEAR_SOYBEAN_trt1_plot_2006_20240719.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt1_plot_2015_20240719.csv</name>
+        <path>analysis-2024-07-19\data-07-19-2024\LINEAR_SOYBEAN_trt1_plot_2015_20240719.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt1_plot_2023_20240719.csv</name>
+        <path>analysis-2024-07-19\data-07-19-2024\LINEAR_SOYBEAN_trt1_plot_2023_20240719.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt2_plot_2001_20240719.csv</name>
+        <path>analysis-2024-07-19\data-07-19-2024\LINEAR_SOYBEAN_trt2_plot_2001_20240719.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt2_plot_2011_20240719.csv</name>
+        <path>analysis-2024-07-19\data-07-19-2024\LINEAR_SOYBEAN_trt2_plot_2011_20240719.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt2_plot_2026_20240719.csv</name>
+        <path>analysis-2024-07-19\data-07-19-2024\LINEAR_SOYBEAN_trt2_plot_2026_20240719.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt3_plot_2003_20240719.csv</name>
+        <path>analysis-2024-07-19\data-07-19-2024\LINEAR_SOYBEAN_trt3_plot_2003_20240719.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt3_plot_2018_20240719.csv</name>
+        <path>analysis-2024-07-19\data-07-19-2024\LINEAR_SOYBEAN_trt3_plot_2018_20240719.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt3_plot_2020_20240719.csv</name>
+        <path>analysis-2024-07-19\data-07-19-2024\LINEAR_SOYBEAN_trt3_plot_2020_20240719.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt4_plot_2009_20240719.csv</name>
+        <path>analysis-2024-07-19\data-07-19-2024\LINEAR_SOYBEAN_trt4_plot_2009_20240719.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt4_plot_2012_20240719.csv</name>
+        <path>analysis-2024-07-19\data-07-19-2024\LINEAR_SOYBEAN_trt4_plot_2012_20240719.csv</path>
+        <content>Full content not provided</content>
+    </file>
+        </directory>
+        <directory name="recommendations-07-19-2024">
+    <file>
+        <name>fuzzy-trt-1.csv</name>
+        <path>analysis-2024-07-19\recommendations-07-19-2024\fuzzy-trt-1.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>other_recommendations.csv</name>
+        <path>analysis-2024-07-19\recommendations-07-19-2024\other_recommendations.csv</path>
+        <content>Full content not provided</content>
+    </file>
+        </directory>
     <directory name="analysis-2024-07-26">
     </directory>
         <directory name="data">
         </directory>
             <directory name="data-2024-07-26">
     <file>
+        <name>LINEAR_CORN_trt1_plot_5006_20240726.csv</name>
+        <path>analysis-2024-07-26\data\data-2024-07-26\LINEAR_CORN_trt1_plot_5006_20240726.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt1_plot_5010_20240726.csv</name>
+        <path>analysis-2024-07-26\data\data-2024-07-26\LINEAR_CORN_trt1_plot_5010_20240726.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
         <name>LINEAR_CORN_trt1_plot_5023_20240726.csv</name>
         <path>analysis-2024-07-26\data\data-2024-07-26\LINEAR_CORN_trt1_plot_5023_20240726.csv</path>
         <content>Full content not provided</content>
     </file>
+    <file>
+        <name>LINEAR_CORN_trt2_plot_5003_20240726.csv</name>
+        <path>analysis-2024-07-26\data\data-2024-07-26\LINEAR_CORN_trt2_plot_5003_20240726.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt2_plot_5012_20240726.csv</name>
+        <path>analysis-2024-07-26\data\data-2024-07-26\LINEAR_CORN_trt2_plot_5012_20240726.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt2_plot_5026_20240726.csv</name>
+        <path>analysis-2024-07-26\data\data-2024-07-26\LINEAR_CORN_trt2_plot_5026_20240726.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt3_plot_5001_20240726.csv</name>
+        <path>analysis-2024-07-26\data\data-2024-07-26\LINEAR_CORN_trt3_plot_5001_20240726.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt3_plot_5018_20240726.csv</name>
+        <path>analysis-2024-07-26\data\data-2024-07-26\LINEAR_CORN_trt3_plot_5018_20240726.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt3_plot_5020_20240726.csv</name>
+        <path>analysis-2024-07-26\data\data-2024-07-26\LINEAR_CORN_trt3_plot_5020_20240726.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt4_plot_5007_20240726.csv</name>
+        <path>analysis-2024-07-26\data\data-2024-07-26\LINEAR_CORN_trt4_plot_5007_20240726.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt4_plot_5009_20240726.csv</name>
+        <path>analysis-2024-07-26\data\data-2024-07-26\LINEAR_CORN_trt4_plot_5009_20240726.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt4_plot_5027_20240726.csv</name>
+        <path>analysis-2024-07-26\data\data-2024-07-26\LINEAR_CORN_trt4_plot_5027_20240726.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt1_plot_2006_20240726.csv</name>
+        <path>analysis-2024-07-26\data\data-2024-07-26\LINEAR_SOYBEAN_trt1_plot_2006_20240726.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt1_plot_2015_20240726.csv</name>
+        <path>analysis-2024-07-26\data\data-2024-07-26\LINEAR_SOYBEAN_trt1_plot_2015_20240726.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt1_plot_2023_20240726.csv</name>
+        <path>analysis-2024-07-26\data\data-2024-07-26\LINEAR_SOYBEAN_trt1_plot_2023_20240726.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt2_plot_2001_20240726.csv</name>
+        <path>analysis-2024-07-26\data\data-2024-07-26\LINEAR_SOYBEAN_trt2_plot_2001_20240726.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt2_plot_2011_20240726.csv</name>
+        <path>analysis-2024-07-26\data\data-2024-07-26\LINEAR_SOYBEAN_trt2_plot_2011_20240726.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt2_plot_2026_20240726.csv</name>
+        <path>analysis-2024-07-26\data\data-2024-07-26\LINEAR_SOYBEAN_trt2_plot_2026_20240726.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt3_plot_2003_20240726.csv</name>
+        <path>analysis-2024-07-26\data\data-2024-07-26\LINEAR_SOYBEAN_trt3_plot_2003_20240726.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt3_plot_2018_20240726.csv</name>
+        <path>analysis-2024-07-26\data\data-2024-07-26\LINEAR_SOYBEAN_trt3_plot_2018_20240726.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt3_plot_2020_20240726.csv</name>
+        <path>analysis-2024-07-26\data\data-2024-07-26\LINEAR_SOYBEAN_trt3_plot_2020_20240726.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt4_plot_2009_20240726.csv</name>
+        <path>analysis-2024-07-26\data\data-2024-07-26\LINEAR_SOYBEAN_trt4_plot_2009_20240726.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt4_plot_2012_20240726.csv</name>
+        <path>analysis-2024-07-26\data\data-2024-07-26\LINEAR_SOYBEAN_trt4_plot_2012_20240726.csv</path>
+        <content>Full content not provided</content>
+    </file>
             </directory>
-    <directory name="data-07-19-2024">
+        <directory name="recommendations">
     <file>
-        <name>LINEAR_CORN_trt1_plot_5006_20240719.csv</name>
-        <path>data-07-19-2024\LINEAR_CORN_trt1_plot_5006_20240719.csv</path>
+        <name>fuzzy-trt-1.csv</name>
+        <path>analysis-2024-07-26\recommendations\fuzzy-trt-1.csv</path>
         <content>Full content not provided</content>
     </file>
     <file>
-        <name>LINEAR_CORN_trt1_plot_5010_20240719.csv</name>
-        <path>data-07-19-2024\LINEAR_CORN_trt1_plot_5010_20240719.csv</path>
+        <name>Oher Treatments.csv</name>
+        <path>analysis-2024-07-26\recommendations\Oher Treatments.csv</path>
         <content>Full content not provided</content>
     </file>
     <file>
-        <name>LINEAR_CORN_trt1_plot_5023_20240719.csv</name>
-        <path>data-07-19-2024\LINEAR_CORN_trt1_plot_5023_20240719.csv</path>
+        <name>recommendations.csv</name>
+        <path>analysis-2024-07-26\recommendations\recommendations.csv</path>
         <content>Full content not provided</content>
     </file>
     <file>
-        <name>LINEAR_CORN_trt2_plot_5003_20240719.csv</name>
-        <path>data-07-19-2024\LINEAR_CORN_trt2_plot_5003_20240719.csv</path>
+        <name>Treatment1-Corn-Soybeans.csv</name>
+        <path>analysis-2024-07-26\recommendations\Treatment1-Corn-Soybeans.csv</path>
         <content>Full content not provided</content>
     </file>
-    <file>
-        <name>LINEAR_CORN_trt2_plot_5012_20240719.csv</name>
-        <path>data-07-19-2024\LINEAR_CORN_trt2_plot_5012_20240719.csv</path>
-        <content>Full content not provided</content>
-    </file>
-    <file>
-        <name>LINEAR_CORN_trt2_plot_5026_20240719.csv</name>
-        <path>data-07-19-2024\LINEAR_CORN_trt2_plot_5026_20240719.csv</path>
-        <content>Full content not provided</content>
-    </file>
-    <file>
-        <name>LINEAR_CORN_trt3_plot_5001_20240719.csv</name>
-        <path>data-07-19-2024\LINEAR_CORN_trt3_plot_5001_20240719.csv</path>
-        <content>Full content not provided</content>
-    </file>
-    <file>
-        <name>LINEAR_CORN_trt3_plot_5018_20240719.csv</name>
-        <path>data-07-19-2024\LINEAR_CORN_trt3_plot_5018_20240719.csv</path>
-        <content>Full content not provided</content>
-    </file>
-    <file>
-        <name>LINEAR_CORN_trt3_plot_5020_20240719.csv</name>
-        <path>data-07-19-2024\LINEAR_CORN_trt3_plot_5020_20240719.csv</path>
-        <content>Full content not provided</content>
-    </file>
-    <file>
-        <name>LINEAR_CORN_trt4_plot_5007_20240719.csv</name>
-        <path>data-07-19-2024\LINEAR_CORN_trt4_plot_5007_20240719.csv</path>
-        <content>Full content not provided</content>
-    </file>
-    <file>
-        <name>LINEAR_CORN_trt4_plot_5009_20240719.csv</name>
-        <path>data-07-19-2024\LINEAR_CORN_trt4_plot_5009_20240719.csv</path>
-        <content>Full content not provided</content>
-    </file>
-    <file>
-        <name>LINEAR_CORN_trt4_plot_5027_20240719.csv</name>
-        <path>data-07-19-2024\LINEAR_CORN_trt4_plot_5027_20240719.csv</path>
-        <content>Full content not provided</content>
-    </file>
-    <file>
-        <name>LINEAR_SOYBEAN_trt1_plot_2006_20240719.csv</name>
-        <path>data-07-19-2024\LINEAR_SOYBEAN_trt1_plot_2006_20240719.csv</path>
-        <content>Full content not provided</content>
-    </file>
-    <file>
-        <name>LINEAR_SOYBEAN_trt1_plot_2015_20240719.csv</name>
-        <path>data-07-19-2024\LINEAR_SOYBEAN_trt1_plot_2015_20240719.csv</path>
-        <content>Full content not provided</content>
-    </file>
-    <file>
-        <name>LINEAR_SOYBEAN_trt1_plot_2023_20240719.csv</name>
-        <path>data-07-19-2024\LINEAR_SOYBEAN_trt1_plot_2023_20240719.csv</path>
-        <content>Full content not provided</content>
-    </file>
-    <file>
-        <name>LINEAR_SOYBEAN_trt2_plot_2001_20240719.csv</name>
-        <path>data-07-19-2024\LINEAR_SOYBEAN_trt2_plot_2001_20240719.csv</path>
-        <content>Full content not provided</content>
-    </file>
-    <file>
-        <name>LINEAR_SOYBEAN_trt2_plot_2011_20240719.csv</name>
-        <path>data-07-19-2024\LINEAR_SOYBEAN_trt2_plot_2011_20240719.csv</path>
-        <content>Full content not provided</content>
-    </file>
-    <file>
-        <name>LINEAR_SOYBEAN_trt2_plot_2026_20240719.csv</name>
-        <path>data-07-19-2024\LINEAR_SOYBEAN_trt2_plot_2026_20240719.csv</path>
-        <content>Full content not provided</content>
-    </file>
-    <file>
-        <name>LINEAR_SOYBEAN_trt3_plot_2003_20240719.csv</name>
-        <path>data-07-19-2024\LINEAR_SOYBEAN_trt3_plot_2003_20240719.csv</path>
-        <content>Full content not provided</content>
-    </file>
-    <file>
-        <name>LINEAR_SOYBEAN_trt3_plot_2018_20240719.csv</name>
-        <path>data-07-19-2024\LINEAR_SOYBEAN_trt3_plot_2018_20240719.csv</path>
-        <content>Full content not provided</content>
-    </file>
-    <file>
-        <name>LINEAR_SOYBEAN_trt3_plot_2020_20240719.csv</name>
-        <path>data-07-19-2024\LINEAR_SOYBEAN_trt3_plot_2020_20240719.csv</path>
-        <content>Full content not provided</content>
-    </file>
-    <file>
-        <name>LINEAR_SOYBEAN_trt4_plot_2009_20240719.csv</name>
-        <path>data-07-19-2024\LINEAR_SOYBEAN_trt4_plot_2009_20240719.csv</path>
-        <content>Full content not provided</content>
-    </file>
-    <file>
-        <name>LINEAR_SOYBEAN_trt4_plot_2012_20240719.csv</name>
-        <path>data-07-19-2024\LINEAR_SOYBEAN_trt4_plot_2012_20240719.csv</path>
-        <content>Full content not provided</content>
-    </file>
+        </directory>
+    <directory name="analysis-2024-08-05">
     </directory>
+        <directory name="data">
+        </directory>
+            <directory name="data-2024-08-05">
+    <file>
+        <name>LINEAR_CORN_trt1_plot_5006_20240805.csv</name>
+        <path>analysis-2024-08-05\data\data-2024-08-05\LINEAR_CORN_trt1_plot_5006_20240805.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt1_plot_5010_20240805.csv</name>
+        <path>analysis-2024-08-05\data\data-2024-08-05\LINEAR_CORN_trt1_plot_5010_20240805.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt1_plot_5023_20240805.csv</name>
+        <path>analysis-2024-08-05\data\data-2024-08-05\LINEAR_CORN_trt1_plot_5023_20240805.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt2_plot_5003_20240805.csv</name>
+        <path>analysis-2024-08-05\data\data-2024-08-05\LINEAR_CORN_trt2_plot_5003_20240805.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt2_plot_5012_20240805.csv</name>
+        <path>analysis-2024-08-05\data\data-2024-08-05\LINEAR_CORN_trt2_plot_5012_20240805.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt2_plot_5026_20240805.csv</name>
+        <path>analysis-2024-08-05\data\data-2024-08-05\LINEAR_CORN_trt2_plot_5026_20240805.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt3_plot_5001_20240805.csv</name>
+        <path>analysis-2024-08-05\data\data-2024-08-05\LINEAR_CORN_trt3_plot_5001_20240805.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt3_plot_5018_20240805.csv</name>
+        <path>analysis-2024-08-05\data\data-2024-08-05\LINEAR_CORN_trt3_plot_5018_20240805.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt3_plot_5020_20240805.csv</name>
+        <path>analysis-2024-08-05\data\data-2024-08-05\LINEAR_CORN_trt3_plot_5020_20240805.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt4_plot_5007_20240805.csv</name>
+        <path>analysis-2024-08-05\data\data-2024-08-05\LINEAR_CORN_trt4_plot_5007_20240805.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt4_plot_5009_20240805.csv</name>
+        <path>analysis-2024-08-05\data\data-2024-08-05\LINEAR_CORN_trt4_plot_5009_20240805.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt4_plot_5027_20240805.csv</name>
+        <path>analysis-2024-08-05\data\data-2024-08-05\LINEAR_CORN_trt4_plot_5027_20240805.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt1_plot_2006_20240805.csv</name>
+        <path>analysis-2024-08-05\data\data-2024-08-05\LINEAR_SOYBEAN_trt1_plot_2006_20240805.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt1_plot_2015_20240805.csv</name>
+        <path>analysis-2024-08-05\data\data-2024-08-05\LINEAR_SOYBEAN_trt1_plot_2015_20240805.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt1_plot_2023_20240805.csv</name>
+        <path>analysis-2024-08-05\data\data-2024-08-05\LINEAR_SOYBEAN_trt1_plot_2023_20240805.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt2_plot_2001_20240805.csv</name>
+        <path>analysis-2024-08-05\data\data-2024-08-05\LINEAR_SOYBEAN_trt2_plot_2001_20240805.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt2_plot_2011_20240805.csv</name>
+        <path>analysis-2024-08-05\data\data-2024-08-05\LINEAR_SOYBEAN_trt2_plot_2011_20240805.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt2_plot_2026_20240805.csv</name>
+        <path>analysis-2024-08-05\data\data-2024-08-05\LINEAR_SOYBEAN_trt2_plot_2026_20240805.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt3_plot_2003_20240805.csv</name>
+        <path>analysis-2024-08-05\data\data-2024-08-05\LINEAR_SOYBEAN_trt3_plot_2003_20240805.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt3_plot_2018_20240805.csv</name>
+        <path>analysis-2024-08-05\data\data-2024-08-05\LINEAR_SOYBEAN_trt3_plot_2018_20240805.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt3_plot_2020_20240805.csv</name>
+        <path>analysis-2024-08-05\data\data-2024-08-05\LINEAR_SOYBEAN_trt3_plot_2020_20240805.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt4_plot_2009_20240805.csv</name>
+        <path>analysis-2024-08-05\data\data-2024-08-05\LINEAR_SOYBEAN_trt4_plot_2009_20240805.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt4_plot_2012_20240805.csv</name>
+        <path>analysis-2024-08-05\data\data-2024-08-05\LINEAR_SOYBEAN_trt4_plot_2012_20240805.csv</path>
+        <content>Full content not provided</content>
+    </file>
+            </directory>
+        <directory name="recommendations">
+    <file>
+        <name>fuzzy-trt-1.csv</name>
+        <path>analysis-2024-08-05\recommendations\fuzzy-trt-1.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>recommendations.csv</name>
+        <path>analysis-2024-08-05\recommendations\recommendations.csv</path>
+        <content>Full content not provided</content>
+    </file>
+        </directory>
     <directory name="images">
     <file>
         <name>fuzzy_control_system.png</name>
@@ -1273,23 +1559,13 @@ pyyaml
         <content>Full content not provided</content>
     </file>
     </directory>
-    <directory name="recommendations-07-19-2024">
-    <file>
-        <name>fuzzy-trt-1.csv</name>
-        <path>recommendations-07-19-2024\fuzzy-trt-1.csv</path>
-        <content>Full content not provided</content>
-    </file>
-    <file>
-        <name>other_recommendations.csv</name>
-        <path>recommendations-07-19-2024\other_recommendations.csv</path>
-        <content>Full content not provided</content>
-    </file>
-    </directory>
     <directory name="src">
     <file>
         <name>cwsi_th1.py</name>
         <path>src\cwsi_th1.py</path>
         <content>
+# src/cwsi_th1.py
+
 import os
 import pandas as pd
 import numpy as np
@@ -1300,7 +1576,10 @@ from datetime import time, timedelta
 STEFAN_BOLTZMANN = 5.67e-8
 CP = 1005
 K = 0.41
-CROP_HEIGHT = 2.7
+CROP_HEIGHTS = {
+    'CORN': 2.845,  # Adjust this value as needed
+    'SOYBEAN': 0.914  # Adjust this value as needed
+}
 SURFACE_ALBEDO = 0.23
 
 # Setup logging
@@ -1380,6 +1659,10 @@ def process_csv_file(file_path):
     # Read the CSV file
     df = pd.read_csv(file_path, parse_dates=['TIMESTAMP'])
     
+    # Determine crop type from filename
+    crop_type = 'CORN' if 'CORN' in file_path.upper() else 'SOYBEAN'
+    crop_height = CROP_HEIGHTS[crop_type]
+    
     # Find the IRT column
     irt_column = next((col for col in df.columns if 'irt' in col.lower()), None)
     if not irt_column:
@@ -1398,7 +1681,7 @@ def process_csv_file(file_path):
         df = df.drop(columns=['cwsi'])
     
     # Calculate CWSI only for the filtered rows
-    df.loc[mask, 'cwsi'] = df.loc[mask].apply(lambda row: calculate_cwsi_th1(row, CROP_HEIGHT, SURFACE_ALBEDO), axis=1)
+    df.loc[mask, 'cwsi'] = df.loc[mask].apply(lambda row: calculate_cwsi_th1(row, crop_height, SURFACE_ALBEDO), axis=1)
     
     # Remove temporary columns
     df = df.drop(columns=['time', 'canopy_temp'])
@@ -1426,7 +1709,6 @@ def main(input_folder):
 if __name__ == "__main__":
     input_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\data"
     main(input_folder)
-
         </content>
     </file>
     <file>
@@ -1614,14 +1896,20 @@ if __name__ == "__main__":
         <name>et.py</name>
         <path>src\et.py</path>
         <content>
+# src/et.py
+
 import os
 import pandas as pd
 import numpy as np
 import pyet
 import logging
+from datetime import datetime
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
+
+# User-defined current crop stage
+CURRENT_CROP_STAGE = 'mid-season'  # Options: 'initial', 'development', 'mid-season', 'late-season'
 
 # Metadata
 ELEVATION = 876  # meters
@@ -1635,7 +1923,46 @@ K = 0.41
 CROP_HEIGHT = 1.6
 SURFACE_ALBEDO = 0.23
 
-def calculate_et(df):
+EMERGENCE_DATE = '2023-05-15'  # Format: 'YYYY-MM-DD'
+
+# Crop coefficients and growth stages (days)
+CROP_DATA = {
+    'corn': {
+        'stages': [30, 40, 50, 30],  # [initial, development, mid-season, late-season]
+        'kc': [0.3, 1.2, 0.35]  # [kc_ini, kc_mid, kc_end]
+    },
+    'soybean': {
+        'stages': [15, 30, 55, 25],
+        'kc': [0.4, 1.15, 0.5]
+    }
+}
+
+def get_crop_coefficient(crop_type):
+    kc_values = CROP_DATA[crop_type]['kc']
+    
+    if CURRENT_CROP_STAGE == 'initial':
+        return kc_values[0]
+    elif CURRENT_CROP_STAGE == 'development':
+        return np.mean([kc_values[0], kc_values[1]])
+    elif CURRENT_CROP_STAGE == 'mid-season':
+        return kc_values[1]
+    elif CURRENT_CROP_STAGE == 'late-season':
+        return np.mean([kc_values[1], kc_values[2]])
+    else:
+        logger.warning(f"Invalid crop stage: {CURRENT_CROP_STAGE}. Using mid-season Kc.")
+        return kc_values[1]
+
+def get_crop_type_from_filename(file_path):
+    file_name = os.path.basename(file_path)
+    if 'CORN' in file_name.upper():
+        return 'corn'
+    elif 'SOYBEAN' in file_name.upper():
+        return 'soybean'
+    else:
+        logger.warning(f"Unable to determine crop type from filename: {file_name}")
+        return None
+
+def calculate_et(df, crop_type):
     # Resample to daily, handling missing data
     df_daily = df.set_index('TIMESTAMP').resample('D').mean()
     
@@ -1643,8 +1970,8 @@ def calculate_et(df):
     df_daily = df_daily.dropna(subset=required_columns)
     
     if df_daily.empty:
-        logger.warning("Dataframe is empty after resampling and dropping NaN values.")
-        return pd.DataFrame(columns=['TIMESTAMP', 'et'])
+        logger.warning(f"Dataframe is empty after resampling and dropping NaN values for {crop_type}.")
+        return pd.DataFrame(columns=['TIMESTAMP', 'eto', 'etc'])
     
     # Convert solar radiation to MJ/m^2/day
     df_daily['Solar_2m_Avg_MJ'] = df_daily['Solar_2m_Avg'] * 0.0864
@@ -1663,29 +1990,43 @@ def calculate_et(df):
         'lat': lat_rad
     }
     
-    # Calculate ET
-    df_daily['et'] = pyet.combination.pm_asce(**inputs)
+    # Calculate ETo
+    df_daily['eto'] = pyet.combination.pm_asce(**inputs)
     
-    # Reset index to get TIMESTAMP as a column and return only TIMESTAMP and et
-    return df_daily.reset_index()[['TIMESTAMP', 'et']]
+    # Get Kc based on current crop stage
+    kc = get_crop_coefficient(crop_type)
+    
+    # Calculate ETc
+    df_daily['etc'] = df_daily['eto'] * kc
+    df_daily['kc'] = kc
+    
+    # Reset index to get TIMESTAMP as a column and return required columns
+    return df_daily.reset_index()[['TIMESTAMP', 'eto', 'etc', 'kc']]
 
 def process_csv_file(file_path):
     logger.info(f"Processing file for ET calculation: {file_path}")
     
+    # Determine crop type from file name
+    crop_type = get_crop_type_from_filename(file_path)
+    if crop_type is None:
+        logger.error(f"Skipping file due to unknown crop type: {file_path}")
+        return None
+    
     df = pd.read_csv(file_path, parse_dates=['TIMESTAMP'])
     
-    et_df = calculate_et(df)
+    et_df = calculate_et(df, crop_type)
     
     if not et_df.empty:
         # Merge ET data back into original dataframe
         df = pd.merge(df, et_df, on='TIMESTAMP', how='left')
         
         # Log ET statistics
-        valid_et = df['et'].dropna()
-        if len(valid_et) > 0:
-            logger.info(f"ET stats - Count: {len(valid_et)}, Mean: {valid_et.mean():.4f}, Min: {valid_et.min():.4f}, Max: {valid_et.max():.4f}")
-        else:
-            logger.info("No valid ET values calculated")
+        for et_type in ['eto', 'etc']:
+            valid_et = df[et_type].dropna()
+            if len(valid_et) > 0:
+                logger.info(f"{et_type.upper()} stats for {crop_type} - Count: {len(valid_et)}, Mean: {valid_et.mean():.4f}, Min: {valid_et.min():.4f}, Max: {valid_et.max():.4f}")
+            else:
+                logger.info(f"No valid {et_type.upper()} values calculated for {crop_type}")
         
         # Save updated dataframe
         df.to_csv(file_path, index=False)
@@ -1738,17 +2079,17 @@ class FuzzyIrrigationController:
         x_irrigation = np.arange(0, 1, 0.01)
     
         # Create fuzzy variables
-        self.et = ctrl.Antecedent(x_et, 'et')
+        self.etc = ctrl.Antecedent(x_et, 'etc')
         self.swsi = ctrl.Antecedent(x_swsi, 'swsi')
         self.cwsi = ctrl.Antecedent(x_cwsi, 'cwsi')
         self.irrigation = ctrl.Consequent(x_irrigation, 'irrigation')
     
         # Define membership functions for ET
-        self.et['very_low'] = fuzz.trimf(x_et, [0, 0, 2])
-        self.et['low'] = fuzz.trimf(x_et, [1, 2.5, 4])
-        self.et['medium'] = fuzz.trimf(x_et, [3, 4.5, 6])
-        self.et['high'] = fuzz.trimf(x_et, [5, 6.5, 8])
-        self.et['very_high'] = fuzz.trimf(x_et, [7, 10, 10])
+        self.etc['very_low'] = fuzz.trimf(x_et, [0, 0, 2])
+        self.etc['low'] = fuzz.trimf(x_et, [1, 2.5, 4])
+        self.etc['medium'] = fuzz.trimf(x_et, [3, 4.5, 6])
+        self.etc['high'] = fuzz.trimf(x_et, [5, 6.5, 8])
+        self.etc['very_high'] = fuzz.trimf(x_et, [7, 10, 10])
     
         self.swsi['very_wet'] = fuzz.trimf(x_swsi, [0, 0, 0.25])
         self.swsi['wet'] = fuzz.trimf(x_swsi, [0, 0.25, 0.5])
@@ -1789,11 +2130,11 @@ class FuzzyIrrigationController:
             ctrl.Rule(self.cwsi['low_stress'] & self.swsi['wet'], self.irrigation['low']),
             ctrl.Rule(self.cwsi['no_stress'] & self.swsi['very_wet'], self.irrigation['none']),
             
-            ctrl.Rule(self.et['very_high'] & self.cwsi['high_stress'], self.irrigation['high']),
-            ctrl.Rule(self.et['high'] & self.swsi['dry'], self.irrigation['medium']),
-            ctrl.Rule(self.et['medium'] & (self.cwsi['moderate_stress'] | self.swsi['normal']), self.irrigation['medium']),
-            ctrl.Rule(self.et['low'] & (self.cwsi['low_stress'] | self.swsi['wet']), self.irrigation['low']),
-            ctrl.Rule(self.et['very_low'] & (self.cwsi['no_stress'] | self.swsi['very_wet']), self.irrigation['none']),
+            ctrl.Rule(self.etc['very_high'] & self.cwsi['high_stress'], self.irrigation['high']),
+            ctrl.Rule(self.etc['high'] & self.swsi['dry'], self.irrigation['medium']),
+            ctrl.Rule(self.etc['medium'] & (self.cwsi['moderate_stress'] | self.swsi['normal']), self.irrigation['medium']),
+            ctrl.Rule(self.etc['low'] & (self.cwsi['low_stress'] | self.swsi['wet']), self.irrigation['low']),
+            ctrl.Rule(self.etc['very_low'] & (self.cwsi['no_stress'] | self.swsi['very_wet']), self.irrigation['none']),
         ]
     
         # Create and simulate control system
@@ -1819,7 +2160,7 @@ class FuzzyIrrigationController:
 
     def compute_irrigation(self, df, plot):
         # Compute inputs for fuzzy system
-        et_data, et_start, et_end = self.get_recent_values(df['et'], 6)
+        et_data, et_start, et_end = self.get_recent_values(df['etc'], 6)
         et_avg = et_data.mean()
 
         swsi_value = self.get_recent_swsi(df['swsi'])
@@ -1832,7 +2173,7 @@ class FuzzyIrrigationController:
         logger.info(f"Most recent valid CWSI: {cwsi_value:.2f}" if cwsi_value is not None else "No valid CWSI value found in the last 3 days")
 
         # Set inputs for fuzzy system
-        self.irrigation_sim.input['et'] = et_avg
+        self.irrigation_sim.input['etc'] = et_avg
         self.irrigation_sim.input['swsi'] = swsi_value if swsi_value is not None else 0.5  # Default value if no valid SWSI
         self.irrigation_sim.input['cwsi'] = min(cwsi_value, 1) if cwsi_value is not None else 0.5  # Default value if no valid CWSI, cap at 1
 
@@ -1902,6 +2243,8 @@ if __name__ == "__main__":
         <name>fuzz_with_visuals.py</name>
         <path>src\fuzz_with_visuals.py</path>
         <content>
+# src/fuzz_with_visuals.py
+
 import os
 import pandas as pd
 import numpy as np
@@ -1917,7 +2260,8 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 class FuzzyIrrigationController:
-    def __init__(self):
+    def __init__(self, days_back=3):
+        self.days_back = days_back
         self.setup_fuzzy_system()
         self.image_dir = os.path.join(os.getcwd(), 'images')
         os.makedirs(self.image_dir, exist_ok=True)
@@ -1930,17 +2274,17 @@ class FuzzyIrrigationController:
         x_irrigation = np.arange(0, 1, 0.01)
     
         # Create fuzzy variables
-        self.et = ctrl.Antecedent(x_et, 'et')
+        self.etc = ctrl.Antecedent(x_et, 'etc')
         self.swsi = ctrl.Antecedent(x_swsi, 'swsi')
         self.cwsi = ctrl.Antecedent(x_cwsi, 'cwsi')
         self.irrigation = ctrl.Consequent(x_irrigation, 'irrigation')
     
         # Define membership functions for ET
-        self.et['very_low'] = fuzz.trimf(x_et, [0, 0, 2])
-        self.et['low'] = fuzz.trimf(x_et, [1, 2.5, 4])
-        self.et['medium'] = fuzz.trimf(x_et, [3, 4.5, 6])
-        self.et['high'] = fuzz.trimf(x_et, [5, 6.5, 8])
-        self.et['very_high'] = fuzz.trimf(x_et, [7, 10, 10])
+        self.etc['very_low'] = fuzz.trimf(x_et, [0, 0, 2])
+        self.etc['low'] = fuzz.trimf(x_et, [1, 2.5, 4])
+        self.etc['medium'] = fuzz.trimf(x_et, [3, 4.5, 6])
+        self.etc['high'] = fuzz.trimf(x_et, [5, 6.5, 8])
+        self.etc['very_high'] = fuzz.trimf(x_et, [7, 10, 10])
     
         self.swsi['very_wet'] = fuzz.trimf(x_swsi, [0, 0, 0.25])
         self.swsi['wet'] = fuzz.trimf(x_swsi, [0, 0.25, 0.5])
@@ -1981,11 +2325,11 @@ class FuzzyIrrigationController:
             ctrl.Rule(self.cwsi['low_stress'] & self.swsi['wet'], self.irrigation['low']),
             ctrl.Rule(self.cwsi['no_stress'] & self.swsi['very_wet'], self.irrigation['none']),
             
-            ctrl.Rule(self.et['very_high'] & self.cwsi['high_stress'], self.irrigation['high']),
-            ctrl.Rule(self.et['high'] & self.swsi['dry'], self.irrigation['medium']),
-            ctrl.Rule(self.et['medium'] & (self.cwsi['moderate_stress'] | self.swsi['normal']), self.irrigation['medium']),
-            ctrl.Rule(self.et['low'] & (self.cwsi['low_stress'] | self.swsi['wet']), self.irrigation['low']),
-            ctrl.Rule(self.et['very_low'] & (self.cwsi['no_stress'] | self.swsi['very_wet']), self.irrigation['none']),
+            ctrl.Rule(self.etc['very_high'] & self.cwsi['high_stress'], self.irrigation['high']),
+            ctrl.Rule(self.etc['high'] & self.swsi['dry'], self.irrigation['medium']),
+            ctrl.Rule(self.etc['medium'] & (self.cwsi['moderate_stress'] | self.swsi['normal']), self.irrigation['medium']),
+            ctrl.Rule(self.etc['low'] & (self.cwsi['low_stress'] | self.swsi['wet']), self.irrigation['low']),
+            ctrl.Rule(self.etc['very_low'] & (self.cwsi['no_stress'] | self.swsi['very_wet']), self.irrigation['none']),
         ]
     
         # Create and simulate control system
@@ -1995,7 +2339,7 @@ class FuzzyIrrigationController:
     def plot_membership_functions(self):
         fig, (ax0, ax1, ax2, ax3) = plt.subplots(nrows=4, figsize=(10, 20))
         
-        self.et.view(ax=ax0)
+        self.etc.view(ax=ax0)
         ax0.set_title('Evapotranspiration')
         self.swsi.view(ax=ax1)
         ax1.set_title('Surface Water Supply Index')
@@ -2045,9 +2389,9 @@ class FuzzyIrrigationController:
         plt.savefig(os.path.join(self.image_dir, f'fuzzy_output_plot_{plot}.png'))
         plt.close()
 
-    def get_recent_values(self, series, n_days=3):
+    def get_recent_values(self, series):
         end_date = pd.Timestamp.now().floor('D')
-        start_date = end_date - pd.Timedelta(days=n_days)
+        start_date = end_date - pd.Timedelta(days=self.days_back)
         
         # Ensure the series index is timezone-naive
         if series.index.tz is not None:
@@ -2056,38 +2400,71 @@ class FuzzyIrrigationController:
         recent_data = series.loc[start_date:end_date]
         return recent_data, start_date, end_date
 
-    def compute_irrigation(self, df, plot, n_days=6):
+    def get_recent_swsi(self, series):
+        # Get the most recent non-NaN SWSI value
+        return series.dropna().iloc[-1] if not series.dropna().empty else None
+
+    def get_recent_cwsi(self, series):
+        end_date = pd.Timestamp.now().floor('D')
+        start_date = end_date - pd.Timedelta(days=self.days_back)
+        
+        # Ensure the series index is timezone-naive
+        if series.index.tz is not None:
+            series.index = series.index.tz_localize(None)
+        
+        # Get data for the last self.days_back days
+        recent_data = series.loc[start_date:end_date]
+        
+        # Group by date and get the maximum CWSI for each day
+        daily_max = recent_data.groupby(recent_data.index.date).max()
+        
+        # Filter valid CWSI values (between 0 and 1.5)
+        valid_data = daily_max[(daily_max >= 0) & (daily_max <= 1.5)]
+        
+        if len(valid_data) > 0:
+            # Sort values in descending order and take the average of up to 3 highest values
+            top_3_avg = valid_data.sort_values(ascending=False).head(3).mean()
+            # Cap the average at 1  
+            return min(top_3_avg, 1)
+        else:
+            return None
+
+    def compute_irrigation(self, df, plot):
         # Compute inputs for fuzzy system
-        et_data, et_start, et_end = self.get_recent_values(df['et'], n_days)
-        swsi_data, swsi_start, swsi_end = self.get_recent_values(df['swsi'], n_days)
-        cwsi_data, cwsi_start, cwsi_end = self.get_recent_values(df['cwsi'], n_days)
+        et_data, et_start, et_end = self.get_recent_values(df['etc'])
+        swsi_data, swsi_start, swsi_end = self.get_recent_values(df['swsi'])
+        cwsi_data, cwsi_start, cwsi_end = self.get_recent_values(df['cwsi'])
 
         # Plot recent data
         self.plot_recent_data(et_data, swsi_data, cwsi_data, plot)
 
         et_avg = et_data.mean()
-        swsi_avg = swsi_data.mean()
 
-        # For CWSI, try to find valid values in the past 5 days
-        valid_cwsi_data = cwsi_data[cwsi_data.notna()]
-        if valid_cwsi_data.empty:
-            # If no valid CWSI values found in the past 5 days, set a default value for CWSI
-            default_cwsi = 0.5  # Set a reasonable default value
-            logger.warning(f"No valid CWSI values found in the past 5 days for plot {plot}, using default value: {default_cwsi}")
-            cwsi_max = default_cwsi
-        else:
-            cwsi_max = min(valid_cwsi_data.max(), 1)  # Cap CWSI at 1
+        swsi_value = self.get_recent_swsi(df['swsi'])
+        cwsi_value = self.get_recent_cwsi(df['cwsi'])
 
         # Log the values used for decision making
         logger.info(f"Values used for irrigation decision for plot {plot}:")
         logger.info(f"ET Average: {et_avg:.2f} (from {et_start} to {et_end})")
-        logger.info(f"SWSI Average: {swsi_avg:.2f} (from {swsi_start} to {swsi_end})")
-        logger.info(f"CWSI Maximum: {cwsi_max:.2f} (from {cwsi_start} to {cwsi_end})")
+        logger.info(f"Most recent SWSI: {swsi_value:.2f}" if swsi_value is not None else "No valid SWSI value found")
+        
+        if cwsi_value is not None:
+            logger.info(f"CWSI Value (avg of up to 3 highest daily max values): {cwsi_value:.2f}")
+            # Log the daily max CWSI values for the last self.days_back days
+            daily_max = cwsi_data.groupby(cwsi_data.index.date).max()
+            for date in daily_max.index:
+                value = daily_max[date]
+                if 0 <= value <= 1.5:
+                    logger.info(f"  CWSI max for {date}: {value:.2f}")
+                else:
+                    logger.info(f"  CWSI max for {date}: {value:.2f} (invalid, outside 0-1.5 range)")
+        else:
+            logger.info(f"No valid CWSI values found in the last {self.days_back} days")
 
         # Set inputs for fuzzy system
-        self.irrigation_sim.input['et'] = et_avg
-        self.irrigation_sim.input['swsi'] = swsi_avg
-        self.irrigation_sim.input['cwsi'] = cwsi_max
+        self.irrigation_sim.input['etc'] = et_avg
+        self.irrigation_sim.input['swsi'] = swsi_value if swsi_value is not None else 0.5  # Default value if no valid SWSI
+        self.irrigation_sim.input['cwsi'] = min(cwsi_value, 1) if cwsi_value is not None else 0.5  # Default value if no valid CWSI, cap at 1
 
         # Compute output
         self.irrigation_sim.compute()
@@ -2097,9 +2474,11 @@ class FuzzyIrrigationController:
         logger.info(f"Recommended Irrigation Amount for plot {plot}: {irrigation_amount:.2f} inches")
 
         # Plot fuzzy output
-        self.plot_fuzzy_output(et_avg, swsi_avg, cwsi_max, irrigation_amount, plot)
+        self.plot_fuzzy_output(et_avg, swsi_value if swsi_value is not None else 0.5, 
+                            min(cwsi_value, 1) if cwsi_value is not None else 0.5, 
+                            irrigation_amount, plot)
 
-        return irrigation_amount, et_avg, swsi_avg, cwsi_max
+        return irrigation_amount, et_avg, swsi_value, cwsi_value
 
 def process_csv_file(file_path, controller):
     logger.info(f"Processing file for irrigation recommendation: {file_path}")
@@ -2110,19 +2489,19 @@ def process_csv_file(file_path, controller):
     plot_number = file_path.split('_')[-2]  # Assuming the plot number is the second-to-last part of the filename
     crop_type = 'corn' if 'CORN' in file_path else 'soybean'
 
-    irrigation_amount, et_avg, swsi_avg, cwsi_max = controller.compute_irrigation(df, plot_number)
+    irrigation_amount, et_avg, swsi_value, cwsi_value = controller.compute_irrigation(df, plot_number)
     
     return {
         'plot': plot_number,
         'crop': crop_type,
         'irrigation': irrigation_amount,
         'et_avg': et_avg,
-        'swsi_avg': swsi_avg,
-        'cwsi_max': cwsi_max
+        'swsi': swsi_value,
+        'cwsi': cwsi_value
     }
 
-def main(input_folder, output_file):
-    controller = FuzzyIrrigationController()
+def main(input_folder, output_file, days_back=4):
+    controller = FuzzyIrrigationController(days_back)
     
     # Plot membership functions
     controller.plot_membership_functions()
@@ -2149,7 +2528,165 @@ def main(input_folder, output_file):
 if __name__ == "__main__":
     input_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\data"
     output_file = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\recommendations\fuzzy-trt-1.csv"
-    main(input_folder, output_file)
+    main(input_folder, output_file, days_back=6)
+        </content>
+    </file>
+    <file>
+        <name>get_forecasts.py</name>
+        <path>src\get_forecasts.py</path>
+        <content>
+import os
+import requests
+import pandas as pd
+import numpy as np
+import pyet
+import logging
+from datetime import datetime
+import pytz
+from dotenv import load_dotenv
+
+# Load API key from .env file
+load_dotenv()
+API_KEY = os.getenv('OPENWEATHERMAP_API_KEY')
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+# OpenWeatherMap API details
+BASE_URL = "https://api.openweathermap.org/data/2.5/forecast"
+
+# Metadata for ET calculation
+ELEVATION = 876  # meters
+LATITUDE = 41.15  # degrees
+LONGITUDE = -100.77  # degrees
+WIND_HEIGHT = 3  # meters
+
+def get_forecast(lat, lon):
+    params = {
+        'lat': lat,
+        'lon': lon,
+        'appid': API_KEY,
+        'units': 'metric'
+    }
+    logger.info(f"Requesting forecast data for coordinates: {lat}, {lon}")
+    response = requests.get(BASE_URL, params=params)
+    response.raise_for_status()
+    logger.info("Successfully retrieved forecast data")
+    return response.json()
+
+def get_solar_radiation_forecast(lat, lon):
+    solar_url = f"https://api.openweathermap.org/data/2.5/solar_radiation/forecast"
+    params = {
+        'lat': lat,
+        'lon': lon,
+        'appid': API_KEY
+    }
+    logger.info(f"Requesting solar radiation forecast data for coordinates: {lat}, {lon}")
+    response = requests.get(solar_url, params=params)
+    response.raise_for_status()
+    logger.info("Successfully retrieved solar radiation forecast data")
+    return response.json()
+
+def map_forecast_data(forecast_item, collection_time):
+    return {
+        'collection_time': collection_time.isoformat(),
+        'TIMESTAMP': datetime.utcfromtimestamp(forecast_item['dt']).isoformat(),
+        'Ta_2m_Avg': forecast_item['main']['temp'],
+        'TaMax_2m': forecast_item['main']['temp_max'],
+        'TaMin_2m': forecast_item['main']['temp_min'],
+        'RH_2m_Avg': forecast_item['main']['humidity'],
+        'Dp_2m_Avg': forecast_item['main'].get('dew_point'),
+        'WndAveSpd_3m': forecast_item['wind']['speed'],
+        'WndAveDir_3m': forecast_item['wind']['deg'],
+        'WndMaxSpd5s_3m': forecast_item['wind'].get('gust'),
+        'PresAvg_1pnt5m': forecast_item['main']['pressure'],
+        'Rain_1m_Tot': forecast_item['rain']['3h'] if 'rain' in forecast_item else 0,
+        'Visibility': forecast_item.get('visibility', 0),
+        'Clouds': forecast_item['clouds']['all']
+    }
+
+def map_solar_forecast_data(solar_item):
+    return {
+        'TIMESTAMP': datetime.utcfromtimestamp(solar_item['dt']).isoformat(),
+        'Solar_2m_Avg': solar_item['radiation']['ghi']  # Assuming GHI is used for solar radiation
+    }
+
+def merge_weather_and_solar_data(weather_data, solar_data):
+    weather_df = pd.DataFrame(weather_data)
+    solar_df = pd.DataFrame(solar_data)
+    merged_df = pd.merge(weather_df, solar_df, on='TIMESTAMP', how='left')
+    return merged_df
+
+def calculate_et(df):
+    df_daily = df.set_index('TIMESTAMP').resample('D').mean()
+    
+    required_columns = ['Ta_2m_Avg', 'TaMax_2m', 'TaMin_2m', 'RH_2m_Avg', 'WndAveSpd_3m', 'Solar_2m_Avg']
+    df_daily = df_daily.dropna(subset=required_columns)
+    
+    if df_daily.empty:
+        logger.warning("Dataframe is empty after resampling and dropping NaN values.")
+        return pd.DataFrame(columns=['TIMESTAMP', 'et'])
+    
+    # Convert solar radiation to MJ/m^2/day
+    df_daily['Solar_2m_Avg_MJ'] = df_daily['Solar_2m_Avg'] * 0.0864
+    
+    lat_rad = LATITUDE * np.pi / 180
+    
+    inputs = {
+        'tmean': df_daily['Ta_2m_Avg'],
+        'wind': df_daily['WndAveSpd_3m'],
+        'rs': df_daily['Solar_2m_Avg_MJ'],
+        'tmax': df_daily['TaMax_2m'],
+        'tmin': df_daily['TaMin_2m'],
+        'rh': df_daily['RH_2m_Avg'],
+        'elevation': ELEVATION,
+        'lat': lat_rad
+    }
+    
+    df_daily['et'] = pyet.combination.pm_asce(**inputs)
+    
+    return df_daily.reset_index()[['TIMESTAMP', 'et']]
+
+def four_day_forecast_static(lat, lon):
+    try:
+        logger.info("Starting static 4-day forecast function")
+        
+        weather_forecast_data = get_forecast(lat, lon)
+        solar_forecast_data = get_solar_radiation_forecast(lat, lon)
+        
+        collection_time = datetime.now(pytz.UTC)
+        
+        mapped_weather_data = [map_forecast_data(item, collection_time) for item in weather_forecast_data['list']]
+        mapped_solar_data = [map_solar_forecast_data(item) for item in solar_forecast_data['list']]
+        
+        logger.info(f"Processed {len(mapped_weather_data)} weather forecast entries")
+        logger.info(f"Processed {len(mapped_solar_data)} solar radiation forecast entries")
+        
+        df_forecast = merge_weather_and_solar_data(mapped_weather_data, mapped_solar_data)
+        
+        # Calculate daily precipitation sum
+        df_forecast['TIMESTAMP'] = pd.to_datetime(df_forecast['TIMESTAMP'])
+        df_forecast.set_index('TIMESTAMP', inplace=True)
+        df_daily_precip = df_forecast['Rain_1m_Tot'].resample('D').sum().reset_index()
+        
+        et_df = calculate_et(df_forecast)
+        
+        if not et_df.empty:
+            df_forecast = pd.merge(df_forecast.reset_index(), et_df, on='TIMESTAMP', how='left')
+            df_forecast = pd.merge(df_forecast, df_daily_precip, on='TIMESTAMP', how='left', suffixes=('', '_daily_sum'))
+        
+        logger.info("Static forecast data processed successfully")
+        return df_forecast
+    except Exception as e:
+        logger.error(f"Error processing static forecast data: {str(e)}", exc_info=True)
+        return pd.DataFrame()
+
+if __name__ == "__main__":
+    lat, lon = 41.089075, -100.773775
+    df_result = four_day_forecast_static(lat, lon)
+    print(df_result)
+
         </content>
     </file>
     <file>
@@ -2332,6 +2869,9 @@ def create_dated_folder(base_path):
     os.makedirs(dated_folder, exist_ok=True)
     return dated_folder
 
+def get_all_subfolders(base_folder):
+    return [os.path.join(base_folder, d) for d in os.listdir(base_folder) if os.path.isdir(os.path.join(base_folder, d))]
+
 def run_analysis():
     # Define base paths
     base_output_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et"
@@ -2344,22 +2884,16 @@ def run_analysis():
     os.makedirs(dated_data_folder, exist_ok=True)
     os.makedirs(dated_recommendations_folder, exist_ok=True)
     
-    # Run dat_to_csv
-    corn_folders = [
-        r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\2024_data_corn_lnr\07-03-2024",
-        r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\2024_data_corn_lnr\07-08-2024-discontinuous",
-        r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\2024_data_corn_lnr\07-14-2024-discont-nodeC only",
-        r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\2024_data_corn_lnr\07-15-2024-discont-unsure",
-        r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\2024_data_corn_lnr\07-19-2024",
-        r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\2024_data_corn_lnr\07-26-2024"
-    ]
-    soybean_folders = [
-        r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\Soybean Lnr\07-15-24",
-        r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\Soybean Lnr\07-19-2024",
-        r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\Soybean Lnr\07-26-2024"
-    ]
+    # Define base folders for corn and soybean data
+    corn_base_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\2024_data_corn_lnr"
+    soybean_base_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\Soybean Lnr"
+    
+    # Get all subfolders
+    corn_folders = get_all_subfolders(corn_base_folder)
+    soybean_folders = get_all_subfolders(soybean_base_folder)
+    
     sensor_mapping_path = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\sensor_mapping.yaml"
-    weather_csv_path = r"C:\Users\bnsoh2\Downloads\North_Platte_3SW_Beta_1min (9).csv"
+    weather_csv_path = r"C:\Users\bnsoh2\Downloads\North_Platte_3SW_Beta_1min (10).csv"
     
     logger.info("Running dat_to_csv...")
     dat_to_csv_main(corn_folders, soybean_folders, sensor_mapping_path, dated_data_folder, weather_csv_path)
@@ -2480,6 +3014,95 @@ def main(input_folder):
 if __name__ == "__main__":
     input_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\data"
     main(input_folder)
+        </content>
+    </file>
+    <file>
+        <name>test.py</name>
+        <path>src\test.py</path>
+        <content>
+import os
+import sys
+import requests
+import json
+from dotenv import load_dotenv, find_dotenv
+
+def get_api_key():
+    # Try to find and load the .env file
+    dotenv_path = find_dotenv()
+    if not dotenv_path:
+        raise FileNotFoundError(".env file not found. Please create one with your API key.")
+    
+    load_dotenv(dotenv_path, override=True)
+    api_key = os.getenv('OPENWEATHERMAP_API_KEY')
+    
+    if not api_key:
+        raise ValueError("API key not found in .env file. Please set OPENWEATHERMAP_API_KEY.")
+    
+    return api_key
+
+def test_solar_radiation_api(lat, lon, api_key):
+    solar_url = "https://api.openweathermap.org/data/2.5/solar_radiation/forecast"
+    params = {
+        'lat': lat,
+        'lon': lon,
+        'appid': api_key
+    }
+    try:
+        response = requests.get(solar_url, params=params, timeout=10)
+        response.raise_for_status()
+        return response.json()
+    except requests.exceptions.HTTPError as http_err:
+        if response.status_code == 401:
+            print(f"Error 401: Unauthorized. Please check your API key.")
+        elif response.status_code == 404:
+            print(f"Error 404: API endpoint not found. Please check the URL.")
+        else:
+            print(f"HTTP error occurred: {http_err}")
+    except requests.exceptions.ConnectionError:
+        print("Error: Unable to connect to the API. Please check your internet connection.")
+    except requests.exceptions.Timeout:
+        print("Error: API request timed out. Please try again later.")
+    except requests.exceptions.RequestException as err:
+        print(f"An error occurred: {err}")
+    return None
+
+def display_solar_data(data):
+    if not data:
+        return
+    
+    print("\nSolar Radiation Forecast Data:")
+    print(json.dumps(data, indent=2))
+    
+    if 'list' in data:
+        print("\nSummary:")
+        for item in data['list'][:5]:  # Display first 5 entries
+            dt = item.get('dt', 'N/A')
+            ghi = item.get('radiation', {}).get('ghi', 'N/A')
+            print(f"Timestamp: {dt}, Global Horizontal Irradiance: {ghi} W/m²")
+
+def main():
+    try:
+        api_key = get_api_key()
+        print(f"API Key loaded successfully: {api_key[:5]}...{api_key[-5:]}")
+        
+        lat, lon = 41.089075, -100.773775
+        print(f"\nTesting Solar Radiation API for coordinates: {lat}, {lon}")
+        
+        solar_data = test_solar_radiation_api(lat, lon, api_key)
+        if solar_data:
+            display_solar_data(solar_data)
+        else:
+            print("Failed to retrieve solar radiation data.")
+    
+    except FileNotFoundError as e:
+        print(f"Error: {e}")
+    except ValueError as e:
+        print(f"Error: {e}")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+
+if __name__ == "__main__":
+    main()
         </content>
     </file>
     </directory>

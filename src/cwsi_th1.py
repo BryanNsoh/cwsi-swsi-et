@@ -11,8 +11,8 @@ STEFAN_BOLTZMANN = 5.67e-8
 CP = 1005
 K = 0.41
 CROP_HEIGHTS = {
-    'CORN': 2.7,  # Adjust this value as needed
-    'SOYBEAN': 1.0  # Adjust this value as needed
+    'CORN': 2.845,  # Adjust this value as needed
+    'SOYBEAN': 0.914  # Adjust this value as needed
 }
 SURFACE_ALBEDO = 0.23
 

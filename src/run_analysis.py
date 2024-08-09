@@ -19,6 +19,9 @@ def create_dated_folder(base_path):
     os.makedirs(dated_folder, exist_ok=True)
     return dated_folder
 
+def get_all_subfolders(base_folder):
+    return [os.path.join(base_folder, d) for d in os.listdir(base_folder) if os.path.isdir(os.path.join(base_folder, d))]
+
 def run_analysis():
     # Define base paths
     base_output_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et"
@@ -31,22 +34,16 @@ def run_analysis():
     os.makedirs(dated_data_folder, exist_ok=True)
     os.makedirs(dated_recommendations_folder, exist_ok=True)
     
-    # Run dat_to_csv
-    corn_folders = [
-        r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\2024_data_corn_lnr\07-03-2024",
-        r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\2024_data_corn_lnr\07-08-2024-discontinuous",
-        r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\2024_data_corn_lnr\07-14-2024-discont-nodeC only",
-        r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\2024_data_corn_lnr\07-15-2024-discont-unsure",
-        r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\2024_data_corn_lnr\07-19-2024",
-        r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\2024_data_corn_lnr\07-26-2024"
-    ]
-    soybean_folders = [
-        r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\Soybean Lnr\07-15-24",
-        r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\Soybean Lnr\07-19-2024",
-        r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\Soybean Lnr\07-26-2024"
-    ]
+    # Define base folders for corn and soybean data
+    corn_base_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\2024_data_corn_lnr"
+    soybean_base_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\Soybean Lnr"
+    
+    # Get all subfolders
+    corn_folders = get_all_subfolders(corn_base_folder)
+    soybean_folders = get_all_subfolders(soybean_base_folder)
+    
     sensor_mapping_path = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\sensor_mapping.yaml"
-    weather_csv_path = r"C:\Users\bnsoh2\Downloads\North_Platte_3SW_Beta_1min (9).csv"
+    weather_csv_path = r"C:\Users\bnsoh2\Downloads\North_Platte_3SW_Beta_1min (10).csv"
     
     logger.info("Running dat_to_csv...")
     dat_to_csv_main(corn_folders, soybean_folders, sensor_mapping_path, dated_data_folder, weather_csv_path)
