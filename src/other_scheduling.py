@@ -1,3 +1,5 @@
+# src/other_scheduling.py
+
 import os
 import pandas as pd
 import numpy as np
@@ -28,20 +30,24 @@ def process_treatment_two(df, plot):
     cwsi_data, _, _ = get_recent_values(df['cwsi'], 3)
     swsi_data, _, _ = get_recent_values(df['swsi'], 3)
     
-    if cwsi_data.empty or swsi_data.empty:
-        logger.warning(f"Missing non-zero CWSI or SWSI data for treatment two, plot {plot}. Skipping.")
-        return None
-
-    cwsi_avg = cwsi_data.mean()
-    swsi_avg = swsi_data.mean()
+    cwsi_avg = cwsi_data.mean() if not cwsi_data.empty else None
+    swsi_avg = swsi_data.mean() if not swsi_data.empty else None
     
-    final_value = cwsi_avg * 0.4 + swsi_avg * 0.6
-    recommendation = 'Irrigate' if final_value > 0.5 else 'Do not irrigate'
+    if cwsi_avg is not None and swsi_avg is not None:
+        final_value = cwsi_avg * 0.4 + swsi_avg * 0.6
+    elif cwsi_avg is not None:
+        final_value = cwsi_avg
+    elif swsi_avg is not None:
+        final_value = swsi_avg
+    else:
+        final_value = None
+    
+    recommendation = 'Irrigate' if final_value is not None and final_value > 0.5 else 'Do not irrigate'
     
     logger.info(f"Processing treatment two for plot {plot}:")
-    logger.info(f"CWSI Avg: {cwsi_avg:.2f}")
-    logger.info(f"SWSI Avg: {swsi_avg:.2f}")
-    logger.info(f"Final Value: {final_value:.2f}")
+    logger.info(f"CWSI Avg: {cwsi_avg:.2f}" if cwsi_avg is not None else "CWSI Avg: N/A")
+    logger.info(f"SWSI Avg: {swsi_avg:.2f}" if swsi_avg is not None else "SWSI Avg: N/A")
+    logger.info(f"Final Value: {final_value:.2f}" if final_value is not None else "Final Value: N/A")
     logger.info(f"Recommendation: {recommendation}")
     
     return {
@@ -60,16 +66,15 @@ def process_treatment_three(df, plot):
     
     cwsi_data, _, _ = get_recent_values(df['cwsi'], 4)
     
-    if cwsi_data.empty:
-        logger.warning(f"Missing non-zero CWSI data for treatment three, plot {plot}. Skipping.")
-        return None
-
-    cwsi_avg = cwsi_data.mean()
+    cwsi_avg = cwsi_data.mean() if not cwsi_data.empty else None
     
-    recommendation = 'Irrigate' if cwsi_avg > 0.5 else 'Do not irrigate'
+    if cwsi_avg is not None:
+        recommendation = 'Irrigate' if cwsi_avg > 0.5 else 'Do not irrigate'
+    else:
+        recommendation = "CWSI value is null"
     
     logger.info(f"Processing treatment three for plot {plot}:")
-    logger.info(f"CWSI Avg: {cwsi_avg:.2f}")
+    logger.info(f"CWSI Avg: {cwsi_avg:.2f}" if cwsi_avg is not None else "CWSI Avg: N/A")
     logger.info(f"Recommendation: {recommendation}")
     
     return {
@@ -86,16 +91,15 @@ def process_treatment_four(df, plot):
     
     swsi_data, _, _ = get_recent_values(df['swsi'], 3)
     
-    if swsi_data.empty:
-        logger.warning(f"Missing non-zero SWSI data for treatment four, plot {plot}. Skipping.")
-        return None
-
-    swsi_avg = swsi_data.mean()
+    swsi_avg = swsi_data.mean() if not swsi_data.empty else None
     
-    recommendation = 'Irrigate' if swsi_avg > 0.5 else 'Do not irrigate'
+    if swsi_avg is not None:
+        recommendation = 'Irrigate' if swsi_avg > 0.5 else 'Do not irrigate'
+    else:
+        recommendation = "SWSI value is null"
     
     logger.info(f"Processing treatment four for plot {plot}:")
-    logger.info(f"SWSI Avg: {swsi_avg:.2f}")
+    logger.info(f"SWSI Avg: {swsi_avg:.2f}" if swsi_avg is not None else "SWSI Avg: N/A")
     logger.info(f"Recommendation: {recommendation}")
     
     return {

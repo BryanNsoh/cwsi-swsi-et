@@ -1487,6 +1487,425 @@ requests
         <content>Full content not provided</content>
     </file>
         </directory>
+    <directory name="analysis-2024-08-09">
+    </directory>
+        <directory name="data">
+        </directory>
+            <directory name="data-2024-08-09">
+    <file>
+        <name>LINEAR_CORN_trt1_plot_5006_20240809.csv</name>
+        <path>analysis-2024-08-09\data\data-2024-08-09\LINEAR_CORN_trt1_plot_5006_20240809.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt1_plot_5010_20240809.csv</name>
+        <path>analysis-2024-08-09\data\data-2024-08-09\LINEAR_CORN_trt1_plot_5010_20240809.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt1_plot_5023_20240809.csv</name>
+        <path>analysis-2024-08-09\data\data-2024-08-09\LINEAR_CORN_trt1_plot_5023_20240809.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt2_plot_5003_20240809.csv</name>
+        <path>analysis-2024-08-09\data\data-2024-08-09\LINEAR_CORN_trt2_plot_5003_20240809.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt2_plot_5012_20240809.csv</name>
+        <path>analysis-2024-08-09\data\data-2024-08-09\LINEAR_CORN_trt2_plot_5012_20240809.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt2_plot_5026_20240809.csv</name>
+        <path>analysis-2024-08-09\data\data-2024-08-09\LINEAR_CORN_trt2_plot_5026_20240809.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt3_plot_5001_20240809.csv</name>
+        <path>analysis-2024-08-09\data\data-2024-08-09\LINEAR_CORN_trt3_plot_5001_20240809.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt3_plot_5018_20240809.csv</name>
+        <path>analysis-2024-08-09\data\data-2024-08-09\LINEAR_CORN_trt3_plot_5018_20240809.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt3_plot_5020_20240809.csv</name>
+        <path>analysis-2024-08-09\data\data-2024-08-09\LINEAR_CORN_trt3_plot_5020_20240809.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt4_plot_5007_20240809.csv</name>
+        <path>analysis-2024-08-09\data\data-2024-08-09\LINEAR_CORN_trt4_plot_5007_20240809.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt4_plot_5009_20240809.csv</name>
+        <path>analysis-2024-08-09\data\data-2024-08-09\LINEAR_CORN_trt4_plot_5009_20240809.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt4_plot_5027_20240809.csv</name>
+        <path>analysis-2024-08-09\data\data-2024-08-09\LINEAR_CORN_trt4_plot_5027_20240809.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt1_plot_2006_20240809.csv</name>
+        <path>analysis-2024-08-09\data\data-2024-08-09\LINEAR_SOYBEAN_trt1_plot_2006_20240809.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt1_plot_2015_20240809.csv</name>
+        <path>analysis-2024-08-09\data\data-2024-08-09\LINEAR_SOYBEAN_trt1_plot_2015_20240809.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt1_plot_2023_20240809.csv</name>
+        <path>analysis-2024-08-09\data\data-2024-08-09\LINEAR_SOYBEAN_trt1_plot_2023_20240809.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt2_plot_2001_20240809.csv</name>
+        <path>analysis-2024-08-09\data\data-2024-08-09\LINEAR_SOYBEAN_trt2_plot_2001_20240809.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt2_plot_2011_20240809.csv</name>
+        <path>analysis-2024-08-09\data\data-2024-08-09\LINEAR_SOYBEAN_trt2_plot_2011_20240809.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt2_plot_2026_20240809.csv</name>
+        <path>analysis-2024-08-09\data\data-2024-08-09\LINEAR_SOYBEAN_trt2_plot_2026_20240809.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt3_plot_2003_20240809.csv</name>
+        <path>analysis-2024-08-09\data\data-2024-08-09\LINEAR_SOYBEAN_trt3_plot_2003_20240809.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt3_plot_2018_20240809.csv</name>
+        <path>analysis-2024-08-09\data\data-2024-08-09\LINEAR_SOYBEAN_trt3_plot_2018_20240809.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt3_plot_2020_20240809.csv</name>
+        <path>analysis-2024-08-09\data\data-2024-08-09\LINEAR_SOYBEAN_trt3_plot_2020_20240809.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt4_plot_2009_20240809.csv</name>
+        <path>analysis-2024-08-09\data\data-2024-08-09\LINEAR_SOYBEAN_trt4_plot_2009_20240809.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt4_plot_2012_20240809.csv</name>
+        <path>analysis-2024-08-09\data\data-2024-08-09\LINEAR_SOYBEAN_trt4_plot_2012_20240809.csv</path>
+        <content>Full content not provided</content>
+    </file>
+            </directory>
+        <directory name="recommendations">
+    <file>
+        <name>fuzzy-trt-1.csv</name>
+        <path>analysis-2024-08-09\recommendations\fuzzy-trt-1.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>recommendations.csv</name>
+        <path>analysis-2024-08-09\recommendations\recommendations.csv</path>
+        <content>Full content not provided</content>
+    </file>
+        </directory>
+    <directory name="analysis-2024-08-29">
+    </directory>
+        <directory name="data">
+    <file>
+        <name>CanopyTemp_1368_SDI1SoyBlockA_SDIC_BlockC.csv</name>
+        <path>analysis-2024-08-29\data\CanopyTemp_1368_SDI1SoyBlockA_SDIC_BlockC.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>CanopyTemp_plot_SDI1SoyBlockA_SDIC_BlockC.png</name>
+        <path>analysis-2024-08-29\data\CanopyTemp_plot_SDI1SoyBlockA_SDIC_BlockC.png</path>
+        <content>Full content not provided</content>
+    </file>
+        </directory>
+            <directory name="data-2024-08-29">
+    <file>
+        <name>LINEAR_CORN_trt1_plot_5006_20240829.csv</name>
+        <path>analysis-2024-08-29\data\data-2024-08-29\LINEAR_CORN_trt1_plot_5006_20240829.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt1_plot_5010_20240829.csv</name>
+        <path>analysis-2024-08-29\data\data-2024-08-29\LINEAR_CORN_trt1_plot_5010_20240829.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt1_plot_5023_20240829.csv</name>
+        <path>analysis-2024-08-29\data\data-2024-08-29\LINEAR_CORN_trt1_plot_5023_20240829.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt2_plot_5003_20240829.csv</name>
+        <path>analysis-2024-08-29\data\data-2024-08-29\LINEAR_CORN_trt2_plot_5003_20240829.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt2_plot_5012_20240829.csv</name>
+        <path>analysis-2024-08-29\data\data-2024-08-29\LINEAR_CORN_trt2_plot_5012_20240829.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt2_plot_5026_20240829.csv</name>
+        <path>analysis-2024-08-29\data\data-2024-08-29\LINEAR_CORN_trt2_plot_5026_20240829.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt3_plot_5001_20240829.csv</name>
+        <path>analysis-2024-08-29\data\data-2024-08-29\LINEAR_CORN_trt3_plot_5001_20240829.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt3_plot_5018_20240829.csv</name>
+        <path>analysis-2024-08-29\data\data-2024-08-29\LINEAR_CORN_trt3_plot_5018_20240829.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt3_plot_5020_20240829.csv</name>
+        <path>analysis-2024-08-29\data\data-2024-08-29\LINEAR_CORN_trt3_plot_5020_20240829.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt4_plot_5007_20240829.csv</name>
+        <path>analysis-2024-08-29\data\data-2024-08-29\LINEAR_CORN_trt4_plot_5007_20240829.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt4_plot_5009_20240829.csv</name>
+        <path>analysis-2024-08-29\data\data-2024-08-29\LINEAR_CORN_trt4_plot_5009_20240829.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt4_plot_5027_20240829.csv</name>
+        <path>analysis-2024-08-29\data\data-2024-08-29\LINEAR_CORN_trt4_plot_5027_20240829.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt1_plot_2006_20240829.csv</name>
+        <path>analysis-2024-08-29\data\data-2024-08-29\LINEAR_SOYBEAN_trt1_plot_2006_20240829.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt1_plot_2015_20240829.csv</name>
+        <path>analysis-2024-08-29\data\data-2024-08-29\LINEAR_SOYBEAN_trt1_plot_2015_20240829.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt1_plot_2023_20240829.csv</name>
+        <path>analysis-2024-08-29\data\data-2024-08-29\LINEAR_SOYBEAN_trt1_plot_2023_20240829.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt2_plot_2001_20240829.csv</name>
+        <path>analysis-2024-08-29\data\data-2024-08-29\LINEAR_SOYBEAN_trt2_plot_2001_20240829.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt2_plot_2011_20240829.csv</name>
+        <path>analysis-2024-08-29\data\data-2024-08-29\LINEAR_SOYBEAN_trt2_plot_2011_20240829.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt2_plot_2026_20240829.csv</name>
+        <path>analysis-2024-08-29\data\data-2024-08-29\LINEAR_SOYBEAN_trt2_plot_2026_20240829.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt3_plot_2003_20240829.csv</name>
+        <path>analysis-2024-08-29\data\data-2024-08-29\LINEAR_SOYBEAN_trt3_plot_2003_20240829.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt3_plot_2018_20240829.csv</name>
+        <path>analysis-2024-08-29\data\data-2024-08-29\LINEAR_SOYBEAN_trt3_plot_2018_20240829.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt3_plot_2020_20240829.csv</name>
+        <path>analysis-2024-08-29\data\data-2024-08-29\LINEAR_SOYBEAN_trt3_plot_2020_20240829.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt4_plot_2009_20240829.csv</name>
+        <path>analysis-2024-08-29\data\data-2024-08-29\LINEAR_SOYBEAN_trt4_plot_2009_20240829.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt4_plot_2012_20240829.csv</name>
+        <path>analysis-2024-08-29\data\data-2024-08-29\LINEAR_SOYBEAN_trt4_plot_2012_20240829.csv</path>
+        <content>Full content not provided</content>
+    </file>
+            </directory>
+        <directory name="recommendations">
+    <file>
+        <name>fuzzy-trt-1.csv</name>
+        <path>analysis-2024-08-29\recommendations\fuzzy-trt-1.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>recommendations.csv</name>
+        <path>analysis-2024-08-29\recommendations\recommendations.csv</path>
+        <content>Full content not provided</content>
+    </file>
+        </directory>
+    <directory name="analysis-2024-08-30">
+    </directory>
+        <directory name="data">
+    <file>
+        <name>CanopyTemp_1368_SDI1SoyBlockA_SDIC_BlockC.csv</name>
+        <path>analysis-2024-08-30\data\CanopyTemp_1368_SDI1SoyBlockA_SDIC_BlockC.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>CanopyTemp_plot_SDI1SoyBlockA_SDIC_BlockC.png</name>
+        <path>analysis-2024-08-30\data\CanopyTemp_plot_SDI1SoyBlockA_SDIC_BlockC.png</path>
+        <content>Full content not provided</content>
+    </file>
+        </directory>
+            <directory name="data-2024-08-30">
+    <file>
+        <name>LINEAR_CORN_trt1_plot_5006_20240830.csv</name>
+        <path>analysis-2024-08-30\data\data-2024-08-30\LINEAR_CORN_trt1_plot_5006_20240830.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt1_plot_5010_20240830.csv</name>
+        <path>analysis-2024-08-30\data\data-2024-08-30\LINEAR_CORN_trt1_plot_5010_20240830.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt1_plot_5023_20240830.csv</name>
+        <path>analysis-2024-08-30\data\data-2024-08-30\LINEAR_CORN_trt1_plot_5023_20240830.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt2_plot_5003_20240830.csv</name>
+        <path>analysis-2024-08-30\data\data-2024-08-30\LINEAR_CORN_trt2_plot_5003_20240830.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt2_plot_5012_20240830.csv</name>
+        <path>analysis-2024-08-30\data\data-2024-08-30\LINEAR_CORN_trt2_plot_5012_20240830.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt2_plot_5026_20240830.csv</name>
+        <path>analysis-2024-08-30\data\data-2024-08-30\LINEAR_CORN_trt2_plot_5026_20240830.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt3_plot_5001_20240830.csv</name>
+        <path>analysis-2024-08-30\data\data-2024-08-30\LINEAR_CORN_trt3_plot_5001_20240830.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt3_plot_5018_20240830.csv</name>
+        <path>analysis-2024-08-30\data\data-2024-08-30\LINEAR_CORN_trt3_plot_5018_20240830.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt3_plot_5020_20240830.csv</name>
+        <path>analysis-2024-08-30\data\data-2024-08-30\LINEAR_CORN_trt3_plot_5020_20240830.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt4_plot_5007_20240830.csv</name>
+        <path>analysis-2024-08-30\data\data-2024-08-30\LINEAR_CORN_trt4_plot_5007_20240830.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt4_plot_5009_20240830.csv</name>
+        <path>analysis-2024-08-30\data\data-2024-08-30\LINEAR_CORN_trt4_plot_5009_20240830.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_CORN_trt4_plot_5027_20240830.csv</name>
+        <path>analysis-2024-08-30\data\data-2024-08-30\LINEAR_CORN_trt4_plot_5027_20240830.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt1_plot_2006_20240830.csv</name>
+        <path>analysis-2024-08-30\data\data-2024-08-30\LINEAR_SOYBEAN_trt1_plot_2006_20240830.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt1_plot_2015_20240830.csv</name>
+        <path>analysis-2024-08-30\data\data-2024-08-30\LINEAR_SOYBEAN_trt1_plot_2015_20240830.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt1_plot_2023_20240830.csv</name>
+        <path>analysis-2024-08-30\data\data-2024-08-30\LINEAR_SOYBEAN_trt1_plot_2023_20240830.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt2_plot_2001_20240830.csv</name>
+        <path>analysis-2024-08-30\data\data-2024-08-30\LINEAR_SOYBEAN_trt2_plot_2001_20240830.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt2_plot_2011_20240830.csv</name>
+        <path>analysis-2024-08-30\data\data-2024-08-30\LINEAR_SOYBEAN_trt2_plot_2011_20240830.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt2_plot_2026_20240830.csv</name>
+        <path>analysis-2024-08-30\data\data-2024-08-30\LINEAR_SOYBEAN_trt2_plot_2026_20240830.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt3_plot_2003_20240830.csv</name>
+        <path>analysis-2024-08-30\data\data-2024-08-30\LINEAR_SOYBEAN_trt3_plot_2003_20240830.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt3_plot_2018_20240830.csv</name>
+        <path>analysis-2024-08-30\data\data-2024-08-30\LINEAR_SOYBEAN_trt3_plot_2018_20240830.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt3_plot_2020_20240830.csv</name>
+        <path>analysis-2024-08-30\data\data-2024-08-30\LINEAR_SOYBEAN_trt3_plot_2020_20240830.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt4_plot_2009_20240830.csv</name>
+        <path>analysis-2024-08-30\data\data-2024-08-30\LINEAR_SOYBEAN_trt4_plot_2009_20240830.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>LINEAR_SOYBEAN_trt4_plot_2012_20240830.csv</name>
+        <path>analysis-2024-08-30\data\data-2024-08-30\LINEAR_SOYBEAN_trt4_plot_2012_20240830.csv</path>
+        <content>Full content not provided</content>
+    </file>
+            </directory>
+        <directory name="recommendations">
+    <file>
+        <name>fuzzy-trt-1.csv</name>
+        <path>analysis-2024-08-30\recommendations\fuzzy-trt-1.csv</path>
+        <content>Full content not provided</content>
+    </file>
+    <file>
+        <name>recommendations.csv</name>
+        <path>analysis-2024-08-30\recommendations\recommendations.csv</path>
+        <content>Full content not provided</content>
+    </file>
+        </directory>
     <directory name="images">
     <file>
         <name>fuzzy_control_system.png</name>
@@ -1709,6 +2128,256 @@ def main(input_folder):
 if __name__ == "__main__":
     input_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\data"
     main(input_folder)
+        </content>
+    </file>
+    <file>
+        <name>cwsi_th2_soybean.py</name>
+        <path>src\cwsi_th2_soybean.py</path>
+        <content>
+# src/cwsi_th2_soybean.py
+
+import os
+import pandas as pd
+import numpy as np
+import logging
+from datetime import time, timedelta
+import glob
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+def calculate_cwsi_soybean(row, reference_temp):
+    """
+    Calculate CWSI for soybeans using the reference temperature method.
+    """
+    Tc = row['canopy_temp']
+    Ta = row['Ta_2m_Avg']
+    Tc_ref = reference_temp
+
+    if Tc_ref - Ta == 0:
+        return None
+
+    cwsi = (Tc - Tc_ref) / (Tc_ref - Ta)
+    return max(0, min(cwsi, 1))  # Clip CWSI between 0 and 1
+
+def process_csv_file(file_path, reference_df):
+    logger.info(f"Processing file: {file_path}")
+    
+    # Read the CSV file
+    df = pd.read_csv(file_path, parse_dates=['TIMESTAMP'])
+    
+    # Find the CanopyTemp_1368 column
+    canopy_temp_column = 'CanopyTemp_1368'
+    if canopy_temp_column not in df.columns:
+        logger.warning(f"No {canopy_temp_column} column found in {file_path}")
+        return None
+    
+    # Filter data between 12 PM and 5 PM
+    df['time'] = df['TIMESTAMP'].dt.time
+    mask = (df['time'] >= time(12, 0)) & (df['time'] <= time(17, 0))
+    
+    # Rename CanopyTemp_1368 column to 'canopy_temp' for CWSI calculation
+    df.loc[mask, 'canopy_temp'] = df.loc[mask, canopy_temp_column]
+    
+    # Remove existing CWSI column if it exists
+    if 'cwsi' in df.columns:
+        df = df.drop(columns=['cwsi'])
+    
+    # Merge with reference temperature data
+    df = pd.merge_asof(df, reference_df, on='TIMESTAMP', direction='nearest')
+    
+    # Calculate CWSI only for the filtered rows
+    df.loc[mask, 'cwsi'] = df.loc[mask].apply(lambda row: calculate_cwsi_soybean(row, row['CanopyTemp_1368']), axis=1)
+    
+    # Remove temporary columns
+    df = df.drop(columns=['time', 'canopy_temp', 'CanopyTemp_1368'])
+    
+    # Log the range of computed CWSI values
+    cwsi_values = df['cwsi'].dropna()
+    if not cwsi_values.empty:
+        logger.info(f"CWSI value ranges for {file_path}: Min={cwsi_values.min():.4f}, Max={cwsi_values.max():.4f}, Mean={cwsi_values.mean():.4f}")
+    else:
+        logger.info(f"No CWSI values computed for {file_path}")
+    
+    # Save the updated DataFrame back to the same CSV file
+    df.to_csv(file_path, index=False)
+    logger.info(f"Updated CWSI values in file: {file_path}")
+    
+    return df
+
+def main(input_folder):
+    # Find the most recent CanopyTemp_1368 CSV file
+    reference_csv_files = glob.glob(os.path.join(input_folder, 'CanopyTemp_1368_*.csv'))
+    if not reference_csv_files:
+        logger.error("No CanopyTemp_1368 CSV files found in the input folder.")
+        return
+    
+    latest_reference_file = max(reference_csv_files, key=os.path.getctime)
+    logger.info(f"Using reference temperature file: {latest_reference_file}")
+
+    # Load reference temperature data
+    reference_df = pd.read_csv(latest_reference_file, parse_dates=['TIMESTAMP'])
+    reference_df = reference_df[['TIMESTAMP', 'CanopyTemp_1368']]
+
+    for root, _, files in os.walk(input_folder):
+        for file in files:
+            if file.endswith('.csv') and 'SOYBEAN' in file.upper():
+                file_path = os.path.join(root, file)
+                process_csv_file(file_path, reference_df)
+
+if __name__ == "__main__":
+    input_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\data"
+    main(input_folder)
+        </content>
+    </file>
+    <file>
+        <name>dat_to_canopy_temp.py</name>
+        <path>src\dat_to_canopy_temp.py</path>
+        <content>
+# src/dat_to_canopy_temp.py
+
+import os
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import logging
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+def compute_irt_temp(sb_temp_c, targ_mv, mC2, mC1, mC0, bC2, bC1, bC0):
+    m = mC2 * sb_temp_c**2 + mC1 * sb_temp_c + mC0
+    b = bC2 * sb_temp_c**2 + bC1 * sb_temp_c + bC0
+    sb_temp_k = sb_temp_c + 273.15
+    targ_temp_k = ((sb_temp_k**4) + m * targ_mv + b)**0.25
+    return targ_temp_k - 273.15
+
+def parse_dat_file_to_csv_with_temps(file_name, output_csv_1368_path, encoding='ISO-8859-1'):
+    with open(file_name, "r", encoding=encoding) as file:
+        lines = file.readlines()
+    headers = lines[1].strip().split(",")
+    data_lines = lines[4:]
+    data = pd.DataFrame([line.strip().split(",") for line in data_lines], columns=headers)
+    
+    data.columns = data.columns.str.replace('"', "").str.replace("RECORD", "RecNbr")
+    data.columns = data.columns.str.replace("_Avg", "")
+    data = data.replace({"NAN": np.nan, '"NAN"': np.nan})
+    data["TIMESTAMP"] = data["TIMESTAMP"].str.replace('"', "")
+    
+    for col in data.columns:
+        if col != "TIMESTAMP":
+            data[col] = pd.to_numeric(data[col], errors='coerce')
+    
+    data["TIMESTAMP"] = pd.to_datetime(data["TIMESTAMP"], errors="coerce")
+    data = data[~data["TIMESTAMP"].isna()]
+    
+    # Define the coefficients for each sensor
+    sensor_coefficients = {
+        '1371': {'mC2': 77988.3, 'mC1': 8788030, 'mC0': 1620750000, 'bC2': 4298, 'bC1': 75731.6, 'bC0': -1569380},
+        '1373': {'mC2': 84144.1, 'mC1': 8699300, 'mC0': 1583000000, 'bC2': 7825.17, 'bC1': 167578, 'bC0': 2947160},
+        '1368': {'mC2': 119752, 'mC1': 10139500, 'mC0': 1787020000, 'bC2': 3884.19, 'bC1': 133998, 'bC0': -5140420},
+        '1369': {'mC2': 118054, 'mC1': 10108500, 'mC0': 1790280000, 'bC2': 4019.44, 'bC1': 135393, 'bC0': -3958680},
+        '1378': {'mC2': 110897, 'mC1': 9229850, 'mC0': 1632750000, 'bC2': 5598.07, 'bC1': 58091.5, 'bC0': 779020},
+        '1374': {'mC2': 106949, 'mC1': 9387600, 'mC0': 1655170000, 'bC2': 4204.25, 'bC1': 102781, 'bC0': 450621},
+        '1379': {'mC2': 80669, 'mC1': 8626800, 'mC0': 1580720000, 'bC2': 4165.68, 'bC1': 87436.7, 'bC0': 1813590},
+        '1377': {'mC2': 105966, 'mC1': 9068660, 'mC0': 1634120000, 'bC2': 3816.74, 'bC1': 120624, 'bC0': 1025890}
+    }
+    
+    # Compute canopy temperatures for each sensor
+    for sensor, coeffs in sensor_coefficients.items():
+        bod_col = f'BodC_{sensor}'
+        tarm_col = f'TarmV_{sensor}'
+        canopy_temp_col = f'CanopyTemp_{sensor}'
+        if bod_col in data.columns and tarm_col in data.columns:
+            data[canopy_temp_col] = compute_irt_temp(
+                sb_temp_c=data[bod_col],
+                targ_mv=data[tarm_col],
+                mC2=coeffs['mC2'],
+                mC1=coeffs['mC1'],
+                mC0=coeffs['mC0'],
+                bC2=coeffs['bC2'],
+                bC1=coeffs['bC1'],
+                bC0=coeffs['bC0']
+            )
+    
+    # Resample to hourly data
+    data_hourly = data.set_index("TIMESTAMP").resample('h').mean().reset_index()
+    
+    # Save the processed data for sensor 1368 to a CSV file
+    canopy_temp_1368_df = data_hourly[["TIMESTAMP", "CanopyTemp_1368"]]
+    canopy_temp_1368_df.to_csv(output_csv_1368_path, index=False)
+    
+    return data_hourly
+
+def plot_canopy_temperatures(data, start_date, end_date, sensors, output_path):
+    plt.figure(figsize=(14, 7))
+
+    for sensor in sensors:
+        canopy_temp_col = f'CanopyTemp_{sensor}'
+        if canopy_temp_col in data.columns:
+            plt.plot(data["TIMESTAMP"], data[canopy_temp_col], label=f"CanopyTemp {sensor}")
+
+    plt.xlabel("Timestamp")
+    plt.ylabel("Canopy Temperature (°C)")
+    plt.title(f"Canopy Temperatures from {start_date} to {end_date}")
+    plt.legend()
+    plt.grid(True)
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.savefig(output_path)
+    plt.close()
+
+def process_dat_files(input_folder, output_folder):
+    for root, _, files in os.walk(input_folder):
+        for file in files:
+            if file.endswith('.dat'):
+                dat_file_path = os.path.join(root, file)
+                output_csv_1368_path = os.path.join(output_folder, f"CanopyTemp_1368_{os.path.splitext(file)[0]}.csv")
+                
+                logger.info(f"Processing file: {dat_file_path}")
+                processed_data_df = parse_dat_file_to_csv_with_temps(dat_file_path, output_csv_1368_path)
+                
+                # Plot canopy temperatures for the last 10 days for all sensors
+                latest_timestamp = processed_data_df["TIMESTAMP"].max()
+                start_date_last_10_days = latest_timestamp - pd.Timedelta(days=10)
+                filtered_data_last_10_days = processed_data_df[
+                    (processed_data_df["TIMESTAMP"] >= start_date_last_10_days) &
+                    (processed_data_df["TIMESTAMP"] <= latest_timestamp)
+                ]
+                plot_output_path = os.path.join(output_folder, f"CanopyTemp_plot_{os.path.splitext(file)[0]}.png")
+                plot_canopy_temperatures(filtered_data_last_10_days, start_date_last_10_days.date(), latest_timestamp.date(), sensors=['1371', '1368', '1377'], output_path=plot_output_path)
+                
+                logger.info(f"Processed {file} and saved results in {output_folder}")
+                
+def process_single_dat_file(dat_file_path, output_folder):
+    file_name = os.path.basename(dat_file_path)
+    output_csv_1368_path = os.path.join(output_folder, f"CanopyTemp_1368_{os.path.splitext(file_name)[0]}.csv")
+    
+    logger.info(f"Processing file: {dat_file_path}")
+    processed_data_df = parse_dat_file_to_csv_with_temps(dat_file_path, output_csv_1368_path)
+    
+    # Plot canopy temperatures for the last 10 days for all sensors
+    latest_timestamp = processed_data_df["TIMESTAMP"].max()
+    start_date_last_10_days = latest_timestamp - pd.Timedelta(days=10)
+    filtered_data_last_10_days = processed_data_df[
+        (processed_data_df["TIMESTAMP"] >= start_date_last_10_days) &
+        (processed_data_df["TIMESTAMP"] <= latest_timestamp)
+    ]
+    plot_output_path = os.path.join(output_folder, f"CanopyTemp_plot_{os.path.splitext(file_name)[0]}.png")
+    plot_canopy_temperatures(filtered_data_last_10_days, start_date_last_10_days.date(), latest_timestamp.date(), sensors=['1371', '1368', '1377'], output_path=plot_output_path)
+    
+    logger.info(f"Processed {file_name} and saved results in {output_folder}")
+
+def main(input_folders, output_folder):
+    os.makedirs(output_folder, exist_ok=True)
+    for folder in input_folders:
+        process_dat_files(folder, output_folder)
+
+if __name__ == "__main__":
+    corn_base_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\2024_data_corn_lnr"
+    soybean_base_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\Soybean Lnr"
+    output_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\data"
+    main([corn_base_folder, soybean_base_folder], output_folder)
         </content>
     </file>
     <file>
@@ -2693,6 +3362,8 @@ if __name__ == "__main__":
         <name>other_scheduling.py</name>
         <path>src\other_scheduling.py</path>
         <content>
+# src/other_scheduling.py
+
 import os
 import pandas as pd
 import numpy as np
@@ -2723,20 +3394,24 @@ def process_treatment_two(df, plot):
     cwsi_data, _, _ = get_recent_values(df['cwsi'], 3)
     swsi_data, _, _ = get_recent_values(df['swsi'], 3)
     
-    if cwsi_data.empty or swsi_data.empty:
-        logger.warning(f"Missing non-zero CWSI or SWSI data for treatment two, plot {plot}. Skipping.")
-        return None
-
-    cwsi_avg = cwsi_data.mean()
-    swsi_avg = swsi_data.mean()
+    cwsi_avg = cwsi_data.mean() if not cwsi_data.empty else None
+    swsi_avg = swsi_data.mean() if not swsi_data.empty else None
     
-    final_value = cwsi_avg * 0.4 + swsi_avg * 0.6
-    recommendation = 'Irrigate' if final_value > 0.5 else 'Do not irrigate'
+    if cwsi_avg is not None and swsi_avg is not None:
+        final_value = cwsi_avg * 0.4 + swsi_avg * 0.6
+    elif cwsi_avg is not None:
+        final_value = cwsi_avg
+    elif swsi_avg is not None:
+        final_value = swsi_avg
+    else:
+        final_value = None
+    
+    recommendation = 'Irrigate' if final_value is not None and final_value > 0.5 else 'Do not irrigate'
     
     logger.info(f"Processing treatment two for plot {plot}:")
-    logger.info(f"CWSI Avg: {cwsi_avg:.2f}")
-    logger.info(f"SWSI Avg: {swsi_avg:.2f}")
-    logger.info(f"Final Value: {final_value:.2f}")
+    logger.info(f"CWSI Avg: {cwsi_avg:.2f}" if cwsi_avg is not None else "CWSI Avg: N/A")
+    logger.info(f"SWSI Avg: {swsi_avg:.2f}" if swsi_avg is not None else "SWSI Avg: N/A")
+    logger.info(f"Final Value: {final_value:.2f}" if final_value is not None else "Final Value: N/A")
     logger.info(f"Recommendation: {recommendation}")
     
     return {
@@ -2755,16 +3430,15 @@ def process_treatment_three(df, plot):
     
     cwsi_data, _, _ = get_recent_values(df['cwsi'], 4)
     
-    if cwsi_data.empty:
-        logger.warning(f"Missing non-zero CWSI data for treatment three, plot {plot}. Skipping.")
-        return None
-
-    cwsi_avg = cwsi_data.mean()
+    cwsi_avg = cwsi_data.mean() if not cwsi_data.empty else None
     
-    recommendation = 'Irrigate' if cwsi_avg > 0.5 else 'Do not irrigate'
+    if cwsi_avg is not None:
+        recommendation = 'Irrigate' if cwsi_avg > 0.5 else 'Do not irrigate'
+    else:
+        recommendation = "CWSI value is null"
     
     logger.info(f"Processing treatment three for plot {plot}:")
-    logger.info(f"CWSI Avg: {cwsi_avg:.2f}")
+    logger.info(f"CWSI Avg: {cwsi_avg:.2f}" if cwsi_avg is not None else "CWSI Avg: N/A")
     logger.info(f"Recommendation: {recommendation}")
     
     return {
@@ -2781,16 +3455,15 @@ def process_treatment_four(df, plot):
     
     swsi_data, _, _ = get_recent_values(df['swsi'], 3)
     
-    if swsi_data.empty:
-        logger.warning(f"Missing non-zero SWSI data for treatment four, plot {plot}. Skipping.")
-        return None
-
-    swsi_avg = swsi_data.mean()
+    swsi_avg = swsi_data.mean() if not swsi_data.empty else None
     
-    recommendation = 'Irrigate' if swsi_avg > 0.5 else 'Do not irrigate'
+    if swsi_avg is not None:
+        recommendation = 'Irrigate' if swsi_avg > 0.5 else 'Do not irrigate'
+    else:
+        recommendation = "SWSI value is null"
     
     logger.info(f"Processing treatment four for plot {plot}:")
-    logger.info(f"SWSI Avg: {swsi_avg:.2f}")
+    logger.info(f"SWSI Avg: {swsi_avg:.2f}" if swsi_avg is not None else "SWSI Avg: N/A")
     logger.info(f"Recommendation: {recommendation}")
     
     return {
@@ -2841,7 +3514,6 @@ if __name__ == "__main__":
     input_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\data"
     output_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\recommendations"
     main(input_folder, output_folder)
-
         </content>
     </file>
     <file>
@@ -2854,7 +3526,9 @@ import os
 from datetime import datetime
 import logging
 from dat_to_csv import main as dat_to_csv_main
-from cwsi_th1 import main as cwsi_main
+from dat_to_canopy_temp import process_single_dat_file
+from cwsi_th1 import main as cwsi_corn_main
+from cwsi_th2_soybean import main as cwsi_soybean_main
 from swsi import main as swsi_main
 from et import main as et_main
 from fuzz_with_visuals import main as fuzz_main
@@ -2872,7 +3546,7 @@ def create_dated_folder(base_path):
 def get_all_subfolders(base_folder):
     return [os.path.join(base_folder, d) for d in os.listdir(base_folder) if os.path.isdir(os.path.join(base_folder, d))]
 
-def run_analysis():
+def run_pipeline():
     # Define base paths
     base_output_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et"
     
@@ -2888,19 +3562,29 @@ def run_analysis():
     corn_base_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\2024_data_corn_lnr"
     soybean_base_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\Soybean Lnr"
     
+    # Define the specific .dat file for reference canopy temperature
+    reference_dat_file = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\SDI1SOY\08-29-2024\SDI1SoyBlockA_SDIC_BlockC.dat"
+    
     # Get all subfolders
     corn_folders = get_all_subfolders(corn_base_folder)
     soybean_folders = get_all_subfolders(soybean_base_folder)
     
     sensor_mapping_path = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\sensor_mapping.yaml"
-    weather_csv_path = r"C:\Users\bnsoh2\Downloads\North_Platte_3SW_Beta_1min (10).csv"
+    weather_csv_path = r"C:\Users\bnsoh2\Downloads\North_Platte_3SW_Beta_1minx.csv"
+    
+    logger.info("Processing reference .dat file for canopy temperature...")
+    process_single_dat_file(reference_dat_file, dated_data_folder)
     
     logger.info("Running dat_to_csv...")
     dat_to_csv_main(corn_folders, soybean_folders, sensor_mapping_path, dated_data_folder, weather_csv_path)
     
-    # Run CWSI calculation
-    logger.info("Calculating CWSI...")
-    cwsi_main(dated_data_folder)
+    # Run CWSI calculation for corn
+    logger.info("Calculating CWSI for corn...")
+    cwsi_corn_main(dated_data_folder)
+    
+    # Run CWSI calculation for soybean
+    logger.info("Calculating CWSI for soybean...")
+    cwsi_soybean_main(dated_data_folder)
     
     # Run SWSI calculation
     logger.info("Calculating SWSI...")
@@ -2919,10 +3603,10 @@ def run_analysis():
     logger.info("Running other scheduling methods...")
     other_scheduling_main(dated_data_folder, dated_recommendations_folder)
     
-    logger.info("Analysis complete. Results saved in: " + dated_output_folder)
+    logger.info("Analysis pipeline complete. Results saved in: " + dated_output_folder)
 
 if __name__ == "__main__":
-    run_analysis()
+    run_pipeline()
         </content>
     </file>
     <file>

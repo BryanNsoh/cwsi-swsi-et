@@ -1,166 +1,94 @@
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
+# src/cwsi_th2_soybean.py
 
-import sqlite3
+import os
 import pandas as pd
 import numpy as np
-from datetime import datetime, timedelta
-import pytz
 import logging
-import time
-from dotenv import load_dotenv
-from crop2cloud24.src.utils import generate_plots
+from datetime import time, timedelta
+import glob
 
-# Load environment variables from .env file
-load_dotenv()
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
-# Configuration
-DAYS_BACK = None  # Set to None for all available data, or specify a number of days
-DB_PATH = 'mpc_data.db'
-CST = pytz.timezone('America/Chicago')
-REFERENCE_TEMP_CSV = '/path/to/your/CanopyTemp_1368.csv'  # Provide the path to your reference temperature CSV
+def calculate_cwsi_soybean(row, reference_temp):
+    """
+    Calculate CWSI for soybeans using the reference temperature method.
+    """
+    Tc = row['canopy_temp']
+    Ta = row['Ta_2m_Avg']
+    Tc_ref = reference_temp
 
-class CustomFormatter(logging.Formatter):
-    def format(self, record):
-        record.message = record.getMessage()
-        return f"{datetime.now(CST).strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]} CST - {record.levelname} - {record.message}"
+    if Tc_ref - Ta == 0:
+        return None
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-handler = logging.StreamHandler(sys.stdout)
-handler.setFormatter(CustomFormatter())
-logger.addHandler(handler)
+    cwsi = (Tc - Tc_ref) / (Tc_ref - Ta)
+    return max(0, min(cwsi, 1))  # Clip CWSI between 0 and 1
 
-def get_db_connection():
-    return sqlite3.connect(DB_PATH)
-
-def get_plot_data(conn, plot_number, irt_column):
-    if DAYS_BACK is None:
-        query = f"""
-        SELECT TIMESTAMP, {irt_column}, Ta_2m_Avg
-        FROM plot_{plot_number}
-        ORDER BY TIMESTAMP
-        """
+def process_csv_file(file_path, reference_df):
+    logger.info(f"Processing file: {file_path}")
+    
+    # Read the CSV file
+    df = pd.read_csv(file_path, parse_dates=['TIMESTAMP'])
+    
+    # Find the CanopyTemp_1368 column
+    canopy_temp_column = 'CanopyTemp_1368'
+    if canopy_temp_column not in df.columns:
+        logger.warning(f"No {canopy_temp_column} column found in {file_path}")
+        return None
+    
+    # Filter data between 12 PM and 5 PM
+    df['time'] = df['TIMESTAMP'].dt.time
+    mask = (df['time'] >= time(12, 0)) & (df['time'] <= time(17, 0))
+    
+    # Rename CanopyTemp_1368 column to 'canopy_temp' for CWSI calculation
+    df.loc[mask, 'canopy_temp'] = df.loc[mask, canopy_temp_column]
+    
+    # Remove existing CWSI column if it exists
+    if 'cwsi' in df.columns:
+        df = df.drop(columns=['cwsi'])
+    
+    # Merge with reference temperature data
+    df = pd.merge_asof(df, reference_df, on='TIMESTAMP', direction='nearest')
+    
+    # Calculate CWSI only for the filtered rows
+    df.loc[mask, 'cwsi'] = df.loc[mask].apply(lambda row: calculate_cwsi_soybean(row, row['CanopyTemp_1368']), axis=1)
+    
+    # Remove temporary columns
+    df = df.drop(columns=['time', 'canopy_temp', 'CanopyTemp_1368'])
+    
+    # Log the range of computed CWSI values
+    cwsi_values = df['cwsi'].dropna()
+    if not cwsi_values.empty:
+        logger.info(f"CWSI value ranges for {file_path}: Min={cwsi_values.min():.4f}, Max={cwsi_values.max():.4f}, Mean={cwsi_values.mean():.4f}")
     else:
-        query = f"""
-        SELECT TIMESTAMP, {irt_column}, Ta_2m_Avg
-        FROM plot_{plot_number}
-        WHERE TIMESTAMP >= datetime('now', '-{DAYS_BACK} days')
-        ORDER BY TIMESTAMP
-        """
-    df = pd.read_sql_query(query, conn, parse_dates=['TIMESTAMP'])
-    df['TIMESTAMP'] = pd.to_datetime(df['TIMESTAMP'], utc=True).dt.tz_convert(CST)
-    return df
-
-def update_cwsi_th2(conn, plot_number, df_cwsi):
-    logger.info(f"Updating CWSI-TH2 for plot {plot_number}")
-
-    cursor = conn.cursor()
-
-    # Check if the column exists, if not, create it
-    cursor.execute(f"PRAGMA table_info(plot_{plot_number})")
-    columns = [column[1] for column in cursor.fetchall()]
-    if 'cwsi-th2' not in columns:
-        cursor.execute(f"ALTER TABLE plot_{plot_number} ADD COLUMN 'cwsi-th2' REAL")
-        conn.commit()
-        logger.info(f"Added 'cwsi-th2' column to plot_{plot_number} table")
-
-    rows_updated = 0
-    for _, row in df_cwsi.iterrows():
-        timestamp = row['TIMESTAMP'].tz_convert('UTC')
-        start_time = timestamp - timedelta(minutes=30)
-        end_time = timestamp + timedelta(minutes=30)
-        
-        cursor.execute(f"""
-        UPDATE plot_{plot_number}
-        SET 'cwsi-th2' = ?
-        WHERE TIMESTAMP BETWEEN ? AND ?
-        """, (row['cwsi-th2'], start_time.strftime('%Y-%m-%d %H:%M:%S'), end_time.strftime('%Y-%m-%d %H:%M:%S')))
-        
-        if cursor.rowcount > 0:
-            rows_updated += cursor.rowcount
-        else:
-            logger.warning(f"No matching row found for timestamp: {timestamp}")
-
-    conn.commit()
+        logger.info(f"No CWSI values computed for {file_path}")
     
-    logger.info(f"Successfully updated CWSI-TH2 for plot {plot_number}. Rows updated: {rows_updated}")
-    
-    # Check for any rows that weren't updated
-    cursor.execute(f"""
-    SELECT COUNT(*) FROM plot_{plot_number}
-    WHERE 'cwsi-th2' IS NULL
-    """)
-    unupdated_rows = cursor.fetchone()[0]
-    logger.info(f"Rows not updated: {unupdated_rows}")
-
-    return rows_updated
-
-def calculate_cwsi_th2(df, irt_column, ref_df):
-    # Merge with reference data on TIMESTAMP
-    df = df.merge(ref_df, on='TIMESTAMP', how='left', suffixes=('', '_ref'))
-    
-    # Calculate Tc - Ta using reference temperature
-    df['Tc_Ta'] = df['CanopyTemp_1368'] - df['Ta_2m_Avg']
-    
-    # Calculate CWSI-TH2 using reference temperature as baseline
-    df['cwsi-th2'] = (df[irt_column] - df['CanopyTemp_1368']) / (df['CanopyTemp_1368'] - df['Ta_2m_Avg'])
-    
-    # Clip CWSI-TH2 values to be between 0 and 1
-    df['cwsi-th2'] = df['cwsi-th2'].clip(0, 1)
+    # Save the updated DataFrame back to the same CSV file
+    df.to_csv(file_path, index=False)
+    logger.info(f"Updated CWSI values in file: {file_path}")
     
     return df
 
-def compute_cwsi(plot_number):
-    start_time = time.time()
-    logger.info(f"Starting CWSI-TH2 computation for plot {plot_number}")
+def main(input_folder):
+    # Find the most recent CanopyTemp_1368 CSV file
+    reference_csv_files = glob.glob(os.path.join(input_folder, 'CanopyTemp_1368_*.csv'))
+    if not reference_csv_files:
+        logger.error("No CanopyTemp_1368 CSV files found in the input folder.")
+        return
     
-    conn = get_db_connection()
+    latest_reference_file = max(reference_csv_files, key=os.path.getctime)
+    logger.info(f"Using reference temperature file: {latest_reference_file}")
 
-    irt_column = f'IRT{plot_number}B1xx24' if plot_number == '5006' else f'IRT{plot_number}C1xx24' if plot_number == '5010' else f'IRT{plot_number}A1xx24'
-    df = get_plot_data(conn, plot_number, irt_column)
-    
-    if df.empty:
-        logger.info(f"No data for plot {plot_number}")
-        conn.close()
-        return None
-    
-    logger.info(f"Processing {len(df)} rows for plot {plot_number}")
-    
-    # Load the reference temperature data
-    ref_df = pd.read_csv(REFERENCE_TEMP_CSV, parse_dates=['TIMESTAMP'])
-    
-    # Filter for 12 PM to 4 PM CST
-    df = df[(df['TIMESTAMP'].dt.hour >= 12) & (df['TIMESTAMP'].dt.hour < 16)]
-    
-    if df.empty:
-        logger.info(f"No data within 12 PM to 4 PM CST for plot {plot_number}")
-        conn.close()
-        return None
-    
-    logger.info(f"Calculating CWSI-TH2 for {len(df)} rows")
-    df_with_cwsi = calculate_cwsi_th2(df, irt_column, ref_df)
-    
-    df_cwsi = df_with_cwsi[['TIMESTAMP', 'cwsi-th2']].dropna()
-    
-    df_cwsi['TIMESTAMP'] = df_cwsi['TIMESTAMP'].dt.tz_convert('UTC')
-    rows_updated = update_cwsi_th2(conn, plot_number, df_cwsi)
-    
-    conn.close()
-    
-    end_time = time.time()
-    duration = end_time - start_time
-    logger.info(f"CWSI-TH2 computation completed for plot {plot_number}.")
-    logger.info(f"Rows processed: {len(df_cwsi)}, Rows updated in database: {rows_updated}")
-    logger.info(f"Total execution time: {duration:.2f} seconds")
-    return f"CWSI-TH2 computation completed for plot {plot_number}. Rows processed: {len(df_cwsi)}, Rows updated: {rows_updated}. Execution time: {duration:.2f} seconds"
+    # Load reference temperature data
+    reference_df = pd.read_csv(latest_reference_file, parse_dates=['TIMESTAMP'])
+    reference_df = reference_df[['TIMESTAMP', 'CanopyTemp_1368']]
 
-def main():
-    plot_numbers = ['5006', '5010', '5023']
-    for plot_number in plot_numbers:
-        result = compute_cwsi(plot_number)
-        print(result)
+    for root, _, files in os.walk(input_folder):
+        for file in files:
+            if file.endswith('.csv') and 'SOYBEAN' in file.upper():
+                file_path = os.path.join(root, file)
+                process_csv_file(file_path, reference_df)
 
 if __name__ == "__main__":
-    main()
+    input_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\data"
+    main(input_folder)
