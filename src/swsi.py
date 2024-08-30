@@ -2,6 +2,9 @@ import os
 import pandas as pd
 import numpy as np
 import logging
+import re
+from datetime import timedelta
+from collections import defaultdict
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -22,13 +25,30 @@ def calculate_soil_properties():
     vwct = fc - MAD * awc
     return fc, pwp, awc, vwct
 
-def calculate_swsi(vwc_values):
-    valid_vwc = [vwc/100 for vwc in vwc_values if pd.notna(vwc) and vwc != 0]
+def calculate_swsi(row, df, tdr_columns, tdr_usage_summary):
+    valid_vwc = {}
+    current_timestamp = row['TIMESTAMP']
+    three_days_ago = current_timestamp - timedelta(days=3)
+    
+    for col in tdr_columns:
+        if pd.notna(row[col]) and row[col] != 0:
+            valid_vwc[col] = row[col] / 100
+            tdr_usage_summary[col]['current'] += 1
+        else:
+            # Look for the last valid value within the past 3 days
+            mask = (df['TIMESTAMP'] <= current_timestamp) & \
+                   (df['TIMESTAMP'] > three_days_ago) & \
+                   (df[col].notna()) & (df[col] != 0)
+            last_valid = df.loc[mask, col].iloc[-1] if mask.any() else None
+            if pd.notna(last_valid):
+                valid_vwc[col] = last_valid / 100
+                tdr_usage_summary[col]['past'] += 1
     
     if len(valid_vwc) < 1:
+        tdr_usage_summary['missing_data'] += 1
         return None
 
-    avg_vwc = np.mean(valid_vwc)
+    avg_vwc = np.mean(list(valid_vwc.values()))
     fc, pwp, awc, vwct = calculate_soil_properties()
     
     if avg_vwc < vwct:
@@ -36,40 +56,58 @@ def calculate_swsi(vwc_values):
     else:
         return 0
 
+def select_tdr_columns(df):
+    pattern = r'^TDR\d{4}[A-E][1256](06|18|30)24$'
+    tdr_columns = [col for col in df.columns if re.match(pattern, col)]
+    logger.info(f"Selected TDR columns: {tdr_columns}")
+    return tdr_columns
+
 def process_csv_file(file_path):
     logger.info(f"Processing file: {file_path}")
     
     df = pd.read_csv(file_path, parse_dates=['TIMESTAMP'])
     
-    tdr_columns = [col for col in df.columns if 'TDR' in col]
+    tdr_columns = select_tdr_columns(df)
     if not tdr_columns:
-        logger.warning(f"No TDR columns found in {file_path}")
+        logger.warning(f"No valid TDR columns found in {file_path}")
         return None
     
+    tdr_usage_summary = {col: {'current': 0, 'past': 0} for col in tdr_columns}
+    tdr_usage_summary['missing_data'] = 0
+
     df['all_tdr_invalid'] = (df[tdr_columns] == 0).all(axis=1) | df[tdr_columns].isnull().all(axis=1)
-    df_filtered = df[~df['all_tdr_invalid']].copy()  # Create a copy to avoid SettingWithCopyWarning
+    df_filtered = df[~df['all_tdr_invalid']].copy()
     
-    df_filtered['swsi'] = df_filtered[tdr_columns].apply(calculate_swsi, axis=1)
-    df.loc[df_filtered.index, 'swsi'] = df_filtered['swsi']  # Use .loc to avoid SettingWithCopyWarning
+    df_filtered['swsi'] = df_filtered.apply(lambda row: calculate_swsi(row, df_filtered, tdr_columns, tdr_usage_summary), axis=1)
+    df.loc[df_filtered.index, 'swsi'] = df_filtered['swsi']
     df = df.drop(columns=['all_tdr_invalid'])
     
     non_zero_tdr = df_filtered[tdr_columns].values.flatten()
-    non_zero_tdr = non_zero_tdr[~np.isnan(non_zero_tdr) & (non_zero_tdr != 0)]  # Remove NaN and zero values
+    non_zero_tdr = non_zero_tdr[~np.isnan(non_zero_tdr) & (non_zero_tdr != 0)]
     
     valid_swsi = df_filtered['swsi'].dropna()
     
+    logger.info("\nTDR Usage Summary:")
+    for col in tdr_columns:
+        current = tdr_usage_summary[col]['current']
+        past = tdr_usage_summary[col]['past']
+        total = current + past
+        if total > 0:
+            logger.info(f"{col}: Used {total} times ({current} current, {past} past 3 days)")
+    logger.info(f"Missing data points: {tdr_usage_summary['missing_data']}")
+
     if len(non_zero_tdr) > 0:
-        logger.info(f"TDR stats - Count: {len(non_zero_tdr)}, Mean: {np.mean(non_zero_tdr):.4f}, Min: {np.min(non_zero_tdr):.4f}, Max: {np.max(non_zero_tdr):.4f}")
+        logger.info(f"\nTDR stats - Count: {len(non_zero_tdr)}, Mean: {np.mean(non_zero_tdr):.4f}, Min: {np.min(non_zero_tdr):.4f}, Max: {np.max(non_zero_tdr):.4f}")
     else:
-        logger.info("No valid TDR values found")
+        logger.info("\nNo valid TDR values found")
     
     if len(valid_swsi) > 0:
-        logger.info(f"SWSI stats - Count: {len(valid_swsi)}, Mean: {valid_swsi.mean():.4f}, Min: {valid_swsi.min():.4f}, Max: {valid_swsi.max():.4f}")
+        logger.info(f"\nSWSI stats - Count: {len(valid_swsi)}, Mean: {valid_swsi.mean():.4f}, Min: {valid_swsi.min():.4f}, Max: {valid_swsi.max():.4f}")
     else:
-        logger.info("No valid SWSI values calculated")
+        logger.info("\nNo valid SWSI values calculated")
     
     df.to_csv(file_path, index=False)
-    logger.info(f"Updated SWSI values in file: {file_path}")
+    logger.info(f"\nUpdated SWSI values in file: {file_path}")
     
     return df
 

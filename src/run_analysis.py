@@ -1,10 +1,9 @@
-# src/run_analysis.py
+# src/run_pipeline.py
 
 import os
 from datetime import datetime
 import logging
 from dat_to_csv import main as dat_to_csv_main
-from dat_to_canopy_temp import process_single_dat_file
 from cwsi_th1 import main as cwsi_corn_main
 from cwsi_th2_soybean import main as cwsi_soybean_main
 from swsi import main as swsi_main
@@ -40,18 +39,12 @@ def run_pipeline():
     corn_base_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\2024_data_corn_lnr"
     soybean_base_folder = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\Soybean Lnr"
     
-    # Define the specific .dat file for reference canopy temperature
-    reference_dat_file = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Projects\Students\Bryan Nsoh\Data\SDI1SOY\08-29-2024\SDI1SoyBlockA_SDIC_BlockC.dat"
-    
     # Get all subfolders
     corn_folders = get_all_subfolders(corn_base_folder)
     soybean_folders = get_all_subfolders(soybean_base_folder)
     
     sensor_mapping_path = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\sensor_mapping.yaml"
     weather_csv_path = r"C:\Users\bnsoh2\Downloads\North_Platte_3SW_Beta_1minx.csv"
-    
-    logger.info("Processing reference .dat file for canopy temperature...")
-    process_single_dat_file(reference_dat_file, dated_data_folder)
     
     logger.info("Running dat_to_csv...")
     dat_to_csv_main(corn_folders, soybean_folders, sensor_mapping_path, dated_data_folder, weather_csv_path)

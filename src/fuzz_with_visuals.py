@@ -60,30 +60,34 @@ class FuzzyIrrigationController:
         self.irrigation['high'] = fuzz.trimf(x_irrigation, [0.6, 0.8, 1])
         self.irrigation['very_high'] = fuzz.trimf(x_irrigation, [0.8, 1, 1])
     
-        # Define fuzzy rules
         rules = [
-            ctrl.Rule(self.cwsi['severe_stress'], self.irrigation['very_high']),
-            ctrl.Rule(self.cwsi['high_stress'], self.irrigation['high']),
-            ctrl.Rule(self.cwsi['moderate_stress'], self.irrigation['medium']),
-            ctrl.Rule(self.cwsi['low_stress'], self.irrigation['low']),
-            ctrl.Rule(self.cwsi['no_stress'], self.irrigation['very_low']),
+            # Strong rule to disregard CWSI when soil is very wet
+            ctrl.Rule(self.swsi['very_wet'], self.irrigation['none']),
             
+            # Existing CWSI rules, now only apply when soil is not very wet
+            ctrl.Rule(self.cwsi['severe_stress'] & ~self.swsi['very_wet'], self.irrigation['very_high']),
+            ctrl.Rule(self.cwsi['high_stress'] & ~self.swsi['very_wet'], self.irrigation['high']),
+            ctrl.Rule(self.cwsi['moderate_stress'] & ~self.swsi['very_wet'], self.irrigation['medium']),
+            ctrl.Rule(self.cwsi['low_stress'] & ~self.swsi['very_wet'], self.irrigation['low']),
+            ctrl.Rule(self.cwsi['no_stress'] & ~self.swsi['very_wet'], self.irrigation['very_low']),
+            
+            # Existing SWSI rules (unchanged)
             ctrl.Rule(self.swsi['very_dry'], self.irrigation['very_high']),
             ctrl.Rule(self.swsi['dry'], self.irrigation['high']),
             ctrl.Rule(self.swsi['normal'], self.irrigation['medium']),
             ctrl.Rule(self.swsi['wet'], self.irrigation['low']),
-            ctrl.Rule(self.swsi['very_wet'], self.irrigation['none']),
             
-            ctrl.Rule(self.cwsi['severe_stress'] & self.swsi['very_dry'], self.irrigation['very_high']),
-            ctrl.Rule(self.cwsi['high_stress'] & self.swsi['dry'], self.irrigation['high']),
-            ctrl.Rule(self.cwsi['moderate_stress'] & self.swsi['normal'], self.irrigation['medium']),
-            ctrl.Rule(self.cwsi['low_stress'] & self.swsi['wet'], self.irrigation['low']),
-            ctrl.Rule(self.cwsi['no_stress'] & self.swsi['very_wet'], self.irrigation['none']),
+            # Existing combined CWSI and SWSI rules, now only apply when soil is not very wet
+            ctrl.Rule(self.cwsi['severe_stress'] & self.swsi['very_dry'] & ~self.swsi['very_wet'], self.irrigation['very_high']),
+            ctrl.Rule(self.cwsi['high_stress'] & self.swsi['dry'] & ~self.swsi['very_wet'], self.irrigation['high']),
+            ctrl.Rule(self.cwsi['moderate_stress'] & self.swsi['normal'] & ~self.swsi['very_wet'], self.irrigation['medium']),
+            ctrl.Rule(self.cwsi['low_stress'] & self.swsi['wet'] & ~self.swsi['very_wet'], self.irrigation['low']),
             
-            ctrl.Rule(self.etc['very_high'] & self.cwsi['high_stress'], self.irrigation['high']),
+            # Existing ET rules, modified to not apply CWSI when soil is very wet
+            ctrl.Rule(self.etc['very_high'] & self.cwsi['high_stress'] & ~self.swsi['very_wet'], self.irrigation['high']),
             ctrl.Rule(self.etc['high'] & self.swsi['dry'], self.irrigation['medium']),
-            ctrl.Rule(self.etc['medium'] & (self.cwsi['moderate_stress'] | self.swsi['normal']), self.irrigation['medium']),
-            ctrl.Rule(self.etc['low'] & (self.cwsi['low_stress'] | self.swsi['wet']), self.irrigation['low']),
+            ctrl.Rule(self.etc['medium'] & ((self.cwsi['moderate_stress'] & ~self.swsi['very_wet']) | self.swsi['normal']), self.irrigation['medium']),
+            ctrl.Rule(self.etc['low'] & ((self.cwsi['low_stress'] & ~self.swsi['very_wet']) | self.swsi['wet']), self.irrigation['low']),
             ctrl.Rule(self.etc['very_low'] & (self.cwsi['no_stress'] | self.swsi['very_wet']), self.irrigation['none']),
         ]
     

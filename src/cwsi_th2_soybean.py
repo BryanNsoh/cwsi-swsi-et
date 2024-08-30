@@ -1,12 +1,15 @@
-# src/cwsi_th2_soybean.py
+# src/cwsi_soybean.py
 
 import os
 import pandas as pd
 import numpy as np
 import logging
 from datetime import time, timedelta
-import glob
 
+# Configuration
+REFERENCE_TEMP_CSV = r"C:\Users\bnsoh2\Downloads\CanopyTemp_1368_User.csv"
+
+# Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -30,18 +33,18 @@ def process_csv_file(file_path, reference_df):
     # Read the CSV file
     df = pd.read_csv(file_path, parse_dates=['TIMESTAMP'])
     
-    # Find the CanopyTemp_1368 column
-    canopy_temp_column = 'CanopyTemp_1368'
-    if canopy_temp_column not in df.columns:
-        logger.warning(f"No {canopy_temp_column} column found in {file_path}")
+    # Find the IRT column
+    irt_column = next((col for col in df.columns if 'irt' in col.lower()), None)
+    if not irt_column:
+        logger.warning(f"No IRT column found in {file_path}")
         return None
     
     # Filter data between 12 PM and 5 PM
     df['time'] = df['TIMESTAMP'].dt.time
     mask = (df['time'] >= time(12, 0)) & (df['time'] <= time(17, 0))
     
-    # Rename CanopyTemp_1368 column to 'canopy_temp' for CWSI calculation
-    df.loc[mask, 'canopy_temp'] = df.loc[mask, canopy_temp_column]
+    # Rename IRT column to 'canopy_temp' for CWSI calculation
+    df.loc[mask, 'canopy_temp'] = df.loc[mask, irt_column]
     
     # Remove existing CWSI column if it exists
     if 'cwsi' in df.columns:
@@ -59,7 +62,7 @@ def process_csv_file(file_path, reference_df):
     # Log the range of computed CWSI values
     cwsi_values = df['cwsi'].dropna()
     if not cwsi_values.empty:
-        logger.info(f"CWSI value ranges for {file_path}: Min={cwsi_values.min():.4f}, Max={cwsi_values.max():.4f}, Mean={cwsi_values.mean():.4f}")
+        logger.info(f"CWSI value ranges for {file_path}: Min={cwsi_values.min()}, Max={cwsi_values.max()}, Mean={cwsi_values.mean()}")
     else:
         logger.info(f"No CWSI values computed for {file_path}")
     
@@ -70,17 +73,8 @@ def process_csv_file(file_path, reference_df):
     return df
 
 def main(input_folder):
-    # Find the most recent CanopyTemp_1368 CSV file
-    reference_csv_files = glob.glob(os.path.join(input_folder, 'CanopyTemp_1368_*.csv'))
-    if not reference_csv_files:
-        logger.error("No CanopyTemp_1368 CSV files found in the input folder.")
-        return
-    
-    latest_reference_file = max(reference_csv_files, key=os.path.getctime)
-    logger.info(f"Using reference temperature file: {latest_reference_file}")
-
     # Load reference temperature data
-    reference_df = pd.read_csv(latest_reference_file, parse_dates=['TIMESTAMP'])
+    reference_df = pd.read_csv(REFERENCE_TEMP_CSV, parse_dates=['TIMESTAMP'])
     reference_df = reference_df[['TIMESTAMP', 'CanopyTemp_1368']]
 
     for root, _, files in os.walk(input_folder):
