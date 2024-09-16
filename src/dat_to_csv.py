@@ -19,6 +19,9 @@ def parse_dat_file(file_name):
     data.columns = data.columns.str.replace('"', "").str.replace("RECORD", "RecNbr")
     data.columns = data.columns.str.replace("_Avg", "")
     data = data.replace({"NAN": np.nan, '"NAN"': np.nan})
+    
+    # Use a copy to avoid the FutureWarning
+    data = data.replace({"NAN": np.nan, '"NAN"': np.nan}).copy()
     data["TIMESTAMP"] = data["TIMESTAMP"].str.replace('"', "")
     
     for col in data.columns:

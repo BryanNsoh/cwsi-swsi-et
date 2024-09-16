@@ -22,91 +22,112 @@ def get_recent_values(series, n_days=3):
     recent_data = series.loc[start_date:end_date]
     return recent_data[recent_data.notnull() & (recent_data != 0)], start_date, end_date
 
-def process_treatment_two(df, plot):
+def process_treatment_two(df, plot, file_path):
     if 'cwsi' not in df.columns or 'swsi' not in df.columns:
         logger.warning(f"Missing CWSI or SWSI data for treatment two, plot {plot}. Skipping.")
         return None
     
-    cwsi_data, _, _ = get_recent_values(df['cwsi'], 3)
-    swsi_data, _, _ = get_recent_values(df['swsi'], 3)
+    recommendations = []
+    for date, row in df.iterrows():
+        cwsi_value = row['cwsi']
+        swsi_value = row['swsi']
+        
+        if pd.notna(cwsi_value) and pd.notna(swsi_value):
+            final_value = cwsi_value * 0.4 + swsi_value * 0.6
+        elif pd.notna(cwsi_value):
+            final_value = cwsi_value
+        elif pd.notna(swsi_value):
+            final_value = swsi_value
+        else:
+            final_value = None
+        
+        recommendation = 'Irrigate' if final_value is not None and final_value > 0.5 else 'Do not irrigate'
+        recommendations.append(recommendation)
     
-    cwsi_avg = cwsi_data.mean() if not cwsi_data.empty else None
-    swsi_avg = swsi_data.mean() if not swsi_data.empty else None
+    df['recommendation'] = recommendations
+    df.to_csv(file_path)  # Overwrite the original CSV with the new column
     
-    if cwsi_avg is not None and swsi_avg is not None:
-        final_value = cwsi_avg * 0.4 + swsi_avg * 0.6
-    elif cwsi_avg is not None:
-        final_value = cwsi_avg
-    elif swsi_avg is not None:
-        final_value = swsi_avg
+    # For the summary, we'll use today's values or the last available if today's not present
+    today = pd.Timestamp.now().floor('D')
+    if today in df.index:
+        summary_row = df.loc[today]
     else:
-        final_value = None
-    
-    recommendation = 'Irrigate' if final_value is not None and final_value > 0.5 else 'Do not irrigate'
-    
-    logger.info(f"Processing treatment two for plot {plot}:")
-    logger.info(f"CWSI Avg: {cwsi_avg:.2f}" if cwsi_avg is not None else "CWSI Avg: N/A")
-    logger.info(f"SWSI Avg: {swsi_avg:.2f}" if swsi_avg is not None else "SWSI Avg: N/A")
-    logger.info(f"Final Value: {final_value:.2f}" if final_value is not None else "Final Value: N/A")
-    logger.info(f"Recommendation: {recommendation}")
+        summary_row = df.iloc[-1]
     
     return {
         'plot': plot,
         'treatment': 2,
-        'cwsi_avg': cwsi_avg,
-        'swsi_avg': swsi_avg,
+        'cwsi_avg': summary_row['cwsi'],
+        'swsi_avg': summary_row['swsi'],
         'final_value': final_value,
-        'recommendation': recommendation
+        'recommendation': summary_row['recommendation'],
+        'date': summary_row.name.strftime('%Y-%m-%d')
     }
 
-def process_treatment_three(df, plot):
+def process_treatment_three(df, plot, file_path):
     if 'cwsi' not in df.columns:
         logger.warning(f"Missing CWSI data for treatment three, plot {plot}. Skipping.")
         return None
     
-    cwsi_data, _, _ = get_recent_values(df['cwsi'], 4)
+    recommendations = []
+    for date, row in df.iterrows():
+        cwsi_value = row['cwsi']
+        
+        if pd.notna(cwsi_value):
+            recommendation = 'Irrigate' if cwsi_value > 0.5 else 'Do not irrigate'
+        else:
+            recommendation = "CWSI value is null"
+        recommendations.append(recommendation)
     
-    cwsi_avg = cwsi_data.mean() if not cwsi_data.empty else None
+    df['recommendation'] = recommendations
+    df.to_csv(file_path)  # Overwrite the original CSV with the new column
     
-    if cwsi_avg is not None:
-        recommendation = 'Irrigate' if cwsi_avg > 0.5 else 'Do not irrigate'
+    # For the summary, we'll use today's values or the last available if today's not present
+    today = pd.Timestamp.now().floor('D')
+    if today in df.index:
+        summary_row = df.loc[today]
     else:
-        recommendation = "CWSI value is null"
-    
-    logger.info(f"Processing treatment three for plot {plot}:")
-    logger.info(f"CWSI Avg: {cwsi_avg:.2f}" if cwsi_avg is not None else "CWSI Avg: N/A")
-    logger.info(f"Recommendation: {recommendation}")
+        summary_row = df.iloc[-1]
     
     return {
         'plot': plot,
         'treatment': 3,
-        'cwsi_avg': cwsi_avg,
-        'recommendation': recommendation
+        'cwsi_avg': summary_row['cwsi'],
+        'recommendation': summary_row['recommendation'],
+        'date': summary_row.name.strftime('%Y-%m-%d')
     }
 
-def process_treatment_four(df, plot):
+def process_treatment_four(df, plot, file_path):
     if 'swsi' not in df.columns:
         logger.warning(f"Missing SWSI data for treatment four, plot {plot}. Skipping.")
         return None
     
-    swsi_data, _, _ = get_recent_values(df['swsi'], 3)
+    recommendations = []
+    for date, row in df.iterrows():
+        swsi_value = row['swsi']
+        
+        if pd.notna(swsi_value):
+            recommendation = 'Irrigate' if swsi_value > 0.5 else 'Do not irrigate'
+        else:
+            recommendation = "SWSI value is null"
+        recommendations.append(recommendation)
     
-    swsi_avg = swsi_data.mean() if not swsi_data.empty else None
+    df['recommendation'] = recommendations
+    df.to_csv(file_path)  # Overwrite the original CSV with the new column
     
-    if swsi_avg is not None:
-        recommendation = 'Irrigate' if swsi_avg > 0.5 else 'Do not irrigate'
+    # For the summary, we'll use today's values or the last available if today's not present
+    today = pd.Timestamp.now().floor('D')
+    if today in df.index:
+        summary_row = df.loc[today]
     else:
-        recommendation = "SWSI value is null"
-    
-    logger.info(f"Processing treatment four for plot {plot}:")
-    logger.info(f"SWSI Avg: {swsi_avg:.2f}" if swsi_avg is not None else "SWSI Avg: N/A")
-    logger.info(f"Recommendation: {recommendation}")
+        summary_row = df.iloc[-1]
     
     return {
         'plot': plot,
         'treatment': 4,
-        'swsi_avg': swsi_avg,
-        'recommendation': recommendation
+        'swsi_avg': summary_row['swsi'],
+        'recommendation': summary_row['recommendation'],
+        'date': summary_row.name.strftime('%Y-%m-%d')
     }
 
 def process_csv_file(file_path):
@@ -118,15 +139,17 @@ def process_csv_file(file_path):
     plot_number = file_path.split('_')[-2]  # Assuming the plot number is the second-to-last part of the filename
     treatment = int(file_path.split('_')[2][3])  # Assuming the treatment number is in the format 'trtX'
 
+    result = None
     if treatment == 2:
-        return process_treatment_two(df, plot_number)
+        result = process_treatment_two(df, plot_number, file_path)
     elif treatment == 3:
-        return process_treatment_three(df, plot_number)
+        result = process_treatment_three(df, plot_number, file_path)
     elif treatment == 4:
-        return process_treatment_four(df, plot_number)
+        result = process_treatment_four(df, plot_number, file_path)
     else:
         logger.warning(f"Unsupported treatment {treatment} for plot {plot_number}. Skipping.")
-        return None
+    
+    return result
 
 def main(input_folder, output_folder):
     recommendations = []

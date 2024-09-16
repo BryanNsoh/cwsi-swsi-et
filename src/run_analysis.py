@@ -1,4 +1,4 @@
-# src/run_pipeline.py
+# src/run_analysis.py
 
 import os
 from datetime import datetime
@@ -10,6 +10,7 @@ from swsi import main as swsi_main
 from et import main as et_main
 from fuzz_with_visuals import main as fuzz_main
 from other_scheduling import main as other_scheduling_main
+from update_bigquery_tables import main as update_bigquery_main
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -73,6 +74,10 @@ def run_pipeline():
     # Run other scheduling methods
     logger.info("Running other scheduling methods...")
     other_scheduling_main(dated_data_folder, dated_recommendations_folder)
+    
+    # Update BigQuery tables
+    logger.info("Updating BigQuery tables...")
+    update_bigquery_main(dated_data_folder)
     
     logger.info("Analysis pipeline complete. Results saved in: " + dated_output_folder)
 

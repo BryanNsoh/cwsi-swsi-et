@@ -189,75 +189,57 @@ class FuzzyIrrigationController:
             return None
 
     def compute_irrigation(self, df, plot):
-        # Compute inputs for fuzzy system
-        et_data, et_start, et_end = self.get_recent_values(df['etc'])
-        swsi_data, swsi_start, swsi_end = self.get_recent_values(df['swsi'])
-        cwsi_data, cwsi_start, cwsi_end = self.get_recent_values(df['cwsi'])
-
-        # Plot recent data
-        self.plot_recent_data(et_data, swsi_data, cwsi_data, plot)
-
-        et_avg = et_data.mean()
-
-        swsi_value = self.get_recent_swsi(df['swsi'])
-        cwsi_value = self.get_recent_cwsi(df['cwsi'])
-
-        # Log the values used for decision making
-        logger.info(f"Values used for irrigation decision for plot {plot}:")
-        logger.info(f"ET Average: {et_avg:.2f} (from {et_start} to {et_end})")
-        logger.info(f"Most recent SWSI: {swsi_value:.2f}" if swsi_value is not None else "No valid SWSI value found")
+        recommendations = []
         
-        if cwsi_value is not None:
-            logger.info(f"CWSI Value (avg of up to 3 highest daily max values): {cwsi_value:.2f}")
-            # Log the daily max CWSI values for the last self.days_back days
-            daily_max = cwsi_data.groupby(cwsi_data.index.date).max()
-            for date in daily_max.index:
-                value = daily_max[date]
-                if 0 <= value <= 1.5:
-                    logger.info(f"  CWSI max for {date}: {value:.2f}")
-                else:
-                    logger.info(f"  CWSI max for {date}: {value:.2f} (invalid, outside 0-1.5 range)")
+        for _, row in df.iterrows():
+            et_value = row['etc']
+            swsi_value = row['swsi']
+            cwsi_value = row['cwsi']
+            
+            # Set inputs for fuzzy system
+            self.irrigation_sim.input['etc'] = et_value if not pd.isna(et_value) else 0
+            self.irrigation_sim.input['swsi'] = swsi_value if not pd.isna(swsi_value) else 0.5
+            self.irrigation_sim.input['cwsi'] = min(cwsi_value, 1) if not pd.isna(cwsi_value) else 0.5
+            
+            # Compute output
+            self.irrigation_sim.compute()
+            
+            irrigation_amount = self.irrigation_sim.output['irrigation']
+            recommendations.append(irrigation_amount)
+        
+        return recommendations
+
+    def process_csv_file(self, file_path):
+        logger.info(f"Processing file for irrigation recommendation: {file_path}")
+        
+        df = pd.read_csv(file_path, parse_dates=['TIMESTAMP'])
+        df.set_index('TIMESTAMP', inplace=True)
+        
+        plot_number = file_path.split('_')[-2]  # Assuming the plot number is the second-to-last part of the filename
+        crop_type = 'corn' if 'CORN' in file_path else 'soybean'
+
+        recommendations = self.compute_irrigation(df, plot_number)
+        
+        # Add recommendations to the main data CSV
+        df['recommendation'] = recommendations
+        df.to_csv(file_path)  # Overwrite the original CSV with the new column
+        
+        # For the summary, we'll use today's values or the last available if today's not present
+        today = pd.Timestamp.now().floor('D')
+        if today in df.index:
+            summary_row = df.loc[today]
         else:
-            logger.info(f"No valid CWSI values found in the last {self.days_back} days")
-
-        # Set inputs for fuzzy system
-        self.irrigation_sim.input['etc'] = et_avg
-        self.irrigation_sim.input['swsi'] = swsi_value if swsi_value is not None else 0.5  # Default value if no valid SWSI
-        self.irrigation_sim.input['cwsi'] = min(cwsi_value, 1) if cwsi_value is not None else 0.5  # Default value if no valid CWSI, cap at 1
-
-        # Compute output
-        self.irrigation_sim.compute()
-
-        irrigation_amount = self.irrigation_sim.output['irrigation']
-
-        logger.info(f"Recommended Irrigation Amount for plot {plot}: {irrigation_amount:.2f} inches")
-
-        # Plot fuzzy output
-        self.plot_fuzzy_output(et_avg, swsi_value if swsi_value is not None else 0.5, 
-                            min(cwsi_value, 1) if cwsi_value is not None else 0.5, 
-                            irrigation_amount, plot)
-
-        return irrigation_amount, et_avg, swsi_value, cwsi_value
-
-def process_csv_file(file_path, controller):
-    logger.info(f"Processing file for irrigation recommendation: {file_path}")
-    
-    df = pd.read_csv(file_path, parse_dates=['TIMESTAMP'])
-    df.set_index('TIMESTAMP', inplace=True)
-    
-    plot_number = file_path.split('_')[-2]  # Assuming the plot number is the second-to-last part of the filename
-    crop_type = 'corn' if 'CORN' in file_path else 'soybean'
-
-    irrigation_amount, et_avg, swsi_value, cwsi_value = controller.compute_irrigation(df, plot_number)
-    
-    return {
-        'plot': plot_number,
-        'crop': crop_type,
-        'irrigation': irrigation_amount,
-        'et_avg': et_avg,
-        'swsi': swsi_value,
-        'cwsi': cwsi_value
-    }
+            summary_row = df.iloc[-1]
+        
+        return {
+            'plot': plot_number,
+            'crop': crop_type,
+            'irrigation': summary_row['recommendation'],
+            'et_avg': summary_row['etc'],
+            'swsi': summary_row['swsi'],
+            'cwsi': summary_row['cwsi'],
+            'date': summary_row.name.strftime('%Y-%m-%d')
+        }
 
 def main(input_folder, output_file, days_back=4):
     controller = FuzzyIrrigationController(days_back)
@@ -271,7 +253,7 @@ def main(input_folder, output_file, days_back=4):
         for file in files:
             if file.endswith('.csv') and ('CORN' in file or 'SOYBEAN' in file) and 'trt1' in file:
                 file_path = os.path.join(root, file)
-                result = process_csv_file(file_path, controller)
+                result = controller.process_csv_file(file_path)
                 recommendations.append(result)
 
     # Create recommendations DataFrame and save to CSV
