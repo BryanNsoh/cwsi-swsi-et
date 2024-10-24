@@ -252,27 +252,58 @@ class ExperimentDataStore:
             treatment = info['treatment']
             crop_type = 'corn' if 'CORN' in field else 'soybean'
 
-            # Get yield data based on crop type
-            yield_data = CORN_YIELDS if crop_type == 'corn' else SOYBEAN_YIELDS
-            if treatment in yield_data:
-                data = yield_data[treatment]
+            if crop_type == 'corn':
+                # Get yield data based on treatment
+                yield_data = CORN_YIELDS.get(treatment)
+                if yield_data:
+                    try:
+                        cursor.execute("""
+                            INSERT OR IGNORE INTO yields 
+                            (plot_id, trt_name, crop_type, avg_yield_bu_ac, yield_kg_ha, irrigation_applied_inches, irrigation_applied_mm)
+                            VALUES (?, ?, ?, ?, ?, ?, ?)
+                        """, (
+                            plot_id,
+                            yield_data['trt_name'],
+                            crop_type,
+                            yield_data['avg_yield_bu_ac'],
+                            yield_data['yield_kg_ha'],
+                            yield_data.get('irrigation_applied_inches'),
+                            yield_data.get('irrigation_applied_mm')
+                        ))
+                        logger.debug(f"Inserted/Existing yield for corn plot {plot_id}")
+                    except Exception as e:
+                        logger.error(f"Failed to insert yield for corn plot {plot_id}. Error: {e}")
+            else:
+                # For soybean, compute total irrigation_applied from irrigation_events
                 try:
                     cursor.execute("""
-                        INSERT OR IGNORE INTO yields 
-                        (plot_id, trt_name, crop_type, avg_yield_bu_ac, yield_kg_ha, irrigation_applied_inches, irrigation_applied_mm)
-                        VALUES (?, ?, ?, ?, ?, ?, ?)
-                    """, (
-                        plot_id,
-                        data['trt_name'],
-                        crop_type,
-                        data['avg_yield_bu_ac'],
-                        data['yield_kg_ha'],
-                        data.get('irrigation_applied_inches'),
-                        data.get('irrigation_applied_mm')
-                    ))
-                    logger.debug(f"Inserted/Existing yield for plot {plot_id}")
+                        SELECT SUM(amount_inches), SUM(amount_mm)
+                        FROM irrigation_events
+                        WHERE plot_id = ?
+                    """, (plot_id,))
+                    irrigation_totals = cursor.fetchone()
+                    total_inches = irrigation_totals[0] if irrigation_totals[0] is not None else 0
+                    total_mm = irrigation_totals[1] if irrigation_totals[1] is not None else 0
+
+                    # Get yield data based on treatment
+                    yield_data = SOYBEAN_YIELDS.get(treatment)
+                    if yield_data:
+                        cursor.execute("""
+                            INSERT OR IGNORE INTO yields 
+                            (plot_id, trt_name, crop_type, avg_yield_bu_ac, yield_kg_ha, irrigation_applied_inches, irrigation_applied_mm)
+                            VALUES (?, ?, ?, ?, ?, ?, ?)
+                        """, (
+                            plot_id,
+                            yield_data['trt_name'],
+                            crop_type,
+                            yield_data['avg_yield_bu_ac'],
+                            yield_data['yield_kg_ha'],
+                            total_inches,
+                            total_mm
+                        ))
+                        logger.debug(f"Inserted/Existing yield for soybean plot {plot_id} with computed irrigation")
                 except Exception as e:
-                    logger.error(f"Failed to insert yield for plot {plot_id}. Error: {e}")
+                    logger.error(f"Failed to insert yield for soybean plot {plot_id}. Error: {e}")
 
         self.conn.commit()
         logger.info("Inserted all yield data.")
@@ -324,7 +355,7 @@ class ExperimentDataStore:
                 for plot_num, amounts in plot_specific.items():
                     for idx, amount in enumerate(amounts):
                         if plot_num == "all":
-                            # Already handled by averaged events
+                            # Averaged events already handled
                             continue
                         if idx < len(specific_dates):
                             date_str = specific_dates[idx]
@@ -360,9 +391,9 @@ class ExperimentDataStore:
         if not data_path.exists():
             raise ValueError(f"Data path does not exist: {data_path}")
 
-        # Insert yields and irrigation events before processing CSVs
-        self.insert_yields()
+        # Insert irrigation events before yields to allow yield insertion to compute irrigation for soybeans
         self.insert_irrigation_events()
+        self.insert_yields()
 
         # Process each CSV file
         logger.info(f"Processing files from: {data_path}")
