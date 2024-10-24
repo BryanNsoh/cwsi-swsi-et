@@ -1,83 +1,35 @@
-import os
-import sys
 import requests
-import json
-from dotenv import load_dotenv, find_dotenv
+import zipfile
+import os
 
-def get_api_key():
-    # Try to find and load the .env file
-    dotenv_path = find_dotenv()
-    if not dotenv_path:
-        raise FileNotFoundError(".env file not found. Please create one with your API key.")
-    
-    load_dotenv(dotenv_path, override=True)
-    api_key = os.getenv('OPENWEATHERMAP_API_KEY')
-    
-    if not api_key:
-        raise ValueError("API key not found in .env file. Please set OPENWEATHERMAP_API_KEY.")
-    
-    return api_key
+# List of image URLs
+image_urls = [
+    "https://i.ibb.co/PFXvfv2/Field-Layout.png",
+    "https://i.ibb.co/GpB939X/datalogger-setup.png",
+    "https://i.ibb.co/m9HnmFC/full-system-diagram.png",
+    "https://i.ibb.co/8jjD4SZ/irrigation-dashboard-demonstration-section2-7-annotated.png",
+    "https://i.ibb.co/pPMbvkf/cloud-function-interactions.png",
+    "https://i.ibb.co/dmwskDr/assignment-mechanism.png",
+    "https://i.ibb.co/gSRWwgh/battery-voltage-trends-on-outage-event.png",
+    "https://i.ibb.co/x53KYGt/sample-irrigation-data-for-demo.png"
+]
 
-def test_solar_radiation_api(lat, lon, api_key):
-    solar_url = "https://api.openweathermap.org/data/2.5/solar_radiation/forecast"
-    params = {
-        'lat': lat,
-        'lon': lon,
-        'appid': api_key
-    }
-    try:
-        response = requests.get(solar_url, params=params, timeout=10)
-        response.raise_for_status()
-        return response.json()
-    except requests.exceptions.HTTPError as http_err:
-        if response.status_code == 401:
-            print(f"Error 401: Unauthorized. Please check your API key.")
-        elif response.status_code == 404:
-            print(f"Error 404: API endpoint not found. Please check the URL.")
-        else:
-            print(f"HTTP error occurred: {http_err}")
-    except requests.exceptions.ConnectionError:
-        print("Error: Unable to connect to the API. Please check your internet connection.")
-    except requests.exceptions.Timeout:
-        print("Error: API request timed out. Please try again later.")
-    except requests.exceptions.RequestException as err:
-        print(f"An error occurred: {err}")
-    return None
+# Directory to store the downloaded images (current directory)
+image_dir = os.getcwd()
 
-def display_solar_data(data):
-    if not data:
-        return
-    
-    print("\nSolar Radiation Forecast Data:")
-    print(json.dumps(data, indent=2))
-    
-    if 'list' in data:
-        print("\nSummary:")
-        for item in data['list'][:5]:  # Display first 5 entries
-            dt = item.get('dt', 'N/A')
-            ghi = item.get('radiation', {}).get('ghi', 'N/A')
-            print(f"Timestamp: {dt}, Global Horizontal Irradiance: {ghi} W/m²")
+# Download the images
+image_paths = []
+for i, url in enumerate(image_urls):
+    image_path = os.path.join(image_dir, f'image_{i+1}.png')
+    response = requests.get(url)
+    with open(image_path, 'wb') as file:
+        file.write(response.content)
+    image_paths.append(image_path)
 
-def main():
-    try:
-        api_key = get_api_key()
-        print(f"API Key loaded successfully: {api_key[:5]}...{api_key[-5:]}")
-        
-        lat, lon = 41.089075, -100.773775
-        print(f"\nTesting Solar Radiation API for coordinates: {lat}, {lon}")
-        
-        solar_data = test_solar_radiation_api(lat, lon, api_key)
-        if solar_data:
-            display_solar_data(solar_data)
-        else:
-            print("Failed to retrieve solar radiation data.")
-    
-    except FileNotFoundError as e:
-        print(f"Error: {e}")
-    except ValueError as e:
-        print(f"Error: {e}")
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}")
+# Create a zip file
+zip_path = os.path.join(image_dir, 'images.zip')
+with zipfile.ZipFile(zip_path, 'w') as zipf:
+    for image_path in image_paths:
+        zipf.write(image_path, os.path.basename(image_path))
 
-if __name__ == "__main__":
-    main()
+print(f"All images downloaded and zipped at {zip_path}")

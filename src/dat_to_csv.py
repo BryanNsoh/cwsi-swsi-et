@@ -1,9 +1,28 @@
+# src/dat_to_csv.py
+
 import os
 import re
 import pandas as pd
 import numpy as np
 import yaml
 from datetime import datetime, timedelta
+import logging
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+# Add this column mapping
+COLUMN_MAPPING = {
+    'BatV': ['BatV', 'BatV_Avg', 'BatteryVoltage_Avg'],
+    'TIMESTAMP': ['TIMESTAMP'],
+    # Add mappings for other columns as needed
+}
+
+def get_column_name(df, possible_names):
+    for name in possible_names:
+        if name in df.columns:
+            return name
+    return None
 
 def load_sensor_mapping(file_path):
     with open(file_path, 'r') as file:
@@ -18,7 +37,6 @@ def parse_dat_file(file_name):
     
     data.columns = data.columns.str.replace('"', "").str.replace("RECORD", "RecNbr")
     data.columns = data.columns.str.replace("_Avg", "")
-    data = data.replace({"NAN": np.nan, '"NAN"': np.nan})
     
     # Use a copy to avoid the FutureWarning
     data = data.replace({"NAN": np.nan, '"NAN"': np.nan}).copy()
@@ -39,6 +57,11 @@ def parse_dat_file(file_name):
     if 'TDR5026A23824' in data.columns:
         data['TDR5026A23024'] = data['TDR5026A23824']
         data.drop('TDR5026A23824', axis=1, inplace=True)
+    
+    # Ensure 'BatV' is treated as a numeric column
+    battery_column = get_column_name(data, COLUMN_MAPPING['BatV'])
+    if battery_column:
+        data[battery_column] = pd.to_numeric(data[battery_column], errors='coerce')
     
     # Resample to hourly data
     data_hourly = data.set_index("TIMESTAMP").resample('h').mean().reset_index()
@@ -94,12 +117,13 @@ def process_folder(folder_path, sensor_mapping, crop_type, output_folder, weathe
     
     for dat_file in dat_files:
         if os.path.exists(dat_file):
-            print(f"Processing file: {dat_file}")
+            logger.info(f"Processing file: {dat_file}")
             df = parse_dat_file(dat_file)
+            logger.info(f"Raw columns for {dat_file}: {df.columns.tolist()}")
             crop_specific_mapping = [sensor for sensor in sensor_mapping if sensor['field'] == f'LINEAR_{crop_type.upper()}']
             process_and_save_data(df, crop_specific_mapping, crop_type, output_folder, weather_data)
         else:
-            print(f"File not found: {dat_file}")
+            logger.warning(f"File not found: {dat_file}")
 
 def process_and_save_data(df, sensor_mapping, crop_type, output_folder, weather_data):
     sensor_groups = {}
@@ -110,8 +134,24 @@ def process_and_save_data(df, sensor_mapping, crop_type, output_folder, weather_
         sensor_groups[key].append(sensor['sensor_id'])
 
     for (treatment, plot_number, field), sensors in sensor_groups.items():
-        columns_to_save = ['TIMESTAMP'] + [s for s in sensors if s in df.columns]
-        df_to_save = df[columns_to_save].dropna(subset=columns_to_save[1:], how='all')
+        # Use the new column mapping for 'BatV'
+        battery_column = get_column_name(df, COLUMN_MAPPING['BatV'])
+        columns_to_save = ['TIMESTAMP'] + ([battery_column] if battery_column else []) + [s for s in sensors if s in df.columns]
+        
+        # Use the new column mapping for all columns
+        mapped_columns = []
+        for col in columns_to_save:
+            mapped_col = get_column_name(df, COLUMN_MAPPING.get(col, [col]))
+            if mapped_col:
+                mapped_columns.append(mapped_col)
+            else:
+                logger.warning(f"Column {col} not found for plot {plot_number}. Skipping this column.")
+        
+        if len(mapped_columns) < 2:  # Ensure we have at least TIMESTAMP and one data column
+            logger.warning(f"Not enough valid columns for plot {plot_number}. Skipping this plot.")
+            continue
+        
+        df_to_save = df[mapped_columns].dropna(subset=mapped_columns[1:], how='all')
         
         if not df_to_save.empty:
             # Get the date range where at least one sensor has data
@@ -131,9 +171,9 @@ def process_and_save_data(df, sensor_mapping, crop_type, output_folder, weather_
             file_name = f"{field}_trt{treatment}_plot_{plot_number}_{datetime.now().strftime('%Y%m%d')}.csv"
             output_path = os.path.join(output_folder, file_name)
             merged_df.to_csv(output_path, index=False)
-            print(f"Saved data to {output_path}")
+            logger.info(f"Saved data to {output_path}")
         else:
-            print(f"No data to save for {field} plot {plot_number}")
+            logger.warning(f"No data to save for {field} plot {plot_number}")
 
 def create_dated_folder(base_path):
     current_date = datetime.now().strftime("%Y-%m-%d")
@@ -149,14 +189,14 @@ def main(corn_folders, soybean_folders, sensor_mapping_path, output_folder, weat
     # Load and process weather data
     weather_data = parse_weather_csv(weather_csv_path)
     
-    print("Processing corn data")
+    logger.info("Processing corn data")
     for folder in corn_folders:
-        print(f"Processing corn folder: {folder}")
+        logger.info(f"Processing corn folder: {folder}")
         process_folder(folder, sensor_mapping, crop_type='corn', output_folder=dated_output_folder, weather_data=weather_data)
     
-    print("Processing soybean data")
+    logger.info("Processing soybean data")
     for folder in soybean_folders:
-        print(f"Processing soybean folder: {folder}")
+        logger.info(f"Processing soybean folder: {folder}")
         process_folder(folder, sensor_mapping, crop_type='soybean', output_folder=dated_output_folder, weather_data=weather_data)
 
 if __name__ == "__main__":
