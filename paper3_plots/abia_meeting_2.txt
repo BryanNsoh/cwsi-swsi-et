@@ -1,0 +1,745 @@
+Meeting 2
+Abia: [interjection...] irrigation scheduling... So, that is SDI. Let me do this. Share. Share screen. But you have access to 2024?
+
+Bryan: Yeah.
+
+Abia: So, you can go to irrigation management.
+
+Bryan: Yeah.
+
+Abia: And then you click on ET scheduling tool.
+
+Bryan: Okay.
+
+Abia: Yeah. I don't know if you can access that or not.
+
+Bryan: Let me see.
+
+Abia: So, you see here, um...
+
+Bryan: Okay.
+
+Abia: So, V when we started to irrigate...
+
+Bryan: Four Linear.
+
+Abia: 72.
+
+Bryan: But I don't think...
+
+Abia: And then I think you irrigated earlier than that, right? For your... So, this is for ET model.
+
+Bryan: Okay. I I mean, for... I don't think, because we put in the the sensors late June. June 21st.
+
+Abia: So, this is, yeah, this is July. So, we started in July. July, we are still at... This is what I'm trying to tell you, growth stages.
+
+Bryan: Okay.
+
+Abia: So, 7... So if we irrigated our first irrigation at 72...
+
+Bryan: Yeah.
+
+Abia: We were... So, we have V12. We were still vegetative.
+
+Bryan: V Okay. So, all okay, so...
+
+Abia: So VT Before we even...
+
+Bryan: Yeah.
+
+Abia: ...went into our, you know, reproductive.
+
+Bryan: Yeah.
+
+Abia: Yeah, if you go to studies... Yeah. So, you go to... No, go back. Go to irrigation management. You go SDI. No, no, go back. No, irrigation scheduling, sorry. No, go back, irrigate. Irrigation scheduling. Um SDI corn. Okay, you open that. So, if you need any weather, I think you've you you've already compiled the data. But then, I think, uh, we...
+
+Bryan: Okay, so yeah.
+
+Abia: I have all the solar radiation here. Yeah, it's already here. So if you want to plot... But this is in mil- mil- milli- megajoules.
+
+Bryan: Yeah.
+
+Abia: It's not in watts.
+
+Bryan: Hmm. Okay, okay, then I will align the growth stages.
+
+Abia: So, align. But I think...
+
+Bryan: Yeah. Yeah. Yeah, this this will be helpful, yeah.
+
+Abia: Yeah. So these are the growth stages, you know? At this... So... But some are missing because I was putting those... So these are the days when we took the growth stages.
+
+Bryan: Okay.
+
+Abia: Which is fine, you know? You can... And part of maybe your discussion you can talk about the growth stages and...
+
+Bryan: Yeah.
+
+Abia: Yeah.
+
+Bryan: Yeah. Yeah. This was just an initial guess, but... Yeah, then I will refine this because these dates are not. I will refine this based on this.
+
+Abia: Yeah, yeah. Yeah, you can refine that. Okay.
+
+Bryan: Yeah. Makes sense. So, once I do, then that figure would make sense.
+
+Abia: So, this one is, uh...
+
+Bryan: This This I'm still working on. Yeah, I'll probably delete this. I was just experimenting with many different...
+
+Abia: So then, soil moisture. This is over the season. So, depth... So, this is daily or...
+
+Bryan: This is, yeah, daily, but for the season, yeah. Yeah. But... Yeah.
+
+Abia: So this is 42 30... 186. But then, how come it doesn't show... So when we irrigate it... Because it has to be...
+
+Bryan: Yeah.
+
+Abia: It has, you have to see that smooth decline and then it shoots up.
+
+Bryan: When we When we do irrigate, yeah.
+
+Abia: So this This...
+
+Bryan: I need to put the irrigation and rainfall on top. So, here, I think this might be... This is an error on the probably error on the data logger, but I need to take a look.
+
+Abia: Yeah, yeah, yeah. Yeah. Yeah. And then, maybe looking at different plots.
+
+Bryan: Yeah, we need to look at the data. It doesn't look good. That one doesn't look good.
+
+Abia: Yeah. So yeah, you see... I mean, this is...
+
+Bryan: This is soil water stress index.
+
+Abia: Soil water stress. At least there... What What What does the color mean?
+
+Bryan: It doesn't really mean anything. It's just some bug in the code, but, I mean, it's just the line that matters. But I can...
+
+Abia: Is it the...
+
+Bryan: This shade doesn't mean anything, just the line. I need to remove the shade.
+
+Abia: I feel like, yeah, but...
+
+Bryan: And then...
+
+Abia: I feel like we can make good good plots in in R, but it's okay. But...
+
+Bryan: Yeah, and this is this is just the start. I'm not done yet. I'm just in the middle. So, here, I'm trying to match the irrigations. But I don't think it matches exactly. So... It's this irrigation. I mean, the thing is... I need to average this to daily, but it should already be daily. It's canopy temperature.
+
+Abia: Let me see the canopy temperature. Yeah. Even the canopy temperature. So if this is daily...
+
+Bryan: Yeah, and then I think this is that August period where it got a little cold.
+
+Abia: So what we'll do, maybe what you have to do also, is when you're correlating to see maybe in there's a week where actually maybe we irrigated and then there was a drop in maybe crop water stress index and there was an increase in soil, no, there was a...
+
+Bryan: A decrease, yeah.
+
+Abia: Yeah. In both. And then if you see that then you can just zoom in, like you just focus on that day. It can be two, one day.
+
+Bryan: Yeah.
+
+Abia: You know? Just to explain... It doesn't have to be the whole season.
+
+Bryan: It doesn't have to be the whole season, yeah. Yeah. Yeah, makes sense. But um... Let's see.
+
+Abia: So this is one... So, here... This this is not finished yet. I'm just trying to think about... So, for each irrigation, can we show like how much was recommended...
+
+Bryan: Yeah, so I would have...
+
+Abia: ...for each treatment?
+
+Bryan: I would have treat... So I don't have to You don't have to worry about the dates. So you'd have the the uh you'd have the x-axis as the treatments, and then the colors should be the dates.
+
+Abia: Yeah.
+
+Bryan: So that, you know? So that you have treatment one. So treatment one basically with... Yeah. So you could have... Yeah, let me share. Something I did here. So, you could have, um... Let me see. Man, my eyes are gone, I can't see. Um... How do I share you? While you're good. Okay. Let's see, let's see. So you see what I did here?
+
+Bryan: Yeah.
+
+Abia: Okay. So you have a method, right? So the colors are the dates. But then it will show, okay... It will show the amount, you know? Total irrigation applied, but dates. So it will keep on compounding.
+
+Bryan: Yeah. Okay. Yeah.
+
+Abia: Yeah.
+
+Bryan: Hmm. Okay. So So then the y-axis would show the total amount?
+
+Abia: Yeah. Would show the total amount. You know? Yeah. Total irrigation applied. And then, but then because this is a paper, you don't have to put inches. It has to be millimeters.
+
+Bryan: Yeah. Millimeters, yeah.
+
+Abia: Right? And then your methods. Maybe you have methods. So, it will show on this day... So, you see the orange is 710. I think... Yeah. IoT your your treatment actually recommended less compared to other, right? And then for... Yeah, let's see, August 1st, um you your you know, IoT didn't recommend. And then, you know, this one recommended more, ET model, compared to other.
+
+Bryan: Yeah. Yeah. Yeah, yeah, yeah. Okay. Okay. Okay.
+
+Abia: I'll do it that way.
+
+Bryan: Yeah. That's a nice image, yeah.
+
+Abia: So, um... But yeah, there's some images that you can do in Excel and they really look good because you'd want to have, you know? You'd want...
+
+Bryan: Yeah. Yeah.
+
+Abia: Yeah. Like this paper, you know, the figures have to be really nice and look good.
+
+Bryan: And look good, yeah, yeah. Makes sense. Makes sense. Yeah, the only convenience with Python is you can do everything in Python.
+
+Abia: Yeah. Yeah, so So the cumulative... So like, I can create a good cumulative graph in in in...
+
+Bryan: Yeah.
+
+Abia: ...in either R or Excel. I prefer so drawing graphs, I would prefer I prefer R.
+
+Bryan: Yeah.
+
+Abia: Yeah, yeah.
+
+Bryan: Yeah, for now, I'm thinking about yield...
+
+Abia: So yield is...
+
+Bryan: ...let's see, did I put that data in right? This is treatment one, two, three, four. And then yield over season.
+
+Abia: But then I think you'll have to name. Instead of doing one, two, three, four...
+
+Bryan: IoT. Um...
+
+Abia: Yeah, you need to name.
+
+Bryan: See, okay, okay. Yeah, yeah, yeah.
+
+Abia: But then you have five, which is the ET model, it's missing, right?
+
+Bryan: That makes sense. Yeah, I need to add that one here. So, add Add the ET to figure 10. Okay. Yeah, and then, I mean, this This one is still incomplete.
+
+Abia: It's it's in computation, but...
+
+Bryan: Yeah, I want to do maybe something more like a box plot or something. But yeah, these are all in progress. I just wanted to show... Yeah, this one doesn't really make sense. I tried to put corn and soybean on the same, but they're inherently different. So I will not do this.
+
+Abia: This is computation. No, you can't do that.
+
+Bryan: Um so it water use efficiency. I'm still working on this, but for this one... So I'm...
+
+Abia: Irrigation water use efficiency.
+
+Bryan: Yeah, I'm taking... So I went to the textbook. I remember they did it in class. So here...
+
+Abia: So it's... What's that?
+
+Bryan: So, I mean, according to this, maybe I should find some paper. They're using application efficiency as like a proxy for water use efficiency here, and then they cite these papers. So they say this has been called water use efficiency, but there's different ones, so another one I've found. I need to find the paper. So this one...
+
+Abia: I just basically...
+
+Bryan: Yeah, I'll just basically use this one. So, you mean, irrigation yield over irrigation?
+
+Abia: Yeah, irrigation efficiency.
+
+Bryan: Yeah, this is the one I'm using for now, yeah.
+
+Abia: Seasonal irrigation. Irrigation...
+
+Bryan: Yeah, yeah. And then yield divided by that. And then, for crops...
+
+Abia: Then this one we need to...
+
+Bryan: ...divide by ET. I need to give you the Excel file. I see here. Um... No, let's see. Uh... Studies. Okay, ET. Or maybe not. There's no such thing. So basically, for this one... I mean, two... This is for corn. This is the... Yeah, but then how is... Yeah, this is uh... most of these are clear here. Yeah, you delete these. So but, um... maybe this last one. So, basically... Let's see. So, for each individual uh page or reading...
+
+Bryan: Yes. We paste it here.
+
+Abia: I'll show you. This is bad. Maybe... There's something that I have. Something there. Now. Let me see. But then... Then, then, okay. Newton there... Regression. Okay. And then maybe this... So, we copy this. Maybe... This will be linear corn. So your span is five. How to span, right? Span.
+
+Bryan: Yeah, 72. So, then it says this is... This is span. Span...
+
+Abia: Five.
+
+Bryan: Okay. Okay. So, this is what we're going to do, okay? So, if you use gauge one, basically here you enter... So, you have six readings, right?
+
+Abia: Yeah.
+
+Bryan: Six, okay. I think... Probably six, no more than seven. 42 or five. For linear. Probably. For probably, and highlight. And these. So we plot. So, you put the treatment I mean the plots here, right? And just paste that sheet here.
+
+Abia: Yeah, yeah, yeah.
+
+Bryan: Yeah, and then you paste You basically paste the values here.
+
+Abia: Yeah.
+
+Bryan: And then I will compute it automatically.
+
+Abia: It will compute, but then here... Okay, I think this just comes in. Now you put the date. So this will be the date, the date here. And yeah, it will pick from here, and then it will compute uh gravimetric water content for each. How come there's so many matching treatments? Okay, so here you have to put in treatments. I don't know. Okay. So because you want to match treatments with total numbers here, okay? So, put treatments there. Um...
+
+Bryan: Yeah.
+
+Abia: So we only need those six.
+
+Bryan: Yeah. And then, yeah. Stand counts here.
+
+Abia: Yeah. If the name, the date here. Okay?
+
+Bryan: Yeah. Yeah, see, if you move over there. And then, the other thing you have to do which you don't have to forget, is the gauge you used.
+
+Abia: Yeah. So, if it was It was... So because it is pulling the coefficients. I'll show you. The coefficients uh... Formulas. Right. So, you see? So these are the coefficients for So its slope and slope and intercept. So when you put gauge one, it just pulls You know? Just pulls the coefficient for that. So you have to be careful here, you know, when you're putting in the gauge.
+
+Bryan: Yeah. Which gauge?
+
+Abia: Which gauge?
+
+Bryan: Okay.
+
+Abia: Yeah. Yeah. So yeah. And I think, um... I think Juan has done most of the data has put in the sheet, you just copy and paste. Put stand count, date. And then, you kind of work on this, you know? Maybe we have only how many treatments? Six treatments.
+
+Bryan: Yeah. Okay. Yeah. Yeah. Yeah. Yeah.
+
+Abia: So, you just put six treatments here. Six plots and treatments. You match them, right? And then... Yeah, and then maybe you stop here because we have six. So these you don't need. Yeah. So then, after that, this is what you copy and paste. For treatment one, you know? Date. So you know the date. You come here. You know you know the date. You paste, right? And then, after that, most of it, it's automatic. So, the weather, you can pick all this weather from...
+
+Bryan: Yeah. Into the ET. Yeah. Okay.
+
+Abia: ...from the ET scheduling you know, spreadsheet. Yeah, this one, okay? Everything is You just copy and paste, right?
+
+Bryan: Yeah. Okay. Yeah. Oh, well, you need to Yeah. Now I guess you can you can do daily, you know? And then you just copy and paste the values here. Maybe you can... I don't know how you do your Python code.
+
+Bryan: Can we get this from MET?
+
+Abia: Yeah.
+
+Bryan: Okay. You're using MET, right?
+
+Abia: Yeah, yeah, yeah. Yeah.
+
+Bryan: I could...
+
+Abia: So, what I do... Will he use rainfall, though? Because there's some rainfall. So, rainfall, you have to change. You have to use the The one we The ones that we recorded. But then still you can just come here and pick the rainfall. Where's the rainfall? Oh, the rainfall. Okay. I think it's... Was it? User inputs. It's here. Should be here. Yeah. Yeah. You can just come and just pick this column.
+
+Bryan: Okay. For rainfall.
+
+Abia: So basically, yeah, it goes, goes Here you don't have to do anything. This is what you need, the summaries, right? So, the water balance is based on the This is based on the on the neutron gauge, and this is what we'll use, but we want to estimate ET. So we want to compare, okay, the actual versus estimated based on the crop coefficients.
+
+Bryan: Yeah.
+
+Abia: So but then, in our case, we just take the ET from the w ETA. So, that one, you know?
+
+Bryan: Okay. Okay. Yeah.
+
+Abia: Okay. So I guess, yeah, you'd like to have this one. I guess, yeah.
+
+Bryan: Okay, makes sense. Yeah, um...
+
+Abia: Because yeah, irrigation water use efficiency, crop water productivity... Then, others, is just your comparing, you know? You can compare irrigation.
+
+Bryan: Yeah. Makes sense, yeah.
+
+Abia: Irrigation with yield.
+
+Bryan: Okay. Yeah, uniformity, you don't need that.
+
+Abia: You don't need that.
+
+Bryan: Yeah, I I don't think there'll be a way to efficiently get that. Yeah, so that's what I have so far, mostly just thinking about the data. And then, once I have that...
+
+Abia: Assessing. Assessing that data using irrigation scheduling method. Yeah. I think, yeah, that where it seems to be a little long.
+
+Bryan: A little long, yeah. Yeah, so I just tried to make the captions, because I feel like this paper, everything is revolving around the the images. So once I have good images...
+
+Abia: Yeah, it's all about...
+
+Bryan: Then I can put them in and then I start talking about them.
+
+Abia: Yeah, ANOVA. Yeah, I don't know if we will We will use that, but ANOVA. Yeah, you could try to see, okay, methods. So basically, your parameters you have methods, irrigation amounts, and then... So what would be What would be the factors influencing yield?
+
+Bryan: Yeah. Yeah, I don't know. Yeah. Maybe not. Yeah.
+
+Abia: You could...
+
+Bryan: Yeah. Maybe...
+
+Abia: ...other than irrigation, or applied water.
+
+Bryan: Yeah, I feel like here, ANOVA... Yeah, this this Maybe not enough.
+
+Abia: Maybe you can do a simple statistical maybe a t-test.
+
+Bryan: Yeah. Yeah. Yeah, but that one I haven't looked into yet. I just put it there, but yeah, this is what I have so far. So, I think what I'll do is work on the images. Just make them prettier. If I can't make it pretty with Python, I will see about R.
+
+Abia: Yeah, I think I think R makes really And you could use some in Excel.
+
+Bryan: In Excel, yeah. Yeah, I think the ones regarding like the ET, I will just use the sheet you sent to me.
+
+Abia: Yeah.
+
+Bryan: Yeah. So because I need to be faster, you're going to I think you'll have a sheet for each treatment. So like, yeah, ET treatment one, ET treatment...
+
+Abia: Yeah.
+
+Bryan: So you're going to have sheets, maybe five sheets. So...
+
+Abia: A A sheet for treatment five, treatment four, treatment two, three and one. So, you just basically need those four numbers, the ET. But then you need the you need the neutron data for...
+
+Bryan: Okay. Okay. For the different uh...
+
+Abia: ...for different uh plots and treatments.
+
+Bryan: Plots Treatments.
+
+Abia: Yeah.
+
+Bryan: Okay.
+
+Abia: Let me see. Irrigation scheduling methods. I do want to read this. Are you... How do you pronounce this name? Different irrigation methods. Okay. We didn't do sampling. So here they use Yeah, they use ET. So you see what they used here. You could add another one.
+
+Bryan: Yeah.
+
+Abia: This is W What is this one? Crop water use over irrigation plus precipitation. Is what? Irrigation water usage. It is crop water uptake and input ratio. Let me send you this one, too. But then, we didn't take parameters. They need ANOVA. No, this is not. This is just grain yield, marginal productivity.
+
+Bryan: Yeah, that will be useful, yeah.
+
+Abia: So you see...
+
+Bryan: Yeah, you can you can even do the marginal productivity.
+
+Abia: Yeah, we have the data.
+
+Bryan: I feel every...
+
+Abia: So, change in yield over change IR. Change Delta Y was a letter change in crop yield, and Delta IR was the difference in irrigation amount. This paper is good.
+
+Bryan: Irrigation amount.
+
+Abia: Um... So, what do they plot? They plot uh... Crop yield versus irrigation.
+
+Bryan: Irrigation. Does it Irrigation application? Yeah, but now we have only four points.
+
+Abia: Yeah. No, we have... Yeah, I feel like, uh, you could You could plot that, but...
+
+Bryan: Yeah, and... Because I only have average yields of all treatments. Like, I don't have individual yields for corn.
+
+Abia: Yeah, but you know? I mean... Like I couldn't do that graph without like individuals. Yeah.
+
+Bryan: Yeah, so I mean...
+
+Abia: Yeah. He has also done He has used average yield.
+
+Bryan: Okay.
+
+Abia: They don't They don't They don't use reps. It's just average of course. But then what I'm saying is, we have only five data points. You could You could try, you know? And see which...
+
+Bryan: Yeah.
+
+Abia: Yeah.
+
+Bryan: But yeah.
+
+Abia: Maybe it will be a line, you know? It would show maybe IoT uh your your method applied less, and then as the irrigation increased, the yield increased.
+
+Bryan: Yeah. Increased. Okay. Okay. Like... Yeah, yeah.
+
+Abia: Yeah.
+
+Bryan: Yeah, I think this is a good paper for finding methods.
+
+Abia: So yeah, I would look at because So sometimes what I do is just to see, okay, what have How have other guys presented the data, right? So like what I said, you can you can have one on weather information, right? Climate.
+
+Bryan: Yeah.
+
+Abia: Um... No, I don't want I don't like that. Maybe the ones like these. They can be for canopy temperature, and canopy temperature. You show the trends, maybe like three days, a day, maybe a week that was wet, dry, and then maybe normal. I don't know. So you just have three graphs.
+
+Bryan: Yeah. Yeah.
+
+Abia: Um... Or maybe one graph, but combines everything. Let's see, the copy. And I guess that paper we can submit it to this Agricultural Water Management, yeah.
+
+Bryan: Agricultural Water Management.
+
+Abia: Irrigation scheduling and nitrogen. Yeah, that's not good. That's no good. I don't like that. Yeah, evaluation, evaluation of... Yeah, you could have a table that just presents methods, and then average yield. You could have maybe irrigation applied, and then yield.
+
+Bryan: Yeah. Just a table.
+
+Abia: Just a table. Yeah, I think that paper will be different.
+
+Bryan: Yeah.
+
+Abia: Yeah, it's linear. They don't have very good graphs. Yeah. So then... Let me see here. Yeah, you could present, you know, those indices in terms It can be bar plots, right?
+
+Bryan: Yeah.
+
+Abia: For you know, for two years. I know I need to give you the yield for... Maybe I'll send it for you. This one is okay.
+
+Bryan: Yeah.
+
+Abia: So yeah, and then... How about your job job search? How is it going?
+
+Bryan: Yeah, that's progressing so-so. Um I also started reaching out to profs, from your advice.
+
+Abia: Mhm. Mhm.
+
+Bryan: Just looking at like what different people are doing.
+
+Abia: Um yes. So I feel like...
+
+Bryan: Yeah.
+
+Abia: Yeah, if you want maybe to change and be close to Vancouver, Washington State, there's what they have, an institute called Ag Ag what? AgFour. It's called AgGateway. Yeah, Ag Aid Institute.
+
+Bryan: That's That's useful.
+
+Abia: So, you see, they are more into robotics. Let's see their artificial intelligence.
+
+Bryan: Oh. Okay, I will put that in my notes.
+
+Abia: AI intelligence, actually. So you see irrigation scheduling, you know, selected projects. Ag digital twins, orchard AI predictions, stemflow, furrow prediction...
+
+Bryan: Wow. Let me put that in my notes.
+
+Abia: Can uh Okay. So this Ag Aid, you know? They put contact us.
+
+Bryan: This This looks pretty interesting, yeah.
+
+Abia: Talk to... There's a guy, you know, there. That's his name. People. Let's see the people. Students or maybe alumni, ex-students. Training.
+
+Bryan: Yeah, I can probably What I do to find people, I was usually they have a page on LinkedIn, and then in the page, you can see who's affiliated to them.
+
+Abia: So like, the guy, he's from Uganda, but he's he's working with one of the Yeah, one of the profs. Um Thiago... You can even write to him. Thiago Shafiq. K I K I Thiago.
+
+Bryan: Yeah. Uganda. Yeah.
+
+Abia: Y K I Wait. K I Y A G Thiago Shafiq. S H A Yeah. Shafiq K K K K Okay, Shafiq. Okay. And then, I think, I might need a recommendation letter.
+
+Bryan: Okay, okay.
+
+Abia: No, no, it's fine. It's fine. No, not for this, but I reached out to another prof from...
+
+Bryan: So... Yeah.
+
+Abia: From?
+
+Bryan: Uh so Well, he works at Oak Ridge National Lab. So, it's like a government-funded lab. It's in Tennessee. But then, they're affiliated to University of Tennessee.
+
+Abia: Okay. What do they do?
+
+Bryan: So, but there They do different stuff. So he works in material science automation. So what they do is they have like laboratory equipment, like micros electron microscopes, things they do for like material science, nanotechnology research, and then they use large language models like AI to automate the use of those technology. So, for example, you can take the model and have it control the equipment. Like, you can tell it, "Do a scan with these parameters." And then, the AI will do it. So, they're working on automation like that. So I had an older project where I did something similar. So I just...
+
+Abia: Yeah.
+
+Bryan: Oh. Just like that.
+
+Abia: Yeah, but you want I mean, I feel like I feel like now you should have I feel like I would stay in I don't know. I don't know what your passion is, but I feel like there's more so much opportunities in in the Ag Ag space, water management space. You know? Even the startup companies, you know, they that are developing tools for weather, you know, weather monitoring, soil moisture monitoring. I feel like that space that space is still has so many opportunities.
+
+Bryan: Yeah.
+
+Abia: Mhm. Mhm. Mhm. Mhm. Mhm. Yeah, yeah, yeah.
+
+Bryan: Yeah, yeah, yeah, yeah.
+
+Abia: Yeah.
+
+Bryan: Yeah, there's got some opportunity, yeah, yeah, yeah. Makes sense, yeah. Rather than you going in material science, you know?
+
+Abia: Yeah.
+
+Bryan: Yeah. And it's less I guess it's material science, but more focusing on AI, like automation, you know? Because I found that really interesting, because one of my projects was on that, and the prof's paper was on something similar. Yeah.
+
+Abia: Yeah.
+
+Bryan: Yeah.
+
+Abia: Um... Yeah, then Maybe even you'd want to If maybe you want to stay in Nebraska but in Lincoln, I feel like Yufeng Yufeng will have money.
+
+Bryan: Yeah. Yeah. Yeah.
+
+Abia: Yeah, yeah, yeah, yeah, yeah. Yufeng and Linxi. So they are still in AI and use of sensors. Um...
+
+Bryan: Yeah. Yeah. Yeah.
+
+Abia: Yeah, I would Maybe let's let's first, you know, defend, and then, you know?
+
+Bryan: Yeah. Yeah, then talk with them. Yeah. Yeah, but I was also thinking... So, keeping them on, but usually, when you speak with profs, like, it's never final until, like, you've signed the agreement or something. So, this particular prof with like over at Oak Ridge. I had a meeting with him I think last week, and he's pretty interested. And when I read the paper, it was like...
+
+Abia: Okay. Is there...
+
+Bryan: Okay.
+
+Abia: What is What is his name?
+
+Bryan: So... Yongtao Liu. So, Y O N G...
+
+Abia: Yongtao?
+
+Bryan: Y O N G T A O Liu.
+
+Abia: T A O Liu.
+
+Bryan: Yeah. Yeah, yeah. So... Yeah. Let me see. Or is there a gap or... Yeah, I think this is all him, but the paper that got my attention... and ET for... Yeah, this I think this is the one. Human expertise and AI efficient language model for microscopy operation and automated experimental design. So it's pretty cool stuff. So I'll just show you the highlights. So I I read the paper, and then I had a project that was sitting around. So, basically, they have like experimentation workflows where you pose a question, you design an experiment, and you have to do so many manual things, but then now you can just have the human being pose the question um and then, like, demonstrate, like, similar problems related to that question, and then the AI kind of takes over from there and automates the experiment.
+
+Abia: Synthesizing human.
+
+Bryan: Okay.
+
+Abia: Okay.
+
+Bryan: Oh yeah. So, I noticed they were doing this, but then the tech they're using to do this is, like, far behind what's possible today. You know? So when I read the paper, I thought, "Oh, this person could really benefit from the experience I had from before, working with language models." And essentially, all this equipment, you can just automate the operation of it.
+
+Abia: Yeah.
+
+Bryan: Yeah. So, I thought that was That was pretty interesting. And they're getting funding, I think, directly from the government, because he's working at Oak Ridge. So Oak... Where is it? National Lab. Yeah. So, federally funded research and development center in Oak Ridge, Tennessee.
+
+Abia: Okay. I mean... Yeah. That's That's okay.
+
+Bryan: Yeah. So, um... So at least I want to apply there for now. And then, probably the next thing I will do, I will just talk to um maybe some of the profs here you mentioned, like maybe Yufeng and Xi.
+
+Abia: Yeah, Yufeng still still works in the same, because you'd want to go You'd want to go somewhere where you're just you're not learning new things, but you're just building on top of much you've learned. Um and then, you know, because after I don't know. Is that going to be PhD, or you're going to be a research? It would be a PhD, like a combination of...
+
+Bryan: Yeah. Yeah, yeah. And you can apply some of your skills from before. Yeah. Yeah. Yeah.
+
+Abia: Yeah.
+
+Bryan: So I'll be doing a PhD with the university, but then the research will be at the National Lab.
+
+Abia: Okay.
+
+Bryan: Yeah. And mentored by this guy who works at the National Lab.
+
+Abia: That's good. I mean, that's good. But, yeah, um... Um...
+
+Bryan: Yeah.
+
+Abia: Yeah. I mean, yeah. Um that's good.
+
+Bryan: Yeah, so...
+
+Abia: Keep on searching.
+
+Bryan: Yeah, definitely, definitely. So, I just have like a second meeting with this guy just to conf- because the first one was just to talk about the research direction, where he was going, just to see if it was something I find interesting. So I thought it was interesting.
+
+Abia: Is there...? Okay.
+
+Bryan: So now I reached out to the university, just to figure out the application, the timelines, everything. But then, you can apply now.
+
+Abia: Yeah, so I can apply now. So I just want to finish the application next week, and then start, like, working on other opportunities.
+
+Bryan: Yeah. Yeah.
+
+Abia: Yeah, that's good. I mean, that's really good.
+
+Bryan: Yeah.
+
+Abia: Um... And yeah.
+
+Bryan: Yeah. And then...
+
+Abia: Take use any opportunity that's there.
+
+Bryan: Yeah. And then yeah, I also take a look at that link you sent me. It looks really interesting.
+
+Abia: Yeah, this Ag Yeah. They do automation. So robotics in in Ag, but they
+
+Abia: So robotics in in Ag, but they use, you know, pretty much everything that you've you've learned from, you've used...
+
+Bryan: Mhm. Mhm. Mhm. Mhm. So far, yeah.
+
+Abia: ...so far. Um... Yeah.
+
+Bryan: Yeah. But there's also other Illinois has... They have an institute in AI. I think it's called AI Farms, maybe. Yeah. AI for future. So you'd look Yeah, about that's good. Student team leadership. Yeah, these guys too. AI Farms. Um...
+
+Bryan: Yeah.
+
+Abia: Mhm.
+
+Bryan: Yeah, there's another university that's that has AI. Um... Yeah, I'm forgetting that. Could be... Yeah.
+
+Bryan: So yeah, that's what I have so far. But yeah, still looking... And then, yeah, I think I'll just work on these. Yeah, I'll probably... Yeah, let's see. Try to make them better, explore R, because yeah, I was also looking online, and it's looking like R has so much better support for...
+
+Abia: For graphs. Yeah, Python is good for analysis, but it's not good for plots.
+
+Bryan: ...for images than Python. Yeah.
+
+Abia: Yeah.
+
+Bryan: Yeah.
+
+Abia: Because R I have really good, good
+
+Bryan: For, like, visualization. Yes. Yes.
+
+Abia: ...and it doesn't It's just two lines, you know? You call the library, you put in the...
+
+Bryan: Makes sense. Okay. The the arguments, and then you get it. Yeah.
+
+Abia: ...and then you get the plots.
+
+Bryan: Yeah. Yeah, yeah, yeah. Makes sense.
+
+Abia: Yeah. Because, yeah, it's really interesting.
+
+Bryan: Yeah. So I'll work on these. And then, once I have the images at least somewhere close to where we're looking to go final, then I will write, like, the draft. And then, just keep on fine-tuning the images and the graphs.
+
+Abia: Yeah, yeah. I mean, graphs, once you get the graphs... I feel like, yeah, once you get the graphs for weather, graphs for your computed ET, using the neutron data... And then still, you know, you need to maybe present the moisture, the neutron...
+
+Bryan: Yeah. The ET. Yeah, yeah, yeah. Using the neutron data. Yeah.
+
+Abia: So I...
+
+Bryan: So I take the neutron, and then I put it on the...
+
+Abia: On the On the TD. Right?
+
+Bryan: Yeah. Yeah. Yeah. Yeah. Yeah. Yeah, and then plot that.
+
+Abia: Yeah, and then some box plots that shows maybe the spread out of yield, and and maybe, like what we talked about last time.
+
+Bryan: Yeah. Yeah, yeah, yeah, yeah. Yeah. Makes sense.
+
+Abia: So once you have those figures... You just need, like, six figures. I mean, six in terms of... But then, it can be like, a, b, c, d...
+
+Bryan: Yeah. A, b, c, d. Yes. Yes, yes. Makes sense. Makes sense. Yeah, I'll work on that. And then...
+
+Abia: Yeah.
+
+Bryan: Yeah. And then we should be... And also, for the defense, I think everybody I was just composing an email before I came. So November 20 22? 22. So... So 22?
+
+Abia: Yes, I think it's on a Monday. Let me see. Yeah. Yeah, it's a Friday. No. It's a Friday. Let me see the messages I sent. I think it's 25th, right? It's a Mon- 25th is a Monday.
+
+Bryan: Let me see. Let me see.
+
+Abia: Yeah, did you see I really like the comments from Weijian. Did you look at those comments?
+
+Bryan: Yeah. No, I don't think I've gone into those yet.
+
+Abia: Yeah. I would start, you know, those who have given you comments, I would start putting those in, you know, free time, weekends...
+
+Bryan: Yeah. Yeah. Putting those in.
+
+Abia: So that by the time you defend, you have it already submitted.
+
+Bryan: Yeah, I'll find I was composing an email to send back, but I think everybody has found It's a It I think it was a Monday.
+
+Abia: Yeah.
+
+Bryan: November 20...
+
+Abia: Which is November 25th.
+
+Bryan: Yeah. Yeah, so in the morning. Yeah. Yeah, and then I'll send that time to everybody.
+
+Abia: Okay, that's good. Good stuff. Yeah, let's see that. For proteins, you could use R...
+
+Bryan: All right. Yeah.
+
+Abia: But I feel like even Excel. You know?
+
+Bryan: Even Excel, yeah. Yeah, I think especially for the ET since I've been working in Excel, I will just do that in Excel. Or what I can do, because the difficulty would be Because I did all all I combined everything, and then put it in one big database. But then, the database...
+
+Abia: You can download. You can You can transfer
+
+Bryan: Yeah.
+
+Abia: ...because the data frames, you can transfer those into Excel file. Into a CSV. You print You print out a CSV, and then you bring that CSV in R, and then you work in R.
+
+Bryan: A CSV. Yeah. Yeah, yeah. Yeah. And then And then I work, yeah, yeah. Yeah, that's Yeah, I'll try and explore that, because if I find a better way to visualize, that would make life easier.
+
+Abia: Yeah. So, because R has really interesting graphics.
+
+Bryan: Yeah. Yeah. Yeah, yeah, yeah. Makes sense. Makes sense. Makes sense. Thank you very much.
+
+Abia: All right. All right. Take care.
+
+Bryan: You too.
+

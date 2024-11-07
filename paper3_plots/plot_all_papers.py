@@ -7,13 +7,14 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 from datetime import datetime
+from matplotlib.backends.backend_pdf import PdfPages  # Import PdfPages for PDF generation
 
 # ================================
 # Enhanced Plotting Configuration
 # ================================
 
 # Modern base style
-plt.style.use('seaborn-v0_8-darkgrid')
+plt.style.use('seaborn-v0_8-darkgrid')  # Modern base style
 
 # Custom color palette - professionally chosen colors
 CUSTOM_COLORS = {
@@ -52,33 +53,33 @@ plt.rcParams.update({
     'xtick.labelsize': 12,
     'ytick.labelsize': 12,
     'legend.fontsize': 12,
-    
+
     # Font families
     'font.family': 'sans-serif',
     'font.sans-serif': ['Arial', 'Helvetica', 'DejaVu Sans'],
-    
+
     # Figure size and DPI
     'figure.figsize': (12, 8),
     'figure.dpi': 300,
     'savefig.dpi': 300,
-    
+
     # Line widths
     'axes.linewidth': 1.5,
     'grid.linewidth': 0.8,
     'lines.linewidth': 2.0,
-    
+
     # Grid styling
     'grid.alpha': 0.3,
     'grid.color': '#cccccc',
-    
+
     # Legend styling
     'legend.frameon': True,
     'legend.framealpha': 0.8,
     'legend.edgecolor': 'white',
     'legend.facecolor': 'white',
-    
+
     # Spacing
-    'figure.constrained_layout.use': True,  # Better than tight_layout
+    'figure.constrained_layout.use': True,  # Use constrained_layout for all figures
     'figure.autolayout': False,  # Disable when using constrained_layout
 })
 
@@ -91,17 +92,17 @@ def style_axis(ax, title=None, xlabel=None, ylabel=None):
         ax.set_xlabel(xlabel, labelpad=10)
     if ylabel:
         ax.set_ylabel(ylabel, labelpad=10)
-    
+
     # Beef up the spines
     for spine in ax.spines.values():
         spine.set_linewidth(1.5)
-    
+
     # Add subtle grid
     ax.grid(True, linestyle='--', alpha=0.7)
-    
+
     # Format tick labels
     ax.tick_params(axis='both', which='major', labelsize=12, length=6, width=1.5)
-    
+
     return ax
 
 def style_legend(ax, title=None, loc='best'):
@@ -122,37 +123,27 @@ def style_legend(ax, title=None, loc='best'):
 # Define the path to the SQLite database
 DATABASE_PATH = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\experiment_data_20241024.sqlite"
 
-# Define the output directory for generated figures
-OUTPUT_DIR = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\paper3_plots\all_plots"
+# Define the output directory for the PDF
+OUTPUT_DIR = r"C:\Users\bnsoh2\OneDrive - University of Nebraska-Lincoln\Documents\Projects\masters-project\cwsi-swsi-et\paper3_plots"
 
 # Create the output directory if it doesn't exist
 if not os.path.exists(OUTPUT_DIR):
     os.makedirs(OUTPUT_DIR)
 
-# ================================
-# Database Connection Function
-# ================================
-
-def connect_db(db_path):
-    """Establish a connection to the SQLite database."""
-    try:
-        conn = sqlite3.connect(db_path)
-        print(f"Connected to database at {db_path}")
-        return conn
-    except sqlite3.Error as e:
-        print(f"Error connecting to database: {e}")
-        return None
+# Define the PDF output path
+PDF_OUTPUT_PATH = os.path.join(OUTPUT_DIR, "all_figures.pdf")
 
 # ================================
 # Plotting Functions
 # ================================
 
-def generate_figure3(conn):
+def generate_figure3(conn, pdf):
     """
     Figure 3: Seasonal Weather Patterns and Environmental Variables
     Multi-panel time series plots for precipitation, temperature, solar radiation, wind speed, and VPD.
     """
-    print("Generating Figure 3: Seasonal Weather Patterns and Environmental Variables")
+    label = "Figure 3: Seasonal Weather Patterns and Environmental Variables"
+    print(f"Generating {label}")
 
     # Extract weather data
     weather_query = """
@@ -199,9 +190,9 @@ def generate_figure3(conn):
     # Subplot 1: Precipitation and Irrigation
     ax = axes[0]
     ax.bar(data_all['date'], data_all['Rain_1m_Tot'], 
-           label='Rainfall', color=CUSTOM_COLORS['primary_blue'], alpha=0.7)
+           label='Rainfall (mm)', color=CUSTOM_COLORS['primary_blue'], alpha=0.7)
     ax.bar(data_all['date'], data_all['irrigation_mm'], 
-           bottom=data_all['Rain_1m_Tot'], label='Irrigation', 
+           bottom=data_all['Rain_1m_Tot'], label='Irrigation (mm)', 
            color=CUSTOM_COLORS['accent_green'], alpha=0.7)
     style_axis(ax, 
               title='Daily Precipitation and Irrigation Events',
@@ -211,9 +202,9 @@ def generate_figure3(conn):
     # Subplot 2: Temperature
     ax = axes[1]
     ax.plot(data_all['date'], data_all['TaMax_2m'], 
-            label='Maximum', color=CUSTOM_COLORS['accent_orange'])
+            label='Maximum Temp (°C)', color=CUSTOM_COLORS['accent_orange'])
     ax.plot(data_all['date'], data_all['TaMin_2m'], 
-            label='Minimum', color=CUSTOM_COLORS['primary_blue'])
+            label='Minimum Temp (°C)', color=CUSTOM_COLORS['primary_blue'])
     style_axis(ax, 
               title='Daily Air Temperature Range',
               ylabel='Temperature (°C)')
@@ -222,7 +213,7 @@ def generate_figure3(conn):
     # Subplot 3: Solar Radiation
     ax = axes[2]
     ax.plot(data_all['date'], data_all['Solar_2m_Avg'], 
-            label='Solar Radiation', color=CUSTOM_COLORS['accent_purple'])
+            label='Solar Radiation (W/m²)', color=CUSTOM_COLORS['accent_purple'])
     style_axis(ax, 
               title='Daily Solar Radiation',
               ylabel='Solar Radiation (W/m²)')
@@ -231,7 +222,7 @@ def generate_figure3(conn):
     # Subplot 4: Wind Speed
     ax = axes[3]
     ax.plot(data_all['date'], data_all['WndAveSpd_3m'], 
-            label='Wind Speed', color=CUSTOM_COLORS['secondary_blue'])
+            label='Wind Speed (m/s)', color=CUSTOM_COLORS['secondary_blue'])
     style_axis(ax, 
               title='Daily Wind Speed',
               ylabel='Wind Speed (m/s)')
@@ -246,21 +237,22 @@ def generate_figure3(conn):
               ylabel='VPD (kPa)')
     style_legend(ax, loc='upper right')
 
-    # Final figure adjustments
-    plt.gcf().autofmt_xdate()  # Angle and align the tick labels so they look better
+    # Adjust layout to make room for the caption
+    plt.subplots_adjust(top=0.95)
+    fig.suptitle(label, fontsize=20, fontweight='bold')
 
-    # Save with high DPI
-    figure_path = os.path.join(OUTPUT_DIR, "seasonal_weather_patterns.png")
-    plt.savefig(figure_path, bbox_inches='tight', dpi=300)
-    plt.close()
-    print(f"Figure 3 saved to {figure_path}")
+    # Save the figure to PDF
+    pdf.savefig(fig, bbox_inches='tight')
+    plt.close(fig)
+    print(f"{label} added to PDF.")
 
-def generate_figure4(conn):
+def generate_figure4(conn, pdf):
     """
     Figure 4: CWSI Implementation Analysis
     Four-panel figure analyzing Crop Water Stress Index (CWSI) for corn and soybeans.
     """
-    print("Generating Figure 4: CWSI Implementation Analysis")
+    label = "Figure 4: CWSI Implementation Analysis"
+    print(f"Generating {label}")
 
     # Extract CWSI data and plot information
     cwsi_query = """
@@ -280,45 +272,31 @@ def generate_figure4(conn):
     corn_cwsi = cwsi_df[cwsi_df['field'] == 'LINEAR_CORN'].copy()
     soybean_cwsi = cwsi_df[cwsi_df['field'] == 'LINEAR_SOYBEAN'].copy()
 
-    # Panel (a): Daily CWSI for corn with theoretical bounds
-    corn_daily = corn_cwsi.groupby('date')['cwsi'].mean().reset_index()
-    fig, ax = plt.subplots(figsize=(15, 6))
-    ax.plot(corn_daily['date'], corn_daily['cwsi'], label='Corn CWSI', color=CUSTOM_COLORS['accent_green'])
-    ax.axhline(y=0, color=CUSTOM_COLORS['red'], linestyle='--', label='Theoretical Lower Bound')
-    ax.axhline(y=1, color=CUSTOM_COLORS['red'], linestyle='--', label='Theoretical Upper Bound')
-    style_axis(ax, 
-              title='Daily CWSI Values for Corn',
-              ylabel='CWSI')
-    style_legend(ax, loc='upper right')
-    figure_path_a = os.path.join(OUTPUT_DIR, "figure4a_corn_cwsi.png")
-    plt.savefig(figure_path_a)
-    plt.close()
-    print(f"Figure 4a saved to {figure_path_a}")
-
-    # Panel (b): Daily CWSI for soybeans with transition point
-    soybean_daily = soybean_cwsi.groupby('date')['cwsi'].mean().reset_index()
-    fig, ax = plt.subplots(figsize=(15, 6))
-    ax.plot(soybean_daily['date'], soybean_daily['cwsi'], label='Soybean CWSI', color=CUSTOM_COLORS['primary_blue'])
-    ax.axhline(y=0, color=CUSTOM_COLORS['red'], linestyle='--', label='Theoretical Lower Bound')
-    ax.axhline(y=1, color=CUSTOM_COLORS['red'], linestyle='--', label='Theoretical Upper Bound')
-    transition_date = pd.to_datetime('2024-08-01')
-    ax.axvline(transition_date, color=CUSTOM_COLORS['accent_purple'], linestyle='-.', label='Transition to Empirical Method')
-    style_axis(ax, 
-              title='Daily CWSI Values for Soybeans',
-              ylabel='CWSI')
-    style_legend(ax, loc='upper right')
-    figure_path_b = os.path.join(OUTPUT_DIR, "figure4b_soybean_cwsi.png")
-    plt.savefig(figure_path_b)
-    plt.close()
-    print(f"Figure 4b saved to {figure_path_b}")
-
-    # Panel (c): Boxplots of CWSI distribution by growth stage (Corn)
-    # Define growth stages for corn
+    # Define growth stages for corn based on provided data
     corn_growth_stages = [
-        ('Emergence', '2024-05-01', '2024-06-01'),
-        ('Vegetative', '2024-06-02', '2024-07-15'),
-        ('Reproductive', '2024-07-16', '2024-08-31'),
-        ('Maturity', '2024-09-01', '2024-10-01')
+        ('Emergence', '2024-04-24', '2024-05-12'),
+        ('VE', '2024-05-12', '2024-05-16'),
+        ('V1', '2024-05-16', '2024-05-20'),
+        ('V2', '2024-05-20', '2024-05-29'),
+        ('V3', '2024-05-29', '2024-06-02'),
+        ('V4', '2024-06-02', '2024-06-07'),
+        ('V5', '2024-06-07', '2024-06-11'),
+        ('V6', '2024-06-11', '2024-06-13'),
+        ('V7', '2024-06-13', '2024-06-17'),
+        ('V8', '2024-06-17', '2024-06-20'),
+        ('V9', '2024-06-20', '2024-06-24'),
+        ('V10', '2024-06-24', '2024-06-27'),
+        ('V11', '2024-06-27', '2024-06-29'),
+        ('V12', '2024-06-29', '2024-07-05'),
+        ('V13', '2024-07-05', '2024-07-08'),
+        ('V14', '2024-07-08', '2024-07-11'),
+        ('VT/R1', '2024-07-11', '2024-07-20'),
+        ('R2', '2024-07-20', '2024-07-24'),
+        ('R3', '2024-07-24', '2024-08-01'),
+        ('R4', '2024-08-01', '2024-08-07'),
+        ('R5', '2024-08-07', '2024-08-16'),
+        ('R5.25', '2024-08-16', '2024-08-24'),
+        ('R5.5', '2024-08-24', '2024-08-28')
     ]
 
     def assign_corn_stage(row):
@@ -327,23 +305,68 @@ def generate_figure4(conn):
                 return stage
         return 'Unknown'
 
-    # To avoid SettingWithCopyWarning, ensure we're working on a copy
+    # Assign growth stages
     corn_cwsi = corn_cwsi.copy()
     corn_cwsi['Growth Stage'] = corn_cwsi.apply(assign_corn_stage, axis=1)
+
+    # Panel (a): Daily CWSI for corn with theoretical bounds
+    corn_daily = corn_cwsi.groupby('date')['cwsi'].mean().reset_index()
+    fig, ax = plt.subplots(figsize=(15, 6))
+    ax.plot(corn_daily['date'], corn_daily['cwsi'], label='Corn CWSI (mm)', color=CUSTOM_COLORS['accent_green'])
+    ax.axhline(y=0, color=CUSTOM_COLORS['red'], linestyle='--', label='Theoretical Lower Bound')
+    ax.axhline(y=1, color=CUSTOM_COLORS['red'], linestyle='--', label='Theoretical Upper Bound')
+    style_axis(ax, 
+              title='Daily CWSI Values for Corn',
+              ylabel='CWSI')
+    style_legend(ax, loc='upper right')
+    fig.suptitle(label, fontsize=20, fontweight='bold')
+
+    # Save the figure to PDF
+    pdf.savefig(fig, bbox_inches='tight')
+    plt.close(fig)
+    print("Figure 4a: Daily CWSI for Corn added to PDF.")
+
+    # Panel (b): Daily CWSI for soybeans with transition point
+    label_b = "Figure 4b: Daily CWSI for Soybeans with Transition Point"
+    print(f"Generating {label_b}")
+
+    soybean_daily = soybean_cwsi.groupby('date')['cwsi'].mean().reset_index()
+    fig, ax = plt.subplots(figsize=(15, 6))
+    ax.plot(soybean_daily['date'], soybean_daily['cwsi'], label='Soybean CWSI (mm)', color=CUSTOM_COLORS['primary_blue'])
+    ax.axhline(y=0, color=CUSTOM_COLORS['red'], linestyle='--', label='Theoretical Lower Bound')
+    ax.axhline(y=1, color=CUSTOM_COLORS['red'], linestyle='--', label='Theoretical Upper Bound')
+    transition_date = pd.to_datetime('2024-08-01')
+    ax.axvline(transition_date, color=CUSTOM_COLORS['accent_purple'], linestyle='-.', label='Transition to Empirical Method')
+    style_axis(ax, 
+              title='Daily CWSI Values for Soybeans',
+              ylabel='CWSI')
+    style_legend(ax, loc='upper right')
+    fig.suptitle(label_b, fontsize=20, fontweight='bold')
+
+    # Save the figure to PDF
+    pdf.savefig(fig, bbox_inches='tight')
+    plt.close(fig)
+    print("Figure 4b: Daily CWSI for Soybeans added to PDF.")
+
+    # Panel (c): Boxplots of CWSI distribution by growth stage (Corn)
     fig, ax = plt.subplots(figsize=(15, 8))
-    sns.boxplot(x='Growth Stage', y='cwsi', data=corn_cwsi, order=[stage[0] for stage in corn_growth_stages], palette='viridis', ax=ax)
+    sns.boxplot(x='Growth Stage', y='cwsi', hue='Growth Stage', data=corn_cwsi, 
+               order=[stage for stage, _, _ in corn_growth_stages], palette='viridis', 
+               legend=False, ax=ax)
     style_axis(ax, 
               title='CWSI Distribution by Growth Stage (Corn)',
               xlabel='Growth Stage',
               ylabel='CWSI')
-    style_legend(ax, loc='upper right')
-    figure_path_c = os.path.join(OUTPUT_DIR, "figure4c_cwsi_growth_stage_corn.png")
-    plt.savefig(figure_path_c)
-    plt.close()
-    print(f"Figure 4c saved to {figure_path_c}")
+    # Legend is not needed as hue is the same as x-axis
+    fig.suptitle(label, fontsize=20, fontweight='bold')
+
+    # Save the figure to PDF
+    pdf.savefig(fig, bbox_inches='tight')
+    plt.close(fig)
+    print("Figure 4c: CWSI Distribution by Growth Stage (Corn) added to PDF.")
 
     # Panel (d): Scatterplot of theoretical vs empirical CWSI
-    # Assume theoretical CWSI is calculated from temperature
+    # Extract temperature data for theoretical CWSI calculation
     temp_query = """
     SELECT d.timestamp, d.plot_id, d.value as temperature
     FROM data d
@@ -351,22 +374,22 @@ def generate_figure4(conn):
     """
     temp_df = pd.read_sql_query(temp_query, conn)
     temp_df['timestamp'] = pd.to_datetime(temp_df['timestamp'])
-
+    
     # Merge with CWSI data
     cwsi_temp_df = pd.merge(cwsi_df, temp_df, on=['timestamp', 'plot_id'], how='left')
-
+    
     # Calculate theoretical CWSI
     Tmin, Tmax = 15, 35  # Example Tmin and Tmax values
     cwsi_temp_df['cwsi_theoretical'] = (cwsi_temp_df['temperature'] - Tmin) / (Tmax - Tmin)
     cwsi_temp_df['cwsi_theoretical'] = cwsi_temp_df['cwsi_theoretical'].clip(0, 1)
-
+    
     # Remove rows where theoretical CWSI is NaN (due to missing temperature)
     cwsi_temp_df = cwsi_temp_df.dropna(subset=['cwsi_theoretical', 'cwsi'])
-
+    
     # Debug: Print theoretical vs empirical CWSI data range
     print(f"Figure 4 - Theoretical CWSI Data Range: {cwsi_temp_df['cwsi_theoretical'].min()} to {cwsi_temp_df['cwsi_theoretical'].max()}")
     print(f"Figure 4 - Empirical CWSI Data Range: {cwsi_temp_df['cwsi'].min()} to {cwsi_temp_df['cwsi'].max()}")
-
+    
     # Scatterplot
     fig, ax = plt.subplots(figsize=(12, 8))
     sns.scatterplot(x='cwsi_theoretical', y='cwsi', data=cwsi_temp_df, alpha=0.5, ax=ax, color=CUSTOM_COLORS['accent_purple'])
@@ -376,17 +399,20 @@ def generate_figure4(conn):
               xlabel='Theoretical CWSI',
               ylabel='Empirical CWSI')
     style_legend(ax, loc='upper left')
-    figure_path_d = os.path.join(OUTPUT_DIR, "figure4d_cwsi_theoretical_vs_empirical.png")
-    plt.savefig(figure_path_d)
-    plt.close()
-    print(f"Figure 4d saved to {figure_path_d}")
+    fig.suptitle(label, fontsize=20, fontweight='bold')
 
-def generate_figure5(conn):
+    # Save the figure to PDF
+    pdf.savefig(fig, bbox_inches='tight')
+    plt.close(fig)
+    print("Figure 4d: Comparison of Theoretical vs Empirical CWSI added to PDF.")
+
+def generate_figure5(conn, pdf):
     """
     Figure 5: Soil Moisture Monitoring and SWSI Calculation
     Time series plots of soil moisture at different depths and Soil Water Stress Index (SWSI).
     """
-    print("Generating Figure 5: Soil Moisture Monitoring and SWSI Calculation")
+    label = "Figure 5: Soil Moisture Monitoring and SWSI Calculation"
+    print(f"Generating {label}")
 
     # Extract TDR soil moisture data
     tdr_query = """
@@ -399,7 +425,6 @@ def generate_figure5(conn):
     tdr_df['date'] = tdr_df['timestamp'].dt.date
 
     # Extract depth information from variable_name
-    # Corrected regex to capture two-digit depth after treatment digit
     # Example variable_name: TDR5001A20624
     # Breakdown:
     # - TDR
@@ -431,16 +456,18 @@ def generate_figure5(conn):
     fig, ax = plt.subplots(figsize=(15, 8))
     for depth in sorted(soil_moisture['Depth_cm'].unique()):
         depth_data = soil_moisture[soil_moisture['Depth_cm'] == depth]
-        ax.plot(depth_data['date'], depth_data['value'], label=f'Depth {depth} cm')
+        ax.plot(depth_data['date'], depth_data['value'], label=f'Depth {depth} cm', linewidth=2.0)
     style_axis(ax, 
               title='Soil Moisture at Different Depths Over Time',
               xlabel='Date',
               ylabel='Soil Moisture (%)')
     style_legend(ax, loc='upper right')
-    figure_path_soil_moisture = os.path.join(OUTPUT_DIR, "figure5_soil_moisture_depths.png")
-    plt.savefig(figure_path_soil_moisture)
-    plt.close()
-    print(f"Figure 5a saved to {figure_path_soil_moisture}")
+    fig.suptitle(label, fontsize=20, fontweight='bold')
+
+    # Save the figure to PDF
+    pdf.savefig(fig, bbox_inches='tight')
+    plt.close(fig)
+    print("Figure 5a: Soil Moisture at Different Depths Over Time added to PDF.")
 
     # Calculate SWSI (Assuming SWSI = normalized soil moisture)
     # Here, we normalize soil moisture across all depths and dates
@@ -456,24 +483,27 @@ def generate_figure5(conn):
 
     # Plot SWSI over time with uncertainty bands (e.g., ±0.05)
     fig, ax = plt.subplots(figsize=(15, 6))
-    ax.plot(swsi_daily['date'], swsi_daily['SWSI'], label='SWSI', color=CUSTOM_COLORS['brown'])
+    ax.plot(swsi_daily['date'], swsi_daily['SWSI'], label='SWSI', color=CUSTOM_COLORS['brown'], linewidth=2.0)
     ax.fill_between(swsi_daily['date'], swsi_daily['SWSI'] - 0.05, swsi_daily['SWSI'] + 0.05, color=CUSTOM_COLORS['brown'], alpha=0.2)
     style_axis(ax, 
               title='Soil Water Stress Index Over Time',
               xlabel='Date',
               ylabel='Soil Water Stress Index (SWSI)')
     style_legend(ax, loc='upper right')
-    figure_path_swsi = os.path.join(OUTPUT_DIR, "figure5_swsi_over_time.png")
-    plt.savefig(figure_path_swsi)
-    plt.close()
-    print(f"Figure 5b saved to {figure_path_swsi}")
+    fig.suptitle(label, fontsize=20, fontweight='bold')
 
-def generate_figure6(conn):
+    # Save the figure to PDF
+    pdf.savefig(fig, bbox_inches='tight')
+    plt.close(fig)
+    print("Figure 5b: Soil Water Stress Index Over Time added to PDF.")
+
+def generate_figure6(conn, pdf):
     """
     Figure 6: Combined Index Analysis and Weighting System
     Analysis of combined CWSI and SWSI indices with weighting and decision thresholds.
     """
-    print("Generating Figure 6: Combined Index Analysis and Weighting System")
+    label = "Figure 6: Combined Index Analysis and Weighting System"
+    print(f"Generating {label}")
 
     # Extract CWSI data
     cwsi_query = """
@@ -535,9 +565,9 @@ def generate_figure6(conn):
     # Debug: Print combined_daily date range
     print(f"Figure 6 - Combined Daily Data Date Range: {combined_daily['date'].min()} to {combined_daily['date'].max()}")
 
-    axes[1].plot(combined_daily['date'], combined_daily['swsi'], label='SWSI', color=CUSTOM_COLORS['blue'])
-    axes[1].plot(combined_daily['date'], combined_daily['cwsi'], label='CWSI', color=CUSTOM_COLORS['green'])
-    axes[1].plot(combined_daily['date'], combined_daily['combined_index'], label='Combined Index (60% SWSI, 40% CWSI)', color=CUSTOM_COLORS['accent_purple'])
+    axes[1].plot(combined_daily['date'], combined_daily['swsi'], label='SWSI', color=CUSTOM_COLORS['blue'], linewidth=2.0)
+    axes[1].plot(combined_daily['date'], combined_daily['cwsi'], label='CWSI', color=CUSTOM_COLORS['green'], linewidth=2.0)
+    axes[1].plot(combined_daily['date'], combined_daily['combined_index'], label='Combined Index (60% SWSI, 40% CWSI)', color=CUSTOM_COLORS['accent_purple'], linewidth=2.0)
     style_axis(axes[1], 
               title='Time Series of SWSI, CWSI, and Combined Index',
               ylabel='Index Value')
@@ -546,7 +576,7 @@ def generate_figure6(conn):
     # Panel (c): Decision threshold analysis
     # Define irrigation trigger threshold, e.g., combined_index > 0.7
     threshold = 0.7
-    axes[2].plot(combined_daily['date'], combined_daily['combined_index'], label='Combined Index', color=CUSTOM_COLORS['accent_purple'])
+    axes[2].plot(combined_daily['date'], combined_daily['combined_index'], label='Combined Index', color=CUSTOM_COLORS['accent_purple'], linewidth=2.0)
     axes[2].axhline(y=threshold, color=CUSTOM_COLORS['red'], linestyle='--', label=f'Irrigation Threshold ({threshold})')
     style_axis(axes[2], 
               title='Irrigation Decision Threshold Based on Combined Index',
@@ -554,22 +584,22 @@ def generate_figure6(conn):
               ylabel='Combined Index Value')
     style_legend(axes[2], loc='upper right')
 
-    # Formatting
-    plt.xticks(rotation=45)
-    plt.tight_layout()
+    # Adjust layout to make room for the caption
+    plt.subplots_adjust(top=0.95)
+    fig.suptitle(label, fontsize=20, fontweight='bold')
 
-    # Save the figure
-    figure_path = os.path.join(OUTPUT_DIR, "figure6_combined_index_analysis.png")
-    plt.savefig(figure_path)
-    plt.close()
-    print(f"Figure 6 saved to {figure_path}")
+    # Save the figure to PDF
+    pdf.savefig(fig, bbox_inches='tight')
+    plt.close(fig)
+    print("Figure 6: Combined Index Analysis and Weighting System added to PDF.")
 
-def generate_figure7(conn):
+def generate_figure7(conn, pdf):
     """
     Figure 7: System Response Analysis
     Multi-day analysis of canopy temperature, soil moisture, recovery patterns, and time lag post-irrigation.
     """
-    print("Generating Figure 7: System Response Analysis")
+    label = "Figure 7: System Response Analysis"
+    print(f"Generating {label}")
 
     # Extract canopy temperature data (variable_name starts with 'IRT')
     irt_query = """
@@ -605,12 +635,11 @@ def generate_figure7(conn):
     print(f"Figure 7 - Irrigation Events Date Range: {irrigation_df['date'].min()} to {irrigation_df['date'].max()}")
 
     # Aggregate canopy temperature by date
-    if irt_df['timestamp'].isna().all():
+    if irt_df['canopy_temp'].notna().any():
+        irt_daily = irt_df.groupby('date')['canopy_temp'].mean().reset_index()
+    else:
         print("Figure 7 - No valid IRT data found. Skipping IRT-related plots.")
         irt_daily = pd.DataFrame(columns=['date', 'canopy_temp'])
-    else:
-        # Aggregate canopy temperature by date
-        irt_daily = irt_df.groupby('date')['canopy_temp'].mean().reset_index()
 
     # Aggregate SWSI by date
     swsi_daily = swsi_df.groupby('date')['swsi'].mean().reset_index()
@@ -648,8 +677,8 @@ def generate_figure7(conn):
     fig, axes = plt.subplots(4, 1, figsize=(15, 22), sharex=True)
 
     # Panel (a): Canopy temperature response
-    if 'canopy_temp' in response_df.columns and not response_df['canopy_temp'].isna().all():
-        axes[0].plot(response_df['date'], response_df['canopy_temp'], label='Canopy Temperature (IRT)', color=CUSTOM_COLORS['orange'])
+    if 'canopy_temp' in response_df.columns and response_df['canopy_temp'].notna().any():
+        axes[0].plot(response_df['date'], response_df['canopy_temp'], label='Canopy Temperature (IRT)', color=CUSTOM_COLORS['orange'], linewidth=2.0)
         axes[0].set_ylabel('Canopy Temperature (°C)')
         axes[0].set_title('Canopy Temperature Response to Irrigation/Rainfall')
         axes[0].legend()
@@ -657,12 +686,12 @@ def generate_figure7(conn):
         axes[0].text(0.5, 0.5, 'No Canopy Temperature Data Available', horizontalalignment='center', verticalalignment='center', fontsize=12)
         axes[0].set_title('Canopy Temperature Response to Irrigation/Rainfall')
         axes[0].set_ylabel('Canopy Temperature (°C)')
-    
+
     style_axis(axes[0])
     style_legend(axes[0], loc='upper right')
 
     # Panel (b): Soil moisture changes
-    axes[1].plot(response_df['date'], response_df['swsi'], label='Soil Water Stress Index (SWSI)', color=CUSTOM_COLORS['brown'])
+    axes[1].plot(response_df['date'], response_df['swsi'], label='Soil Water Stress Index (SWSI)', color=CUSTOM_COLORS['brown'], linewidth=2.0)
     style_axis(axes[1], 
               title='Soil Moisture Changes',
               ylabel='SWSI')
@@ -670,37 +699,36 @@ def generate_figure7(conn):
 
     # Panel (c): Recovery patterns across treatments (Assuming treatment data is available)
     # For simplicity, plot SWSI recovery after irrigation
-    axes[2].plot(response_df['date'], response_df['swsi_7d_avg'], label='7-Day Avg SWSI', color=CUSTOM_COLORS['green'])
+    axes[2].plot(response_df['date'], response_df['swsi_7d_avg'], label='7-Day Avg SWSI', color=CUSTOM_COLORS['green'], linewidth=2.0)
     style_axis(axes[2], 
               title='Recovery Patterns of SWSI After Irrigation Events',
               ylabel='Average SWSI')
     style_legend(axes[2], loc='upper right')
 
     # Panel (d): Time lag analysis between irrigation and plant response
-    axes[3].bar(response_df['date'], response_df['amount_mm'], label='Irrigation Amount (mm)', color=CUSTOM_COLORS['blue'])
+    axes[3].bar(response_df['date'], response_df['amount_mm'], label='Irrigation Amount (mm)', color=CUSTOM_COLORS['blue'], width=1.0)
     style_axis(axes[3], 
               title='Irrigation Events Over Time',
               xlabel='Date',
               ylabel='Irrigation Amount (mm)')
     style_legend(axes[3], loc='upper right')
 
-    # Formatting
-    plt.xlabel('Date')
-    plt.xticks(rotation=45)
-    plt.tight_layout()
+    # Adjust layout to make room for the caption
+    plt.subplots_adjust(top=0.95)
+    fig.suptitle(label, fontsize=20, fontweight='bold')
 
-    # Save the figure
-    figure_path = os.path.join(OUTPUT_DIR, "figure7_system_response_analysis.png")
-    plt.savefig(figure_path)
-    plt.close()
-    print(f"Figure 7 saved to {figure_path}")
+    # Save the figure to PDF
+    pdf.savefig(fig, bbox_inches='tight')
+    plt.close(fig)
+    print("Figure 7: System Response Analysis added to PDF.")
 
-def generate_figure8(conn):
+def generate_figure8(conn, pdf):
     """
     Figure 8: Monthly Stress Index Distributions
     Boxplots showing CWSI, SWSI, and combined index distributions across treatments monthly.
     """
-    print("Generating Figure 8: Monthly Stress Index Distributions")
+    label = "Figure 8: Monthly Stress Index Distributions"
+    print(f"Generating {label}")
 
     # Extract CWSI and SWSI data
     stress_query = """
@@ -733,17 +761,20 @@ def generate_figure8(conn):
               xlabel='Month',
               ylabel='Index Value')
     style_legend(ax, title='Index', loc='upper right')
-    figure_path = os.path.join(OUTPUT_DIR, "figure8_monthly_stress_index_distributions.png")
-    plt.savefig(figure_path)
-    plt.close()
-    print(f"Figure 8 saved to {figure_path}")
+    fig.suptitle(label, fontsize=20, fontweight='bold')
 
-def generate_figure9(conn):
+    # Save the figure to PDF
+    pdf.savefig(fig, bbox_inches='tight')
+    plt.close(fig)
+    print("Figure 8: Monthly Stress Index Distributions added to PDF.")
+
+def generate_figure9(conn, pdf):
     """
     Figure 9: Irrigation Application Patterns
     Stacked bar graphs showing daily and cumulative irrigation amounts by treatment.
     """
-    print("Generating Figure 9: Irrigation Application Patterns")
+    label = "Figure 9: Irrigation Application Patterns"
+    print(f"Generating {label}")
 
     # Extract irrigation events with treatment information
     irrigation_query = """
@@ -771,10 +802,12 @@ def generate_figure9(conn):
               xlabel='Date',
               ylabel='Irrigation Amount (mm)')
     style_legend(ax, title='Treatment', loc='upper right')
-    figure_path_a = os.path.join(OUTPUT_DIR, "figure9a_daily_irrigation_by_treatment.png")
-    plt.savefig(figure_path_a)
-    plt.close()
-    print(f"Figure 9a saved to {figure_path_a}")
+    fig.suptitle(label, fontsize=20, fontweight='bold')
+
+    # Save the figure to PDF
+    pdf.savefig(fig, bbox_inches='tight')
+    plt.close(fig)
+    print("Figure 9a: Daily Irrigation Amounts by Treatment added to PDF.")
 
     # Calculate cumulative irrigation
     pivot_daily_cumulative = pivot_daily.cumsum()
@@ -787,21 +820,24 @@ def generate_figure9(conn):
               xlabel='Date',
               ylabel='Cumulative Irrigation Amount (mm)')
     style_legend(ax, title='Treatment', loc='upper left')
-    figure_path_b = os.path.join(OUTPUT_DIR, "figure9b_cumulative_irrigation_by_treatment.png")
-    plt.savefig(figure_path_b)
-    plt.close()
-    print(f"Figure 9b saved to {figure_path_b}")
+    fig.suptitle(label, fontsize=20, fontweight='bold')
 
-def generate_figure10(conn):
+    # Save the figure to PDF
+    pdf.savefig(fig, bbox_inches='tight')
+    plt.close(fig)
+    print("Figure 9b: Cumulative Irrigation Amounts by Treatment added to PDF.")
+
+def generate_figure10(conn, pdf):
     """
     Figure 10: Yield Distribution Analysis
     Box plots of yield distribution by treatment, scatter plots of individual plot yields.
     """
-    print("Generating Figure 10: Yield Distribution Analysis")
+    label = "Figure 10: Yield Distribution Analysis"
+    print(f"Generating {label}")
 
     # Extract yield data with treatment information
     yield_query = """
-    SELECT y.*, p.treatment, p.field, p.crop_type
+    SELECT y.*, p.treatment, p.field, y.crop_type
     FROM yields y
     JOIN plots p ON y.plot_id = p.plot_id
     """
@@ -826,10 +862,12 @@ def generate_figure10(conn):
               xlabel='Treatment',
               ylabel='Yield (kg/ha)')
     style_legend(ax, loc='upper right')
-    figure_path = os.path.join(OUTPUT_DIR, "figure10_yield_distribution_by_treatment.png")
-    plt.savefig(figure_path)
-    plt.close()
-    print(f"Figure 10a saved to {figure_path}")
+    fig.suptitle(label, fontsize=20, fontweight='bold')
+
+    # Save the figure to PDF
+    pdf.savefig(fig, bbox_inches='tight')
+    plt.close(fig)
+    print("Figure 10a: Yield Distribution by Treatment added to PDF.")
 
     # Scatter plot of individual plot yields
     fig, ax = plt.subplots(figsize=(12, 6))
@@ -839,34 +877,30 @@ def generate_figure10(conn):
               xlabel='Treatment',
               ylabel='Yield (kg/ha)')
     style_legend(ax, title='Crop Type', loc='upper right')
-    figure_path_b = os.path.join(OUTPUT_DIR, "figure10b_individual_plot_yields.png")
-    plt.savefig(figure_path_b)
-    plt.close()
-    print(f"Figure 10b saved to {figure_path_b}")
+    fig.suptitle(label, fontsize=20, fontweight='bold')
 
-    # Spatial yield patterns using scatter plots (assuming field layout coordinates are available)
-    # Placeholder: Without spatial coordinates, we cannot plot GIS-based spatial patterns
-    # This section can be implemented if spatial data is available in the database
+    # Save the figure to PDF
+    pdf.savefig(fig, bbox_inches='tight')
+    plt.close(fig)
+    print("Figure 10b: Individual Plot Yields by Treatment and Crop Type added to PDF.")
 
-def generate_figure11(conn):
+    # Note: Spatial yield patterns using scatter plots are not implemented due to lack of spatial coordinates.
+
+def generate_figure11(conn, pdf):
     """
     Figure 11: Water Use Efficiency Metrics
     Comparison of irrigation water use efficiency metrics across treatments.
     """
-    print("Generating Figure 11: Water Use Efficiency Metrics")
+    label = "Figure 11: Water Use Efficiency Metrics"
+    print(f"Generating {label}")
 
     # Extract yield and irrigation data with treatment information
-    # Corrected SQL query: Join yields with plots to get 'treatment'
     efficiency_query = """
     SELECT y.plot_id, p.treatment, y.yield_kg_ha, y.irrigation_applied_mm
     FROM yields y
     JOIN plots p ON y.plot_id = p.plot_id
     """
-    try:
-        efficiency_df = pd.read_sql_query(efficiency_query, conn)
-    except pd.io.sql.DatabaseError as e:
-        print(f"Database error during Figure 11 data extraction: {e}")
-        return
+    efficiency_df = pd.read_sql_query(efficiency_query, conn)
 
     # Debug: Print efficiency data columns and rows
     print(f"Figure 11 - Efficiency Data Columns: {efficiency_df.columns.tolist()}")
@@ -913,10 +947,12 @@ def generate_figure11(conn):
               xlabel='Treatment',
               ylabel='Irrigation Water Use Efficiency (kg/ha per mm)')
     style_legend(ax, loc='upper right')
-    figure_path_a = os.path.join(OUTPUT_DIR, "figure11a_iwue_by_treatment.png")
-    plt.savefig(figure_path_a)
-    plt.close()
-    print(f"Figure 11a saved to {figure_path_a}")
+    fig.suptitle(label, fontsize=20, fontweight='bold')
+
+    # Save the figure to PDF
+    pdf.savefig(fig, bbox_inches='tight')
+    plt.close(fig)
+    print("Figure 11a: IWUE by Treatment added to PDF.")
 
     # Plot CWUE by treatment
     fig, ax = plt.subplots(figsize=(12, 6))
@@ -926,10 +962,12 @@ def generate_figure11(conn):
               xlabel='Treatment',
               ylabel='Crop Water Use Efficiency (kg/ha per mm ETo)')
     style_legend(ax, loc='upper right')
-    figure_path_b = os.path.join(OUTPUT_DIR, "figure11b_cwue_by_treatment.png")
-    plt.savefig(figure_path_b)
-    plt.close()
-    print(f"Figure 11b saved to {figure_path_b}")
+    fig.suptitle(label, fontsize=20, fontweight='bold')
+
+    # Save the figure to PDF
+    pdf.savefig(fig, bbox_inches='tight')
+    plt.close(fig)
+    print("Figure 11b: CWUE by Treatment added to PDF.")
 
     # Scatter plot: Applied water vs Yield
     fig, ax = plt.subplots(figsize=(12, 6))
@@ -939,47 +977,64 @@ def generate_figure11(conn):
               xlabel='Irrigation Applied (mm)',
               ylabel='Yield (kg/ha)')
     style_legend(ax, title='Treatment', loc='upper right')
-    figure_path_c = os.path.join(OUTPUT_DIR, "figure11c_applied_water_vs_yield.png")
-    plt.savefig(figure_path_c)
-    plt.close()
-    print(f"Figure 11c saved to {figure_path_c}")
+    fig.suptitle(label, fontsize=20, fontweight='bold')
 
-def generate_figure12(conn):
-    """
-    (Placeholder) Figure 12: Additional Analysis (Add your description here)
-    """
-    print("Generating Figure 12: Additional Analysis")
-    # Implement additional figure generation as needed
-    pass
-
-# ================================
-# Main Function
-# ================================
+    # Save the figure to PDF
+    pdf.savefig(fig, bbox_inches='tight')
+    plt.close(fig)
+    print("Figure 11c: Applied Water vs Yield added to PDF.")
 
 def main():
-    """Main function to generate all figures."""
-    # Connect to the database
-    conn = connect_db(DATABASE_PATH)
-    if conn is None:
-        print("Failed to connect to the database. Exiting.")
-        return
-
+    """Main function to generate all figures and compile them into a single PDF."""
+    conn = None
     try:
-        # Generate Figures
-        generate_figure3(conn)
-        generate_figure4(conn)
-        generate_figure5(conn)
-        generate_figure6(conn)
-        generate_figure7(conn)
-        generate_figure8(conn)
-        generate_figure9(conn)
-        generate_figure10(conn)
-        generate_figure11(conn)
-        # generate_figure12(conn)  # Uncomment and implement if needed
+        # Connect to the database
+        conn = connect_db(DATABASE_PATH)
+        if conn is None:
+            print("Failed to connect to the database. Exiting.")
+            return
+
+        # Initialize PdfPages
+        with PdfPages(PDF_OUTPUT_PATH) as pdf:
+            # Generate Figures
+            generate_figure3(conn, pdf)
+            generate_figure4(conn, pdf)
+            generate_figure5(conn, pdf)
+            generate_figure6(conn, pdf)
+            generate_figure7(conn, pdf)
+            generate_figure8(conn, pdf)
+            generate_figure9(conn, pdf)
+            generate_figure10(conn, pdf)
+            generate_figure11(conn, pdf)
+            # generate_figure12(conn, pdf)  # Uncomment and implement if needed
+
+            # Optional: Add PDF metadata
+            d = pdf.infodict()
+            d['Title'] = 'Irrigation and Stress Index Analysis Figures'
+            d['Author'] = 'Your Name'
+            d['Subject'] = 'Generated by irrigation_graphs_generator.py'
+            d['Keywords'] = 'Irrigation, CWSI, SWSI, Water Use Efficiency, Agriculture'
+            d['CreationDate'] = datetime.now()
+            d['ModDate'] = datetime.now()
+
+        print(f"All figures have been compiled into {PDF_OUTPUT_PATH}")
+
+    except Exception as e:
+        print(f"Error during execution: {e}")
     finally:
-        # Close the database connection
-        conn.close()
-        print("Database connection closed.")
+        if conn:
+            conn.close()
+            print("Database connection closed.")
+
+def connect_db(db_path):
+    """Establish a connection to the SQLite database."""
+    try:
+        conn = sqlite3.connect(db_path)
+        print(f"Connected to database at {db_path}")
+        return conn
+    except sqlite3.Error as e:
+        print(f"Error connecting to database: {e}")
+        return None
 
 if __name__ == "__main__":
     main()
