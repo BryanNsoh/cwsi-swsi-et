@@ -5,6 +5,9 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import traceback
+import matplotlib.gridspec as gridspec
+import matplotlib.dates as mdates
 import os
 from datetime import datetime
 from matplotlib.backends.backend_pdf import PdfPages  # Import PdfPages for PDF generation
@@ -842,117 +845,229 @@ def generate_figure5(conn, pdf):
 
 def generate_figure6(conn, pdf):
     """
-    Figure 6: Combined Index Analysis and Weighting System
-    Analysis of combined CWSI and SWSI indices with weighting and decision thresholds.
+    Figure 6: CWSI and SWSI Analysis and Irrigation Decisions
+    Shows correlation between indices and their temporal patterns, focusing on irrigation days.
     """
-    label = "Figure 6: Combined Index Analysis and Weighting System"
+    label = "Figure 6: CWSI and SWSI Analysis"
     print(f"\n=== Generating {label} ===")
     
     try:
-        # Extract CWSI data
-        print("Fetching CWSI Data")
+        # 1. Fetch raw data with error checking
+        print("Fetching CWSI data...")
         cwsi_query = """
-        SELECT d.timestamp, d.plot_id, d.value as cwsi
-        FROM data d
-        WHERE d.variable_name = 'cwsi'
+        SELECT 
+            date(timestamp) as date,
+            AVG(value) as cwsi
+        FROM data 
+        WHERE variable_name = 'cwsi'
+        GROUP BY date(timestamp)
         """
         cwsi_df = pd.read_sql_query(cwsi_query, conn)
-        print(f"CWSI Data Retrieved: {len(cwsi_df)} records")
-        cwsi_df = filter_valid_dates(cwsi_df, 'timestamp')
-        cwsi_df['timestamp'] = pd.to_datetime(cwsi_df['timestamp'])
-        cwsi_df['date'] = cwsi_df['timestamp'].dt.date
-        print(f"CWSI Data After Date Filtering: {len(cwsi_df)} records")
-    
-        # Extract SWSI data
-        print("Fetching SWSI Data")
+        if cwsi_df.empty:
+            raise ValueError("No CWSI data found in database")
+        print(f"Retrieved {len(cwsi_df)} CWSI records")
+        
+        print("Fetching SWSI data...")
         swsi_query = """
-        SELECT d.timestamp, d.plot_id, d.value as swsi
-        FROM data d
-        WHERE d.variable_name = 'swsi'
+        SELECT 
+            date(timestamp) as date,
+            AVG(value) as swsi
+        FROM data 
+        WHERE variable_name = 'swsi'
+        GROUP BY date(timestamp)
         """
         swsi_df = pd.read_sql_query(swsi_query, conn)
-        print(f"SWSI Data Retrieved: {len(swsi_df)} records")
-        swsi_df = filter_valid_dates(swsi_df, 'timestamp')
-        swsi_df['timestamp'] = pd.to_datetime(swsi_df['timestamp'])
-        swsi_df['date'] = swsi_df['timestamp'].dt.date
-        print(f"SWSI Data After Date Filtering: {len(swsi_df)} records")
-    
-        # Aggregate SWSI by date
-        print("Aggregating SWSI by Date")
-        swsi_daily = swsi_df.groupby('date')['swsi'].mean().reset_index()
-        print(f"SWSI Daily Aggregated: {swsi_daily.shape[0]} records")
-    
-        # Merge CWSI and SWSI
-        print("Merging CWSI and SWSI Data")
-        combined_df = pd.merge(cwsi_df, swsi_daily, on='date', how='left')
-        print(f"Combined Data Shape: {combined_df.shape}")
-    
-        # Calculate weighted combined index (60% SWSI, 40% CWSI)
-        print("Calculating Weighted Combined Index (60% SWSI, 40% CWSI)")
-        combined_df['combined_index'] = 0.6 * combined_df['swsi'] + 0.4 * combined_df['cwsi']
-        print(f"Combined Index Calculated:\n{combined_df['combined_index'].head()}")
-    
-        # Remove rows with NaN values in combined_index
-        initial_count = len(combined_df)
-        combined_df = combined_df.dropna(subset=['combined_index'])
-        final_count = len(combined_df)
-        print(f"Dropped {initial_count - final_count} rows due to NaN in combined_index")
-    
-        # Plotting
-        print("Creating Combined Index Analysis Plots")
-        fig, axes = plt.subplots(3, 1, figsize=(15, 18), sharex=True)
-    
-        # Panel (a): CWSI vs SWSI correlation analysis
-        print("Plotting CWSI vs SWSI Correlation")
-        sns.scatterplot(x='swsi', y='cwsi', data=combined_df, alpha=0.5, ax=axes[0], color=CUSTOM_COLORS['accent_purple'])
-        # Calculate and plot regression line
-        sns.regplot(x='swsi', y='cwsi', data=combined_df, scatter=False, ax=axes[0], color=CUSTOM_COLORS['red'], line_kws={'linewidth':2})
-        corr = combined_df[['swsi', 'cwsi']].corr().iloc[0,1]
-        axes[0].text(0.05, 0.95, f'Correlation: {corr:.2f}', transform=axes[0].transAxes, fontsize=16, verticalalignment='top', bbox=dict(boxstyle="round", facecolor='white', alpha=0.5))
-        style_axis(axes[0], 
+        if swsi_df.empty:
+            raise ValueError("No SWSI data found in database")
+        print(f"Retrieved {len(swsi_df)} SWSI records")
+        
+        print("Fetching irrigation events...")
+        irrigation_query = """
+        SELECT 
+            date(date) as date, 
+            SUM(amount_mm) as amount_mm
+        FROM irrigation_events
+        GROUP BY date(date)
+        """
+        irrigation_df = pd.read_sql_query(irrigation_query, conn)
+        if irrigation_df.empty:
+            raise ValueError("No irrigation events found in database")
+        print(f"Retrieved {len(irrigation_df)} irrigation events")
+
+        # 2. Process dates
+        print("Processing dates...")
+        for df in [cwsi_df, swsi_df, irrigation_df]:
+            df['date'] = pd.to_datetime(df['date'])
+            
+        # Verify date ranges
+        date_range = pd.date_range(cwsi_df['date'].min(), cwsi_df['date'].max())
+        print(f"Data spans from {date_range.min().date()} to {date_range.max().date()}")
+        if not (date_range.year == 2024).all():
+            raise ValueError(f"Found data outside 2024: {date_range}")
+
+        # 3. Merge CWSI and SWSI data
+        print("Merging CWSI and SWSI data...")
+        indices_df = pd.merge(cwsi_df, swsi_df, on='date', how='inner')
+        print(f"Combined dataset has {len(indices_df)} records")
+        
+        # Create figure
+        print("Creating figure...")
+        fig = plt.figure(figsize=(15, 12))
+        gs = gridspec.GridSpec(3, 1, height_ratios=[1, 1.5, 1])
+        
+        # Panel 1: Correlation
+        print("Creating correlation plot...")
+        ax1 = fig.add_subplot(gs[0])
+        sns.scatterplot(
+            data=indices_df,
+            x='swsi',
+            y='cwsi',
+            alpha=0.5,
+            color=CUSTOM_COLORS['accent_purple'],
+            ax=ax1
+        )
+        
+        # Add regression line
+        sns.regplot(
+            data=indices_df,
+            x='swsi',
+            y='cwsi',
+            scatter=False,
+            color=CUSTOM_COLORS['red'],
+            ax=ax1
+        )
+        
+        # Add correlation coefficient
+        corr = indices_df['swsi'].corr(indices_df['cwsi'])
+        print(f"Correlation coefficient between CWSI and SWSI: {corr:.3f}")
+        ax1.text(
+            0.05, 0.95, 
+            f'Correlation: {corr:.2f}',
+            transform=ax1.transAxes,
+            bbox=dict(facecolor='white', alpha=0.8, edgecolor='black')
+        )
+        style_axis(ax1, 
                   title='Correlation between SWSI and CWSI',
-                  xlabel='Soil Water Stress Index (SWSI)',
-                  ylabel='Crop Water Stress Index (CWSI)')
-        style_legend(axes[0], loc='upper left')
-        print("Plotted CWSI vs SWSI Correlation.")
-    
-        # Panel (b): Time series of both indices with weighted average overlay
-        print("Plotting Time Series of SWSI, CWSI, and Combined Index")
-        combined_daily = combined_df.groupby('date').agg({'swsi': 'mean', 'cwsi': 'mean', 'combined_index': 'mean'}).reset_index()
-        sns.lineplot(x='date', y='swsi', data=combined_daily, label='SWSI', color=CUSTOM_COLORS['blue'], linewidth=2.5, ax=axes[1])
-        sns.lineplot(x='date', y='cwsi', data=combined_daily, label='CWSI', color=CUSTOM_COLORS['green'], linewidth=2.5, ax=axes[1])
-        sns.lineplot(x='date', y='combined_index', data=combined_daily, label='Combined Index (60% SWSI, 40% CWSI)', color=CUSTOM_COLORS['accent_purple'], linewidth=2.5, ax=axes[1])
-        style_axis(axes[1], 
-                  title='Time Series of SWSI, CWSI, and Combined Index',
-                  ylabel='Index Value')
-        style_legend(axes[1], loc='upper right')
-        print("Plotted Time Series of Indices.")
-    
-        # Panel (c): Decision threshold analysis
-        print("Plotting Decision Threshold Analysis")
-        threshold = 0.7
-        sns.lineplot(x='date', y='combined_index', data=combined_daily, label='Combined Index', color=CUSTOM_COLORS['accent_purple'], linewidth=2.5, ax=axes[2])
-        axes[2].axhline(y=threshold, color=CUSTOM_COLORS['red'], linestyle='--', label=f'Irrigation Threshold ({threshold})')
-        style_axis(axes[2], 
-                  title='Irrigation Decision Threshold Based on Combined Index',
+                  xlabel='SWSI',
+                  ylabel='CWSI')
+        
+        # Panel 2: Time series
+        print("Creating time series plot...")
+        ax2 = fig.add_subplot(gs[1])
+        
+        # Plot indices
+        ax2.plot(
+            indices_df['date'],
+            indices_df['cwsi'],
+            label='CWSI',
+            color=CUSTOM_COLORS['blue'],
+            linewidth=2
+        )
+        ax2.plot(
+            indices_df['date'],
+            indices_df['swsi'],
+            label='SWSI',
+            color=CUSTOM_COLORS['green'],
+            linewidth=2
+        )
+        
+        # Add threshold line
+        ax2.axhline(
+            y=0.5,
+            color='red',
+            linestyle='--',
+            label='Threshold (0.5)'
+        )
+        
+        # Mark irrigation events
+        print("Adding irrigation markers...")
+        for idx, event in irrigation_df.iterrows():
+            ax2.axvline(
+                x=event['date'],
+                color='gray',
+                alpha=0.3,
+                linestyle=':'
+            )
+            ax2.text(
+                event['date'],
+                ax2.get_ylim()[1],
+                f"{event['amount_mm']:.1f}mm",
+                rotation=90,
+                verticalalignment='bottom'
+            )
+        
+        style_axis(ax2,
+                  title='CWSI and SWSI Over Time',
                   xlabel='Date',
-                  ylabel='Combined Index Value')
-        style_legend(axes[2], loc='upper right')
-        print("Plotted Decision Threshold Analysis.")
-    
-        # Adjust layout to make room for the caption
-        plt.subplots_adjust(top=0.95)
-        fig.suptitle(label, fontsize=24, fontweight='bold')
-    
-        # Save to PDF
+                  ylabel='Index Value')
+        style_legend(ax2)
+        
+        # Panel 3: Irrigation day analysis
+        print("Creating irrigation day analysis...")
+        ax3 = fig.add_subplot(gs[2])
+        
+        # Get index values only on irrigation days
+        irrigation_dates = irrigation_df['date'].unique()
+        irrigation_indices = indices_df[indices_df['date'].isin(irrigation_dates)].copy()
+        print(f"Found {len(irrigation_indices)} days with irrigation events")
+        
+        # Plot values on irrigation days
+        ax3.scatter(
+            irrigation_indices['date'],
+            irrigation_indices['cwsi'],
+            label='CWSI',
+            color=CUSTOM_COLORS['blue'],
+            marker='o',
+            s=100
+        )
+        ax3.scatter(
+            irrigation_indices['date'],
+            irrigation_indices['swsi'],
+            label='SWSI',
+            color=CUSTOM_COLORS['green'],
+            marker='s',
+            s=100
+        )
+        
+        # Add threshold
+        ax3.axhline(
+            y=0.5,
+            color='red',
+            linestyle='--',
+            label='Threshold'
+        )
+        
+        style_axis(ax3,
+                  title='Index Values on Irrigation Days',
+                  xlabel='Date',
+                  ylabel='Index Value')
+        style_legend(ax3)
+        
+        # Format dates on all x-axes
+        print("Formatting date axes...")
+        for ax in [ax2, ax3]:
+            ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
+            ax.xaxis.set_major_locator(mdates.WeekdayLocator(interval=7))
+            plt.setp(ax.xaxis.get_majorticklabels(), rotation=45, ha='right')
+        
+        plt.tight_layout()
+        
+        # Save figure
+        print(f"Saving {label}...")
         pdf.savefig(fig, bbox_inches='tight')
         plt.close(fig)
-        print("Figure 6: Combined Index Analysis and Weighting System added to PDF.")
-    
+        print(f"{label} successfully generated and saved")
+        
+        return fig
+        
     except Exception as e:
-        print(f"Error in generate_figure6: {e}")
-        plt.close('all')
-
+        print(f"Error generating {label}: {str(e)}")
+        print("Detailed error information:")
+        traceback.print_exc()
+        plt.close('all')  # Clean up any partial figures
+        return None
+    
+    
 def generate_figure7(conn, pdf):
     """
     Figure 7: System Response Analysis
