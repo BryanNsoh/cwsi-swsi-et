@@ -204,19 +204,6 @@ def add_statistical_annotations(ax, df, x, y):
         print(f"Error in add_statistical_annotations: {e}")
     return ax
 
-# ================================
-# Treatment Names Mapping
-# ================================
-
-TREATMENT_NAMES = {
-    1: 'IoT-Fuzzy',
-    2: 'CWSI + SWSI',
-    3: 'CWSI only',
-    4: 'SWSI',
-    5: 'ET-Model',
-    6: "Grower's Practice"
-}
-
 def update_treatment_labels(ax):
     """
     Update treatment labels to actual treatment names.
@@ -282,6 +269,19 @@ def calc_vpd(temp, rh):
     except Exception as e:
         print(f"Error calculating VPD for temp={temp}, rh={rh}: {e}")
         return np.nan
+
+# ================================
+# Treatment Names Mapping
+# ================================
+
+TREATMENT_NAMES = {
+    1: 'IoT-Fuzzy',
+    2: 'CWSI + SWSI',
+    3: 'CWSI only',
+    4: 'SWSI',
+    5: 'ET-Model',
+    6: "Grower's Practice"
+}
 
 # ================================
 # Plotting Functions
@@ -435,7 +435,7 @@ def generate_representative_days_analysis(conn, pdf):
             FROM data
             WHERE variable_name IN ('Ta_2m_Avg', 'RH_2m_Avg')
             AND date(timestamp) BETWEEN '{start_day.date()}' AND '{end_day.date()}'
-            GROUP BY date
+            GROUP BY date(timestamp)
             """
             weather_df = pd.read_sql_query(weather_query, conn)
             print(f"Weather Data for VPD Calculation:\n{weather_df.head()}")
@@ -1072,8 +1072,6 @@ def generate_figure6(conn, pdf):
         plt.close('all')  # Clean up any partial figures
         return None
 
-    
-    
 def generate_figure7(conn, pdf):
     """
     Figure 7: System Response Analysis
@@ -1230,7 +1228,7 @@ def generate_figure8(conn, pdf):
 def generate_figure9(conn, pdf):
     """
     Figure 9: Irrigation Application Patterns
-    Stacked bar graphs showing daily and cumulative irrigation amounts by treatment.
+    Stacked bar graphs showing daily irrigation amounts by treatment.
     """
     label = "Figure 9: Irrigation Application Patterns"
     print(f"\n=== Generating {label} ===")
@@ -1251,51 +1249,88 @@ def generate_figure9(conn, pdf):
         # Map treatment numbers to names
         print("Mapping Treatment Numbers to Names")
         irrigation_df['treatment_name'] = irrigation_df['treatment'].map(TREATMENT_NAMES)
-        print(f"Irrigation Data with Treatment Names:\n{irrigation_df.head()}")
-    
-        # Aggregate daily irrigation by treatment
-        print("Aggregating Daily Irrigation by Treatment")
-        daily_irrigation = irrigation_df.groupby(['date', 'treatment_name'])['amount_mm'].sum().reset_index()
-        print(f"Daily Irrigation Aggregated: {daily_irrigation.shape[0]} records")
-    
-        # Pivot for stacked bar
-        print("Pivoting Daily Irrigation Data for Stacked Bar Plot")
-        pivot_daily = daily_irrigation.pivot(index='date', columns='treatment_name', values='amount_mm').fillna(0)
-        print(f"Pivoted Daily Irrigation Data Shape: {pivot_daily.shape}")
-    
-        # Plot stacked bar for daily irrigation amounts
-        print("Creating Stacked Bar Plot for Daily Irrigation Amounts")
-        fig, ax = plt.subplots(figsize=(15, 6))
-        pivot_daily.plot(kind='bar', stacked=True, ax=ax, color=sns.color_palette("Set2", n_colors=pivot_daily.shape[1]))
-        style_axis(ax, 
+        
+        # Clean dates and aggregate data
+        irrigation_df['clean_date'] = irrigation_df['date'].dt.strftime('%Y-%m-%d')
+        agg_data = irrigation_df.groupby(['treatment_name', 'clean_date'])['amount_mm'].sum().reset_index()
+        
+        # Pivot table
+        pivot_data = agg_data.pivot(index='treatment_name', columns='clean_date', values='amount_mm').fillna(0)
+        
+        # Sort dates for consistent temporal progression
+        pivot_data = pivot_data.reindex(sorted(pivot_data.columns), axis=1)
+        
+        # Define distinct colors for each date using a combination of color palettes
+        # Using multiple qualitative palettes to ensure distinct colors
+        colors = (sns.color_palette("Set1", n_colors=9) + 
+                 sns.color_palette("Set2", n_colors=8) + 
+                 sns.color_palette("Set3", n_colors=12))
+        
+        # Plotting
+        fig, ax = plt.subplots(figsize=(15, 8))
+        
+        # Create stacked bars
+        bottom = np.zeros(len(pivot_data.index))
+        for idx, date in enumerate(pivot_data.columns):
+            color_idx = idx % len(colors)  # Cycle through colors if more dates than colors
+            ax.bar(pivot_data.index, pivot_data[date], bottom=bottom, 
+                  label=date, color=colors[color_idx])
+            bottom += pivot_data[date]
+        
+        # Styling
+        style_axis(ax,
                   title='Daily Irrigation Amounts by Treatment',
-                  xlabel='Date',
+                  xlabel='Treatment',
                   ylabel='Irrigation Amount (mm)')
-        style_legend(ax, title='Treatment', loc='upper right')
-        fig.suptitle(label, fontsize=24, fontweight='bold')
+        
+        # Rotate x-axis labels
+        plt.xticks(rotation=45, ha='right')
+        
+        # Add legend
+        ax.legend(title='Date', bbox_to_anchor=(1.05, 1), loc='upper left')
+        
+        # Adjust layout to prevent label cutoff
+        plt.tight_layout()
+        
+        # Save to PDF
         pdf.savefig(fig, bbox_inches='tight')
         plt.close(fig)
         print("Figure 9a: Daily Irrigation Amounts by Treatment added to PDF.")
-    
-        # Calculate cumulative irrigation
-        print("Calculating Cumulative Irrigation Amounts")
-        pivot_daily_cumulative = pivot_daily.cumsum()
-        print("Cumulative Irrigation Calculated")
-    
-        # Plot stacked line for cumulative irrigation amounts
-        print("Creating Stacked Line Plot for Cumulative Irrigation Amounts")
-        fig, ax = plt.subplots(figsize=(15, 6))
-        pivot_daily_cumulative.plot(kind='line', ax=ax, marker='o', linewidth=2.5)
-        style_axis(ax, 
+        
+        # Cumulative Plot
+        print("Creating Cumulative Irrigation Line Plot")
+        
+        # Calculate cumulative sums
+        cumulative_data = pivot_data.cumsum(axis=1)
+        
+        # Create new figure for cumulative plot
+        fig, ax = plt.subplots(figsize=(15, 8))
+        
+        # Plot lines for each treatment
+        for treatment in cumulative_data.index:
+            ax.plot(cumulative_data.columns, cumulative_data.loc[treatment], 
+                   marker='o', label=treatment, linewidth=2.5)
+        
+        # Styling
+        style_axis(ax,
                   title='Cumulative Irrigation Amounts by Treatment',
                   xlabel='Date',
                   ylabel='Cumulative Irrigation Amount (mm)')
+        
+        # Rotate x-axis labels
+        plt.xticks(rotation=45, ha='right')
+        
+        # Add legend
         style_legend(ax, title='Treatment', loc='upper left')
-        fig.suptitle(label, fontsize=24, fontweight='bold')
+        
+        # Adjust layout
+        plt.tight_layout()
+        
+        # Save to PDF
         pdf.savefig(fig, bbox_inches='tight')
         plt.close(fig)
         print("Figure 9b: Cumulative Irrigation Amounts by Treatment added to PDF.")
-    
+        
     except Exception as e:
         print(f"Error in generate_figure9: {e}")
         plt.close('all')
